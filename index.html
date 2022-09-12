@@ -52,7 +52,7 @@
 
     <input type="text" id="departure" required style="text-transform:uppercase; text-align: center;">
     <input type="text" id="scheduleDep" required style="text-transform:uppercase; text-align: center;">
-    <input type="datetime-local" id="departureActual">
+    <input type="datetime-local" id="departureActual" value="2022-09-08T16:17:00.000">
     <select id="startLight">
       <option value="DAY">DAY</option>
       <option value="NIGHT">NIGHT</option>
@@ -81,7 +81,7 @@
 
     <input type="text" id="destination" required style="text-transform:uppercase; text-align: center;">
     <input type="text" id="scheduleDes" required style="text-transform:uppercase; text-align: center;">
-    <input type="datetime-local" id="destinationActual">
+    <input type="datetime-local" id="destinationActual" value="2022-09-09T05:48:00.000">
     <select id="endLight">
       <option value="DAY">DAY</option>
       <option value="NIGHT">NIGHT</option>
@@ -97,10 +97,10 @@
     </br></br></br></br>
     </br></br></br></br>
 
-    <div id="moon1" style="position:absolute;">
+    <!-- <div id="moon1" style="position:absolute;">
       <img  style="object-fit:fill; height:50px;" src="moon.png">
       <output>100</output>
-    </div>
+    </div> -->
 
     <div id="sun1" style="position:absolute;">
       <img  style="object-fit:fill; height:50px;" src="sun.png">
@@ -618,46 +618,52 @@
 
     <script type="text/javascript">
 
-    var moon1 = document.getElementById('moon1');
-    moon1.style.left = window.innerWidth * 0.20 + 'px';
-    moon1.childNodes[1].value = window.innerWidth * 0.20;
 
-    moon1.addEventListener('touchmove', function(event) {
-      var touch = event.targetTouches[0];
+    let width_start = window.innerWidth * 0.20;
+    let width_end = window.innerWidth * 0.80;
 
-      // Place element where the finger is
-      let drag = 100;
-      if(touch.pageX-25 < window.innerWidth * 0.20){drag = window.innerWidth * 0.20}
-      else if(touch.pageX-25 > window.innerWidth * 0.80){drag = window.innerWidth * 0.80}
-      else{drag = touch.pageX-25};
+    let start = document.getElementById('departureActual').valueAsNumber;
+    let startLight = document.getElementById('startLight').value;
 
-      moon1.style.left = drag + 'px';
-      //moon1.style.top = touch.pageY-25 + 'px';
-      //this.childNodes[1].value = touch.pageX;
-      this.lastElementChild.value = drag;
-      // let rect = moon1.getBoundingClientRect();
-      // console.log(rect.left);
-      //document.getElementById('night').innerhtml = touch.pageX;
-      event.preventDefault();
-    }, false);
+    let ls = document.getElementById('lightStart').valueAsNumber;
+    let le = document.getElementById('lightEnd').valueAsNumber;
+    let ll = document.getElementById('light').value;
+
+    let end = document.getElementById('destinationActual').valueAsNumber;
+    let endLight = document.getElementById('endLight').value;
+
+    let lastlight = startLight;
+
+
+    let a = width_end - width_start;
+    let b = (end - start)/60000;
+    let c = (a / b);
+
+
+    ////SUN 1
 
     var sun1 = document.getElementById('sun1');
-    sun1.style.left = window.innerWidth * 0.20 + 'px';
-    sun1.childNodes[1].value = window.innerWidth * 0.20;
+
+    sun1.style.left = width_start + 'px';
+    sun1.childNodes[1].value = width_start;
+    sun1.lastElementChild.value = get_utc(document.getElementById('departureActual').valueAsNumber);
 
     sun1.addEventListener('touchmove', function(event) {
+
       var touch = event.targetTouches[0];
 
       // Place element where the finger is
-      let drag = 100;
-      if(touch.pageX-25 < window.innerWidth * 0.20){drag = window.innerWidth * 0.20}
-      else if(touch.pageX-25 > window.innerWidth * 0.80){drag = window.innerWidth * 0.80}
+      let drag = width_start;
+      if(touch.pageX-25 < width_start){drag = width_start}
+      else if(touch.pageX-25 > width_end){drag = width_end}
       else{drag = touch.pageX-25};
 
       sun1.style.left = drag + 'px';
       //sun1.style.top = touch.pageY-25 + 'px';
       //this.childNodes[1].value = touch.pageX;
+      drag = get_utc( start + 60000 * (drag - width_start)/c );
       this.lastElementChild.value = drag;
+      // this.lastElementChild.value = drag;
       // let rect = sun1.getBoundingClientRect();
       // console.log(rect.left);
       //document.getElementById('night').innerhtml = touch.pageX;
@@ -665,25 +671,60 @@
     }, false);
 
 
+    // ////MOON 1
+    //
+    // var moon1 = document.getElementById('moon1');
+    // moon1.style.left = window.innerWidth * 0.20 + 'px';
+    // moon1.childNodes[1].value = window.innerWidth * 0.20;
+    //
+    // moon1.addEventListener('touchmove', function(event) {
+    //   var touch = event.targetTouches[0];
+    //
+    //   // Place element where the finger is
+    //   let drag = 100;
+    //   if(touch.pageX-25 < window.innerWidth * 0.20){drag = window.innerWidth * 0.20}
+    //   else if(touch.pageX-25 > window.innerWidth * 0.80){drag = window.innerWidth * 0.80}
+    //   else{drag = touch.pageX-25};
+    //
+    //   moon1.style.left = drag + 'px';
+    //   //moon1.style.top = touch.pageY-25 + 'px';
+    //   //this.childNodes[1].value = touch.pageX;
+    //   this.lastElementChild.value = drag;
+    //   // let rect = moon1.getBoundingClientRect();
+    //   // console.log(rect.left);
+    //   //document.getElementById('night').innerhtml = touch.pageX;
+    //   event.preventDefault();
+    // }, false);
+
+
+
+///////////////////////////////////////////
+
+      function get_utc(time){
+        time = new Date(time);
+        hh = time.getUTCHours();
+        hh = ('0'+ hh).slice(-2);
+        mm = time.getUTCMinutes();
+        mm = ('0'+ mm).slice(-2);
+        return hh + ':' + mm;
+      };
+
+      function get_hhmm(block){
+        //block = (b - a)/60000;
+        block = block / 60000;
+        hh = Math.trunc(block / 60);
+        hh = ('0'+ hh).slice(-2);
+        mm = block % 60;
+        mm = ('0'+ mm).slice(-2);
+        return hh + ':' + mm;
+      };
 
       function psrgenerate(){
 
 
 
+
 /////////////////////////////////////
-
-
-        let start = document.getElementById('departureActual').valueAsNumber;
-        let startLight = document.getElementById('startLight').value;
-
-        let ls = document.getElementById('lightStart').valueAsNumber;
-        let le = document.getElementById('lightEnd').valueAsNumber;
-        let ll = document.getElementById('light').value;
-
-        let end = document.getElementById('destinationActual').valueAsNumber;
-        let endLight = document.getElementById('endLight').value;
-
-        let lastlight = startLight;
 
         let instrument = document.getElementById('instrumentflying').valueAsNumber;
 
@@ -830,25 +871,6 @@
           block.instrument = get_hhmm(block.instrument);
 
           console.log(block);
-
-          function get_utc(time){
-            time = new Date(time);
-            hh = time.getUTCHours();
-            hh = ('0'+ hh).slice(-2);
-            mm = time.getUTCMinutes();
-            mm = ('0'+ mm).slice(-2);
-            return hh + ':' + mm;
-          };
-          function get_hhmm(block){
-            //block = (b - a)/60000;
-            block = block / 60000;
-            hh = Math.trunc(block / 60);
-            hh = ('0'+ hh).slice(-2);
-            mm = block % 60;
-            mm = ('0'+ mm).slice(-2);
-            return hh + ':' + mm;
-          };
-
         };
 
 /////////////////////////////////////
