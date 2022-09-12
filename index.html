@@ -21,23 +21,24 @@
     </br></br></br></br>
 
     <div class="" id="light" style="position:absolute;" onclick="lightchange()">
-      <img class="" style="object-fit:fill; height:50px;" src="moon.png">
+      <img class="" style="object-fit:fill; height:100px;" src="moon.png">
       <output class="" style="display:block; text-align: center;">HI</output>
     </div>
 
+    </br></br></br></br>
     </br></br></br></br>
 
     <div class="" id="line1" style="position:absolute;">
       <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
       <svg class = "" width="4" height="300">
-        <rect class = "" width="8" height="300" style="fill:grey;" />
+        <rect class = "line" width="8" height="300" style="fill:grey;" />
       </svg>
     </div>
 
     <div class="" id="line2" style="position:absolute;">
       <output class="" style="display: block; text-align: center;"></output>
       <svg class = "" width="4" height="300">
-        <rect class = "" width="8" height="300" style="fill:grey;" />
+        <rect class = "line" width="8" height="300" style="fill:grey;" />
       </svg>
     </div>
 
@@ -47,7 +48,7 @@
     </br></br></br></br>
 
 
-    <div class="" style="position: absolute; left: 20%; width: 60%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
+    <div class="" id="base" style="position: absolute; left: 20%; width: 60%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
 
     <script type="text/javascript">
 
@@ -66,7 +67,10 @@
       var l1 = document.getElementById('line1');
       var light = document.getElementById('light');
       var l2 = document.getElementById('line2');
-
+      var base = document.getElementById('base');
+      var outer = '', inner = '';
+      if(light.firstElementChild.src.endsWith("sun.png")){ outer = 'grey'; inner = 'yellow'; }
+      else{ outer = 'yellow'; inner = 'grey'; };
 
       let l1_pos = width_start + a * 0.33;
       l1.style.left = l1_pos + 'px';
@@ -83,10 +87,12 @@
 
         let diff = value(l2.style.left) - drag;
         light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
-        light.style.left = drag + diff / 2 - 25 + 'px';
+        light.style.left = drag + diff / 2 - 50 + 'px';
 
         drag = get_utc( start + 60000 * (drag - width_start)/c );
         this.firstElementChild.value = drag;
+
+        base_color();
 
         event.preventDefault();
 
@@ -109,10 +115,12 @@
 
         let diff = drag - value(l1.style.left);
         light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
-        light.style.left = value(l1.style.left) + diff / 2 - 25 + 'px';
+        light.style.left = value(l1.style.left) + diff / 2 - 50 + 'px';
 
         drag = get_utc( start + 60000 * (drag - width_start)/c );
         this.firstElementChild.value = drag;
+
+        base_color();
 
         event.preventDefault();
 
@@ -120,12 +128,40 @@
 
 
       let light_pos = (l2_pos - l1_pos) / 2;
-      light.style.left = l1_pos + light_pos - 25 + 'px';
+      light.style.left = l1_pos + light_pos - 50 + 'px';
 
       //////////////////////////////////////////////////////////////////////////
+
+      function lightchange(){
+
+        if(light.firstElementChild.src.endsWith("sun.png")){
+          light.firstElementChild.src = "moon.png";
+          outer = 'yellow'
+          inner = 'grey';
+        }
+        else{
+          light.firstElementChild.src = "sun.png";
+          outer = 'grey'
+          inner = 'yellow';
+        }
+        l1.lastElementChild.firstElementChild.style.fill = inner;
+        l2.lastElementChild.firstElementChild.style.fill = inner;
+        base_color();
+      };
+
       function value(data){
         return Number(data.slice(0, data.length - 2));
       };
+
+      function base_color(){
+        let first = (value(l1.style.left) - width_start) / (width_end - width_start) * 100;
+        let mid = value(l1.style.left) + ( value(l2.style.left) - value(l1.style.left) ) / 2;
+        mid = (mid - width_start) / (width_end - width_start) * 100;
+        let second = (value(l2.style.left) - width_start) / (width_end - width_start) * 100;
+        let grad = 'linear-gradient(90deg, ' + outer + ' ' + first + '%, ' + inner + ' ' + mid + '%, ' + outer + ' ' + second + '%)';
+
+        base.style['background-image'] = grad;
+      }
 
       function get_utc(time){
         time = new Date(time);
@@ -145,9 +181,6 @@
         return hh + ':' + mm;
       };
 
-      function lightchange(){
-        console.log(light);
-      };
       //////////////////////////////////////////////////////////////////////////
 
     </script>
