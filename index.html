@@ -16,8 +16,9 @@
     </div>
 
     <input class="b" id="instrumentflying" type="range" value="30" min="0" max="360" step="10" style="width: 80%;" oninput="this.nextElementSibling.value = this.value">
-<output> </output>
+    <output> </output>
 
+    <h1 style="position:absolute; left:25%;">HI</h1>
 
     </br></br></br></br>
     </br></br></br></br>
@@ -82,10 +83,11 @@
       l1.addEventListener('touchmove', function(event) {
         var touch = event.targetTouches[0];
 
+        let val = touch.pageX/window.innerWidth * 100;
         let drag = width_start;
         if(touch.pageX <= width_start){drag = width_start;}
         else if(touch.pageX >= width_end){drag = width_end;}
-        else{drag = touch.pageX;};
+        else{drag = val;};
 
         l1.style.left = drag + 'px';
 
@@ -109,13 +111,15 @@
       l2.addEventListener('touchmove', function(event) {
         var touch = event.targetTouches[0];
 
+        let val = touch.pageX/window.innerWidth * 100;
+        console.log(touch.pageX/window.innerWidth * 100);
         let min = value(l1.style.left) + c * 10;
         //let drag = width_start;
         if(touch.pageX <= min){drag = min;}
         else if(touch.pageX >= width_end){drag = width_end;}
-        else{drag = touch.pageX;};
+        else{drag = val};
 
-        l2.style.left = drag + 'px';
+        l2.style.left = drag + '%';
 
         let diff = drag - value(l1.style.left);
         light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
