@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>AUTO-PSR</title>
+    <style>
+
+      #draggable {width:50px;height:50px;background-color:#f00;position:absolute;}
+
+      table {
+        width: 100%;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+
+  <body>
+
+
+    </br></br></br></br>
+
+    AIC
+    <input type="text" id="flightNumber" required style="text-transform:uppercase; text-align: center;">
+
+    VT -
+    <select id="registeration">
+          <option value=" "> </option>
+          <option value="ALF">ALF</option>
+          <option value="ALG">ALG</option>
+          <option value="ALH">ALH</option>
+          <option value="ALJ">ALJ</option>
+          <option value="ALK">ALK</option>
+          <option value="ALL">ALL</option>
+          <option value="ALM">ALM</option>
+          <option value="ALN">ALN</option>
+          <option value="ALO">ALO</option>
+          <option value="ALP">ALP</option>
+          <option value="ALQ">ALQ</option>
+          <option value="ALR">ALR</option>
+          <option value="ALS">ALS</option>
+          <option value="ALT">ALT</option>
+          <option value="ALU">ALU</option>
+          <option value="ALX">ALX</option>
+    </select>
+
+    </br></br></br></br>
+
+    <input type="text" id="departure" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="scheduleDep" required style="text-transform:uppercase; text-align: center;">
+    <input type="datetime-local" id="departureActual">
+    <select id="startLight">
+      <option value="DAY">DAY</option>
+      <option value="NIGHT">NIGHT</option>
+    </select>
+    <select id="departureDelay">
+      <option value=" "> </option>
+      <option value="CONSQ">CONSQ</option>
+      <option value="STN">STN</option>
+      <option value="ATC">ATC</option>
+      <option value="WX WIND">WX WIND</option>
+    </select>
+
+    </br></br>
+
+
+    <select id="light">
+      <option value="DAY">DAY</option>
+      <option value="NIGHT">NIGHT</option>
+    </select>
+    <input type="datetime-local" id="lightStart">
+    <input type="datetime-local" id="lightEnd">
+
+
+
+    </br></br>
+
+    <input type="text" id="destination" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="scheduleDes" required style="text-transform:uppercase; text-align: center;">
+    <input type="datetime-local" id="destinationActual">
+    <select id="endLight">
+      <option value="DAY">DAY</option>
+      <option value="NIGHT">NIGHT</option>
+    </select>
+
+    </br></br></br></br>
+
+    <input id="instrumentflying" type="range" value="30" min="0" max="360" step="10" oninput="this.nextElementSibling.value = this.value">
+    <output> </output>
+
+    </br></br></br></br>
+
+    <div id="draggable" >
+      <output>100</output>
+    </div>
+
+    </br></br></br></br>
+
+    <select id="destinationDelay">
+      <option value=" "> </option>
+      <option value="CONSQ">CONSQ</option>
+      <option value="STN">STN</option>
+      <option value="ATC">ATC</option>
+      <option value="WX WIND">WX WIND</option>
+    </select>
+
+    </br></br></br></br>
+
+    <input type="text" id="quantity" required style="text-transform:uppercase; text-align: center;">
+    <select id="unit">
+      <option value=" "> </option>
+      <option value="LT">LT</option>
+      <option value="USG">USG</option>
+    </select>
+    <input type="text" id="spgr" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="temp" required style="text-transform:uppercase; text-align: center;">
+
+
+    </br></br></br></br>
+
+    <input type="text" id="1name" required style="text-transform:uppercase; text-align: left;">
+    <input type="text" id="1staff" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="1sap" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="1ipltm" required style="text-transform:uppercase; text-align: center;">
+    <input type="time" id="1crt" required style="text-transform:uppercase; text-align: center;">
+    <select id="1status">
+      <option value=" "> </option>
+      <option value="PIC RC">PIC RC</option>
+      <option value="PC PF">RC PF</option>
+      <option value="RC PM">RC PM</option>
+      <option value="SLF">SLF</option>
+      <option value="SUT">SUT</option>
+      <option value="SNY">SNY</option>
+    </select>
+
+    </br></br>
+
+    <input type="text" id="2name" required style="text-transform:uppercase; text-align: left;">
+    <input type="text" id="2staff" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="2sap" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="2ipltm" required style="text-transform:uppercase; text-align: center;">
+    <input type="time" id="2crt" required style="text-transform:uppercase; text-align: center;">
+    <select id="2status">
+      <option value=" "> </option>
+      <option value="PIC RC">PIC RC</option>
+      <option value="PC PF">RC PF</option>
+      <option value="RC PM">RC PM</option>
+      <option value="SLF">SLF</option>
+      <option value="SUT">SUT</option>
+      <option value="SNY">SNY</option>
+    </select>
+
+    </br></br>
+
+    <input type="text" id="3name" required style="text-transform:uppercase; text-align: left;">
+    <input type="text" id="3staff" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="3sap" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="3ipltm" required style="text-transform:uppercase; text-align: center;">
+    <input type="time" id="3crt" required style="text-transform:uppercase; text-align: center;">
+    <select id="3status">
+      <option value=" "> </option>
+      <option value="PIC RC">PIC RC</option>
+      <option value="PC PF">RC PF</option>
+      <option value="RC PM">RC PM</option>
+      <option value="SLF">SLF</option>
+      <option value="SUT">SUT</option>
+      <option value="SNY">SNY</option>
+    </select>
+
+    </br></br>
+
+    <input type="text" id="4name" required style="text-transform:uppercase; text-align: left;">
+    <input type="text" id="4staff" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="4sap" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="4ipltm" required style="text-transform:uppercase; text-align: center;">
+    <input type="time" id="4crt" required style="text-transform:uppercase; text-align: center;">
+    <select id="4status">
+      <option value=" "> </option>
+      <option value="PIC RC">PIC RC</option>
+      <option value="PC PF">RC PF</option>
+      <option value="RC PM">RC PM</option>
+      <option value="SLF">SLF</option>
+      <option value="SUT">SUT</option>
+      <option value="SNY">SNY</option>
+    </select>
+
+    </br></br></br></br>
+
+    <input type="button" value="AUTO PSR" onclick="psrgenerate()">
+
+    </br></br></br></br>
+
+
+
+
+
+
+
+    <div id = "table" style="font-family: Arial">
+
+
+      <table id="0table" style="height:8mm; border: none;">
+        <tr>
+          <th style="width:18%; border: none;"><img  style="object-fit:fill; height:30px;" src="logo.png"></th>
+          <th style="width:18%; border: none;"></th>
+          <th style="border: none;">PILOTS REPORT</th>
+          <th style="width:12%; border: none;">AI 187</th>
+          <th style="width:12%; border: none;">VT-ALN</th>
+          <th style="width:12%; border: none;">B777-300LR</th>
+        </tr>
+      </table>
+
+      <table id="1table" style="height:10mm;">
+        <tr style="height:6mm; font-size: 11px;">
+          <td style="width: 24.6%; font-size: 14px;" rowspan="2">OPERATING CREW</td>
+          <td style="width: 9.2%;">STAFF NO.</br>(Suffix AT / IT)</td>
+          <td style="width: 4.4%;" rowspan="2">TRG</br>STS*</td>
+          <td style="width: 6.4%;" rowspan="2">CRT</br>(UTC)</br>HH:MM</td>
+          <td style="width: 6.4%;" colspan="2">SECTOR(S) OPTG</br>(4 letter ICAO)</td>
+          <td style="width: 6.8%; font-size: 16px;" colspan="6">MULTIPLE CREW LOG - ON CONTROLS TIMING</td>
+        </tr>
+        <tr style="height:4mm; font-size: 10px;">
+          <td style="width: 9.2%;">SAP NO.</td>
+
+
+          <td style="width: 6.4%;">FROM</td>
+          <td style="width: 6.4%;">TO</td>
+          <td style="width: 6.8%;">FROM</td>
+          <td style="width: 6.8%;">TO</td>
+          <td style="width: 6.8%;">FROM</td>
+          <td style="width: 6.8%;">TO</td>
+          <td style="width: 6.8%;">FROM</td>
+          <td style="width: 6.8%;">TO</td>
+        </tr>
+
+      </table>
+
+
+
+
+
+      <table id="2table" style="height:85mm; font-size: 12px;">
+
+
+
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
+          <td style="width: 20%;" rowspan="2"></td>
+          <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
+          <td style="width: 4.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;">IPLTM</td>
+          <td style="width: 20%;"></td>
+          <td style="width: 9.2%; border-top: none;">80008646</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
+          <td style="width: 20%;" rowspan="2"></td>
+          <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
+          <td style="width: 4.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;">IPLTM</td>
+          <td style="width: 20%;"></td>
+          <td style="width: 9.2%; border-top: none;">80008646</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
+          <td style="width: 20%;" rowspan="2"></td>
+          <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
+          <td style="width: 4.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;">IPLTM</td>
+          <td style="width: 20%;"></td>
+          <td style="width: 9.2%; border-top: none;">80008646</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
+          <td style="width: 20%;" rowspan="2"></td>
+          <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
+          <td style="width: 4.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;">IPLTM</td>
+          <td style="width: 20%;"></td>
+          <td style="width: 9.2%; border-top: none;">80008646</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
+          <td style="width: 20%;" rowspan="2"></td>
+          <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
+          <td style="width: 4.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.4%;" rowspan="3">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+        <tr style="height:5.5mm; font-size: 12px;">
+          <td style="width: 4.6%;">IPLTM</td>
+          <td style="width: 20%;"></td>
+          <td style="width: 9.2%; border-top: none;">80008646</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;"></td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+          <td style="width: 6.8%;">HH:MM</td>
+        </tr>
+
+      </table>
+
+
+
+
+
+
+
+
+      <table id="3table" style="margin:2px 0 0 0; height:12mm;">
+        <tr style="height:5mm; font-size: 12px;">
+          <td style="width: 9.4%; border-bottom: none;" rowspan="2">DATE</br>(UTC)</td>
+          <td style="width: 7.2%; border-bottom: none;" rowspan="2">STATION</br>4 letter</td>
+          <td style="width: 6%; border-bottom: none;" rowspan="2">SKED</br>(UTC)</td>
+          <td style="width: 6%; border-bottom: none;" rowspan="2">ACTUAL</br>(UTC)</td>
+          <td style="width: 6%; border-bottom: none;" rowspan="2">TOTAL</br>DELAY</td>
+          <td style="width: 6%; border-bottom: none;" rowspan="2">CONSQ</td>
+          <td style="width: 6%; border-bottom: none;" rowspan="2">STN</td>
+          <td style="width: 6%; border-bottom: none;" rowspan="2">ATC</td>
+          <td style="width: 6%; border-bottom: none;" rowspan="2">WX</br>WIND</td>
+          <td style="width: 5.6%; border-bottom: none;" rowspan="3">PF</td>
+          <td style="width: 6.6%; border-bottom: none;" rowspan="2">TOTAL</br>FLT.TIME</td>
+          <td style="width: 6.6%; border-bottom: none;" rowspan="2">NIGHT</br>FLYING</td>
+          <td style="width: 6.6%; border-bottom: none;" rowspan="2">INST</br>FLYING</td>
+          <td style="width: 8.4%; border-bottom: none;" colspan="3">FUEL UPLIFT</td>
+        </tr>
+        <tr style="height:4mm; font-size: 10px;">
+          <td style="width: 8.4%; border: none;"></td>
+          <td style="width: 3.6%; border: none;"></td>
+          <td style="width: 4%;">SPGR</td>
+        </tr>
+        <tr style="height:3mm; font-size: 10px;">
+          <td style="width: 9.4%; border-top: none;">DD-MM-YYYY</td>
+          <td style="width: 7.2%">ICAO CODE</td>
+          <td style="width: 6%">HH:MM</td>
+          <td style="width: 6%">HH:MM</td>
+          <td style="width: 6%">HH:MM</td>
+          <td style="width: 6%">HH:MM</td>
+          <td style="width: 6%">HH:MM</td>
+          <td style="width: 6%">HH:MM</td>
+          <td style="width: 6%">HH:MM</td>
+          <td style="width: 6.6%">HH:MM</td>
+          <td style="width: 6.6%">HH:MM</td>
+          <td style="width: 6.6%">HH:MM</td>
+          <td style="width: 8.4%">QUANTITY</td>
+          <td style="width: 3.6%">UNIT</td>
+          <td style="width: 4%">TEMP</td>
+        </tr>
+      </table>
+
+      <table id="4table" style="height:42mm;">
+        <tr>
+          <td style="width: 9.4%;"></td>
+          <td style="width: 7.2%; border-bottom: none;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 5.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 8.4%;"></td>
+          <td style="width: 3.6%;"></td>
+          <td style="width: 4%;"></td>
+        </tr>
+        <tr>
+          <td style="width: 9.4%;"></td>
+          <td style="width: 7.2%; border-top: none;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 5.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 8.4%;"></td>
+          <td style="width: 3.6%;"></td>
+          <td style="width: 4%;"></td>
+        </tr>
+        <tr>
+          <td style="width: 9.4%;"></td>
+          <td style="width: 7.2%; border-bottom: none;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 5.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 8.4%;"></td>
+          <td style="width: 3.6%;"></td>
+          <td style="width: 4%;"></td>
+        </tr>
+        <tr>
+          <td style="width: 9.4%;"></td>
+          <td style="width: 7.2%; border-top: none;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 5.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 8.4%;"></td>
+          <td style="width: 3.6%;"></td>
+          <td style="width: 4%;"></td>
+        </tr>
+        <tr>
+          <td style="width: 9.4%;"></td>
+          <td style="width: 7.2%; border-bottom: none;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 5.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 8.4%;"></td>
+          <td style="width: 3.6%;"></td>
+          <td style="width: 4%;"></td>
+        </tr>
+        <tr>
+          <td style="width: 9.4%;"></td>
+          <td style="width: 7.2%; border-top: none;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 5.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 8.4%;"></td>
+          <td style="width: 3.6%;"></td>
+          <td style="width: 4%;"></td>
+        </tr>
+
+      </table>
+
+      <table id="5table" style="margin:2px 0 0 0; height:12mm;">
+        <tr>
+          <td style="font-size: 14px; border: none;  text-align: left;">REMARKS :</td>
+        </tr>
+        <tr>
+          <td style="font-size: 14px; border: none;  text-align: left;">FDTL EXTENSION AVAILED [  ]</td>
+        </tr>
+      </table>
+
+      <table id="6table" style="height:9mm; border: none;">
+        <tr>
+          <td style="font-size: 12px; border: none; text-align: left;">NOTE : UNDER PF coloumn enter the Crew Serial Number, Seat Occupied [L/R] and Circle [D/N] for [Day/Night] T.O / Landing.  Tick [] IF FDTL EXTENSION AVAILED.</br>
+          * TRG STS = PIC RC, RCPF, RCPM, SLF, SNY, SUT  Important Email ID's : FLIGHT SAFETY : flightsafety.airindia.in CMS : cms.psrupdation@airindia.in</td>
+        </tr>
+      </table>
+
+
+    </div>
+
+
+    <script type="text/javascript">
+
+    var draggable = document.getElementById('draggable');
+    draggable.style.left = window.innerWidth * 0.20 + 'px';
+    draggable.childNodes[1].value = window.innerWidth * 0.20;
+
+    draggable.addEventListener('touchmove', function(event) {
+      var touch = event.targetTouches[0];
+
+      // Place element where the finger is
+      let drag = 100;
+      if(touch.pageX-25 < window.innerWidth * 0.20){drag = window.innerWidth * 0.20}
+      else if(touch.pageX-25 > window.innerWidth * 0.80){drag = window.innerWidth * 0.80}
+      else{drag = touch.pageX-25};
+
+      draggable.style.left = drag + 'px';
+      //draggable.style.top = touch.pageY-25 + 'px';
+      //this.childNodes[1].value = touch.pageX;
+      this.childNodes[1].value = drag;
+      // let rect = draggable.getBoundingClientRect();
+      // console.log(rect.left);
+      //document.getElementById('night').innerhtml = touch.pageX;
+      event.preventDefault();
+    }, false);
+
+
+
+      function psrgenerate(){
+
+
+
+/////////////////////////////////////
+
+
+        let start = document.getElementById('departureActual').valueAsNumber;
+        let startLight = document.getElementById('startLight').value;
+
+        let ls = document.getElementById('lightStart').valueAsNumber;
+        let le = document.getElementById('lightEnd').valueAsNumber;
+        let ll = document.getElementById('light').value;
+
+        let end = document.getElementById('destinationActual').valueAsNumber;
+        let endLight = document.getElementById('endLight').value;
+
+        let lastlight = startLight;
+
+        let instrument = document.getElementById('instrumentflying').valueAsNumber;
+
+        let one_start = start;
+        let one_add = 3600000;
+        let one_end = start + one_add;
+        let block1 = {'from': one_start, 'to': one_end};
+
+        let two_start = one_end + 60000;
+        let two_add = 14400000;
+        let two_end = two_start + two_add;
+        let block2 = {'from': two_start, 'to': two_end};
+
+        let three_start = two_end + 60000;
+        let three_add = 10800000;
+        let three_end = three_start + three_add;
+        let block3 = {'from': three_start, 'to': three_end};
+
+
+        let four_start = three_end + 60000;
+
+        let last_block = end - 60000 - four_start;
+        let block = last_block/60000;
+        let min = block % 60;
+        last_block -= 60000 * (min%2);
+        let four_add = last_block/2;
+
+        let four_end = four_start + four_add;
+        let block4 = {'from': four_start, 'to': four_end};
+
+        let five_start = four_end + 60000;
+        let five_add = undefined;
+        let five_end = end;
+        let block5 = {'from': five_start, 'to': five_end};
+
+
+/////////////////////////////////////
+
+        daynight(block1, 1);
+        daynight(block2, 2);
+        daynight(block3, 3);
+        daynight(block4, 4);
+        daynight(block5, 5);
+
+        function daynight(block, index){
+
+          let day = 0, night = 0;
+
+          if(le <= block.from || ls >= block.to){
+            if(lastlight == 'DAY'){day = diff(block.from, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
+          }
+          else if(ls <= block.from && le >= block.to){
+            lastlight = ll;
+            if(lastlight == 'DAY'){day = diff(block.from, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
+          }
+          else if(ls <= block.from && le < block.to){
+            lastlight = ll;
+            if(lastlight == 'DAY'){day = diff(block.from, le); night = diff(le, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, le); day = diff(le, block.to)}
+          }
+          else if(ls > block.from && le >= block.to){
+            if(lastlight == 'DAY'){day = diff(block.from, ls); night = diff(ls, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, ls); day = diff(ls, block.to)}
+            lastlight = ll;
+          }
+          else if(ls > block.from && le < block.to){
+            let a = diff(block.from, ls);
+            let b = diff(ls, le);
+            let c = diff(le, block.to);
+            if(lastlight == 'DAY'){day = a + c; night = b; ll = 'DAY';}
+            else if(lastlight == 'NIGHT'){night = a + c; day = b; ll = 'NIGHT';}
+          }
+
+          function diff(a, b){
+            return (b - a);
+          };
+
+          block.day = day;
+          block.night = night;
+          block.block = index;
+
+        };
+
+/////////////////////////////////////
+        console.log('value of instrument = ', instrument);
+        let half = instrument * 60000 /2;
+        let last = instrument * 60000;
+        let set1 = [block1, block3, block5], day1 = 0;
+        let set2 = [block2, block4], day2 = 0;
+        set1 = sort_info(set1, 'day', 'high');
+        set2 = sort_info(set2, 'day', 'high');
+        function sort_info(x, y, z){
+          x.sort( compare );
+          function compare( a, b ) {
+            if ( eval('a.' + y + ' < b.' + y ) ){ return -1 }
+            if ( eval('a.' + y + ' > b.' + y ) ){ return 1 }
+            return 0;
+          }
+          if(z == 'low'){return x};
+          if(z == 'high'){return x.reverse()};
+        };
+
+
+        inst_add(set1[0], half);
+        if(last < half){inst_add(set2[0], last)}
+        else{inst_add(set2[0], half)};
+
+        half = last / 2;
+        inst_add(set1[1], half);
+        if(last < half){inst_add(set2[1], last)}
+        else{inst_add(set2[1], half)};
+
+        inst_add(set1[2], last);
+
+        function inst_add(item, add){
+          let aval = 0, added = 0;
+          if(item.day - 600000 > 0){ aval = Math.trunc( (item.day - 600000) / 300000 ) * 300000 };
+          if(add >= aval){ item.instrument = aval; added = aval; }
+          else{ item.instrument = add; added = add; };
+          if(last - added <= 0){last = 0}
+          else{last -= added};
+        };
+
+
+
+/////////////////////////////////////
+
+        final(block1);
+        final(block2);
+        final(block3);
+        final(block4);
+        final(block5);
+
+        function final(block){
+
+          block.from = get_utc(block.from);
+          block.to = get_utc(block.to);
+
+          block.day = get_hhmm(block.day);
+          block.night = get_hhmm(block.night);
+
+          block.instrument = get_hhmm(block.instrument);
+
+          console.log(block);
+
+          function get_utc(time){
+            time = new Date(time);
+            hh = time.getUTCHours();
+            hh = ('0'+ hh).slice(-2);
+            mm = time.getUTCMinutes();
+            mm = ('0'+ mm).slice(-2);
+            return hh + ':' + mm;
+          };
+          function get_hhmm(block){
+            //block = (b - a)/60000;
+            block = block / 60000;
+            hh = Math.trunc(block / 60);
+            hh = ('0'+ hh).slice(-2);
+            mm = block % 60;
+            mm = ('0'+ mm).slice(-2);
+            return hh + ':' + mm;
+          };
+
+        };
+
+/////////////////////////////////////
+
+
+        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+
+
+
+        mywindow.document.write('<html><head><title>' + "AIC " + document.getElementById("flightNumber").value + '</title></head><body >');
+
+
+
+        var style = document.head.lastElementChild
+        mywindow.document.head.appendChild(style);
+
+        var table = document.getElementById("table");
+        mywindow.document.body.appendChild(table);
+
+
+
+
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+
+/////////////////////////////////////
+
+    }
+
+    </script>
+
+
+
+
+
+  </body>
+
+
+
+</html>
