@@ -86,7 +86,7 @@
         let val = touch.pageX/window.innerWidth * 100;
         let drag = width_start;
         if(touch.pageX <= width_start){drag = width_start;}
-        else if( >= width_end){drag = width_end;}
+        else if( touch.pageX >= width_end){drag = width_end;}
         else{drag = touch.pageX};
 
         l1.style.left = drag + 'px';
