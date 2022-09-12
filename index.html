@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <title>AUTO-PSR</title>
     <style>
-
-      #draggable {position:absolute;}
-
       table {
         width: 100%;
         border: 1px solid black;
@@ -96,20 +93,22 @@
     <output> </output>
 
     </br></br></br></br>
+    </br></br></br></br>
+    </br></br></br></br>
+    </br></br></br></br>
 
-    <div id="draggable" >
-      <output>100</output>
+    <div id="moon1" style="position:absolute;">
       <img  style="object-fit:fill; height:50px;" src="moon.png">
-    </div>
-
-    <div id="draggable" >
       <output>100</output>
+    </div>
+
+    <div id="sun1" style="position:absolute;">
       <img  style="object-fit:fill; height:50px;" src="sun.png">
+      <output>100</output>
     </div>
 
     </br></br></br></br>
     </br></br></br></br>
-    <h1>HI PSR START</h1>
     </br></br></br></br>
     </br></br></br></br>
 
@@ -619,11 +618,11 @@
 
     <script type="text/javascript">
 
-    var draggable = document.getElementById('draggable');
-    draggable.style.left = window.innerWidth * 0.20 + 'px';
-    draggable.childNodes[1].value = window.innerWidth * 0.20;
+    var moon1 = document.getElementById('moon1');
+    moon1.style.left = window.innerWidth * 0.20 + 'px';
+    moon1.childNodes[1].value = window.innerWidth * 0.20;
 
-    draggable.addEventListener('touchmove', function(event) {
+    moon1.addEventListener('touchmove', function(event) {
       var touch = event.targetTouches[0];
 
       // Place element where the finger is
@@ -632,11 +631,34 @@
       else if(touch.pageX-25 > window.innerWidth * 0.80){drag = window.innerWidth * 0.80}
       else{drag = touch.pageX-25};
 
-      draggable.style.left = drag + 'px';
-      //draggable.style.top = touch.pageY-25 + 'px';
+      moon1.style.left = drag + 'px';
+      //moon1.style.top = touch.pageY-25 + 'px';
       //this.childNodes[1].value = touch.pageX;
-      this.childNodes[1].value = drag;
-      // let rect = draggable.getBoundingClientRect();
+      this.lastElementChild.value = drag;
+      // let rect = moon1.getBoundingClientRect();
+      // console.log(rect.left);
+      //document.getElementById('night').innerhtml = touch.pageX;
+      event.preventDefault();
+    }, false);
+
+    var sun1 = document.getElementById('sun1');
+    sun1.style.left = window.innerWidth * 0.20 + 'px';
+    sun1.childNodes[1].value = window.innerWidth * 0.20;
+
+    sun1.addEventListener('touchmove', function(event) {
+      var touch = event.targetTouches[0];
+
+      // Place element where the finger is
+      let drag = 100;
+      if(touch.pageX-25 < window.innerWidth * 0.20){drag = window.innerWidth * 0.20}
+      else if(touch.pageX-25 > window.innerWidth * 0.80){drag = window.innerWidth * 0.80}
+      else{drag = touch.pageX-25};
+
+      sun1.style.left = drag + 'px';
+      //sun1.style.top = touch.pageY-25 + 'px';
+      //this.childNodes[1].value = touch.pageX;
+      this.lastElementChild.value = drag;
+      // let rect = sun1.getBoundingClientRect();
       // console.log(rect.left);
       //document.getElementById('night').innerhtml = touch.pageX;
       event.preventDefault();
