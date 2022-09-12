@@ -82,7 +82,7 @@
         l1.style.left = drag + 'px';
 
         let diff = value(l2.style.left) - drag;
-        light.lastElementChild.value =  get_hhmm( diff * 60000 / c );
+        light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
         light.style.left = drag + diff / 2 - 25 + 'px';
 
         drag = get_utc( start + 60000 * (drag - width_start)/c );
@@ -108,8 +108,7 @@
         l2.style.left = drag + 'px';
 
         let diff = drag - value(l1.style.left);
-        // let light_time = ((drag - value(l1.style.left)) / c).toFixed(0);
-        // light.lastElementChild.value =  get_hhmm( light_time * 60000 );
+        light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
         light.style.left = value(l1.style.left) + diff / 2 - 25 + 'px';
 
         drag = get_utc( start + 60000 * (drag - width_start)/c );
