@@ -2,27 +2,52 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>NEW</title>
     <style media="screen">
+
       .b {border: 1px solid red;}
+
+      table {
+        width: 100%;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
     </style>
   </head>
   <body>
 
 
-    <div class="" style="display: none;">
-      <input type="datetime-local" id="departureActual" value="2022-09-08T16:17:00.000">
-      <input type="datetime-local" id="destinationActual" value="2022-09-09T05:48:00.000">
+
+
+    </br></br></br></br>
+    </br></br></br></br>
+    </br></br></br></br>
+    </br></br></br></br>
+
+
+
+
+    <div class="" style="position: absolute; left: 0; width:18%; height: 400px;">
+      <div class="" style="text-align: center; margin-top: 320px;">
+      <input type="datetime-local" id="departureActual" value="2022-09-08T16:17:00.000" oninput="init()">
+    </div>
     </div>
 
-    </br></br></br></br>
-    </br></br></br></br>
-    </br></br></br></br>
-    </br></br></br></br>
+    <div class="" style="position: absolute; right: 0; width:18%; height: 400px;">
+      <div class="" style="text-align: center; margin-top: 320px;">
+          <input type="datetime-local" id="destinationActual" value="2022-09-09T05:48:00.000" oninput="init()">
+      </div>
+    </div>
 
-    <div class="" id="light" style="margin-left: -50px; position:absolute;" onclick="lightchange()">
+
+
+
+
+
+    <div class="NIGHT" id="light" style="margin-left: -50px; position:absolute;" onclick="lightchange()">
       <img class="" style="object-fit:fill; height:100px;" src="moon.png">
-      <output class="" style="display:block; text-align: center;">HI</output>
+      <output class="" style="display:block; text-align: center;"></output>
     </div>
 
     </br></br></br></br>
@@ -42,32 +67,87 @@
       </svg>
     </div>
 
-
-
     </br></br></br></br>
     </br></br></br></br>
-
 
     <div class="" id="base" style="position: absolute; left: 20%; width: 60%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
 
+    </br></br></br></br>
+    </br></br></br></br>
+
+    <div class="" style="text-align: center;">
+      <input class="" id="instrumentflying" type="range" value="30" min="0" max="360" step="10" style="width: 60%;" oninput="this.nextElementSibling.value = this.value">
+      <output>30</output>
+    </div>
+
+    </br></br></br></br>
+
+
+
+
+
+
+    <div class="" style="text-align: center;">
+      <input type="button" value="AUTO PSR" onclick="psrgenerate()">
+    </div>
+
+    </br></br></br></br>
+    </br></br></br></br>
+    </br></br></br></br>
+    </br></br></br></br>
+
+
+    <div id = "table" style="font-family: Arial; position: relative;">
+
+      <img class="" style="position:absolute; height:60px; margin-top: -32px;object-fit:fill;" src="logo.png">
+
+      <table id="0table" style="height:8mm; border: none;">
+        <tr>
+          <th style="width:18%; border: none;"></th>
+          <th style="width:18%; border: none;"></th>
+          <th style="border: none;">PILOTS REPORT</th>
+          <th id="flightNumber" style="width:12%; border: none;"></th>
+          <th id="registeration" style="width:12%; border: none;"></th>
+          <th id="a/ctype" style="width:12%; border: none;"></th>
+        </tr>
+      </table>
+
+    </div>
+
+
+
     <script type="text/javascript">
 
-      //////////////////////////////////////////////////////////////////////////
-
-      const start = document.getElementById('departureActual').valueAsNumber;
-      const end = document.getElementById('destinationActual').valueAsNumber;
-      const l1 = document.getElementById('line1');
-      const light = document.getElementById('light');
-      const l2 = document.getElementById('line2');
+      // var table_data = document.getElementsByTagName('td');
+      // for(let i = 0; i < table_data.length; i++){table_data[i].setAttribute("contenteditable", "true")};
 
       //////////////////////////////////////////////////////////////////////////
 
-      var c = 60 / ((end - start)/60000);
+      var start, end, l1, light, l2, c;
+      init();
 
-      ////
+      function init(){
 
-      l1.style.left = 20 + 60 * 0.33 + '%';
-      l1.firstElementChild.value = get_utc( start + 60000 * (60 * 0.33) / c );
+        start = document.getElementById('departureActual').valueAsNumber;
+        end = document.getElementById('destinationActual').valueAsNumber;
+        l1 = document.getElementById('line1');
+        light = document.getElementById('light');
+        l2 = document.getElementById('line2');
+
+        c = 60 / ((end - start)/60000);
+        l1.style.left = 20 + 60 * 0.33 + '%';
+        l1.firstElementChild.value = get_utc( start + 60000 * (60 * 0.33) / c );
+        l2.style.left = 20 + 60 * 0.66 + '%';
+        l2.firstElementChild.value = get_utc( start + 60000 * (60 * 0.66)/c );
+
+        light.style.left = 50 + '%';
+        let r = value(l2.style.left) - value(l1.style.left);
+        light.lastElementChild.value =  get_hhmm( (r / c).toFixed(0) * 60000 );
+
+      };
+
+      //////////////////////////////////////////////////////////////////////////
+
       l1.addEventListener('touchmove', function(event) {
 
         var touch = event.targetTouches[0].pageX / window.innerWidth * 100;
@@ -81,24 +161,22 @@
         ////
 
         l1.style.left = drag + '%';
-        this.firstElementChild.value = get_utc( start + 60000 * (drag - 20)/c );
+        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/c ) );
 
         ////
 
         let diff = value(l2.style.left) - drag;
-        light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
+        light.lastElementChild.value =  get_hhmm( Math.floor(diff / c) * 60000 );
         light.style.left = drag + diff / 2 + '%';
 
         ////
-        
+
         event.preventDefault();
 
       }, false);
 
       ////////////////
 
-      l2.style.left = 20 + 60 * 0.66 + '%';
-      l2.firstElementChild.value = get_utc( start + 60000 * (60 * 0.66)/c );
       l2.addEventListener('touchmove', function(event) {
 
         var touch = event.targetTouches[0].pageX / window.innerWidth * 100;
@@ -113,12 +191,12 @@
         ////
 
         l2.style.left = drag + '%';
-        this.firstElementChild.value = get_utc( start + 60000 * (drag - 20)/c );
+        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/c ) );
 
         ////
 
         let diff = drag - value(l1.style.left);
-        light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
+        light.lastElementChild.value =  get_hhmm( Math.floor(diff / c) * 60000 );
         light.style.left = value(l1.style.left) + diff / 2 + '%';
 
         ////
@@ -126,12 +204,6 @@
         event.preventDefault();
 
       }, false);
-
-      ////////////////
-
-      light.style.left = 50 + '%';
-      let r = value(l2.style.left) - value(l1.style.left);
-      light.lastElementChild.value =  get_hhmm( (r / c).toFixed(0) * 60000 );
 
       //////////////////////////////////////////////////////////////////////////
 
@@ -141,18 +213,14 @@
       function lightchange(){
 
         if(light.firstElementChild.src.endsWith("sun.png")){
+          light.classList = ["NIGHT"];
           light.firstElementChild.src = "moon.png";
-          outer = 'yellow'
-          inner = 'grey';
         }
         else{
+          light.classList = ["DAY"];
           light.firstElementChild.src = "sun.png";
-          outer = 'grey'
-          inner = 'yellow';
-        }
-        l1.lastElementChild.firstElementChild.style.fill = inner;
-        l2.lastElementChild.firstElementChild.style.fill = inner;
-        base_color();
+        };
+
       };
 
       function get_utc(time){
@@ -175,6 +243,213 @@
       };
 
       //////////////////////////////////////////////////////////////////////////
+
+      function ppsrgenerate(){
+
+        let ll, ls, le;
+
+        if(light.classList[0] == 'NIGHT'){ll = 'NIGHT'}
+        else if(light.classList[0] == 'DAY'){ll = 'DAY'};
+
+        ls = start + 60000 * Math.floor( (value(l1.style.left) - 20) / c );
+        if(ls <= start){startLight = ll}
+        else if(ls > start){startLight = lc(ll)};
+        le = start + 60000 * Math.floor( (value(l2.style.left) - 20) / c );
+        if(le < end){endLight = lc(ll)}
+        else if(le >= end){endLight = ll};
+
+        function lc(info){
+          if(info == 'DAY'){return 'NIGHT'}
+          if(info == 'NIGHT'){return 'DAY'}
+        };
+
+        let instrument = document.getElementById('instrumentflying').valueAsNumber;
+
+        console.log(start, startLight);
+        console.log(ls, ll, le);
+        console.log(end, endLight);
+        console.log(instrument);
+
+        ////////////////////////////////////////////////////////////////////////
+
+        let lastlight = startLight;
+
+        let one_start = start;
+        let one_add = 3600000;
+        let one_end = start + one_add;
+        let block1 = {'from': one_start, 'to': one_end};
+
+        let two_start = one_end + 60000;
+        let two_add = 14400000;
+        let two_end = two_start + two_add;
+        let block2 = {'from': two_start, 'to': two_end};
+
+        let three_start = two_end + 60000;
+        let three_add = 10800000;
+        let three_end = three_start + three_add;
+        let block3 = {'from': three_start, 'to': three_end};
+
+
+        let four_start = three_end + 60000;
+
+        let last_block = end - 60000 - four_start;
+        let block = last_block/60000;
+        let min = block % 60;
+        last_block -= 60000 * (min%2);
+        let four_add = last_block/2;
+
+        let four_end = four_start + four_add;
+        let block4 = {'from': four_start, 'to': four_end};
+
+        let five_start = four_end + 60000;
+        let five_add = undefined;
+        let five_end = end;
+        let block5 = {'from': five_start, 'to': five_end};
+
+        daynight(block1, 1);
+        daynight(block2, 2);
+        daynight(block3, 3);
+        daynight(block4, 4);
+        daynight(block5, 5);
+
+        function daynight(block, index){
+
+          let day = 0, night = 0;
+
+          if(le <= block.from || ls >= block.to){
+            if(lastlight == 'DAY'){day = diff(block.from, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
+          }
+          else if(ls <= block.from && le >= block.to){
+            lastlight = ll;
+            if(lastlight == 'DAY'){day = diff(block.from, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
+          }
+          else if(ls <= block.from && le < block.to){
+            lastlight = ll;
+            if(lastlight == 'DAY'){day = diff(block.from, le); night = diff(le, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, le); day = diff(le, block.to)}
+          }
+          else if(ls > block.from && le >= block.to){
+            if(lastlight == 'DAY'){day = diff(block.from, ls); night = diff(ls, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, ls); day = diff(ls, block.to)}
+            lastlight = ll;
+          }
+          else if(ls > block.from && le < block.to){
+            let a = diff(block.from, ls);
+            let b = diff(ls, le);
+            let c = diff(le, block.to);
+            if(lastlight == 'DAY'){day = a + c; night = b; ll = 'DAY';}
+            else if(lastlight == 'NIGHT'){night = a + c; day = b; ll = 'NIGHT';}
+          }
+
+          function diff(a, b){
+            return (b - a);
+          };
+
+          block.day = day;
+          block.night = night;
+          block.block = index;
+
+        };
+
+        console.log('value of instrument = ', instrument);
+        let half = instrument * 60000 /2;
+        let last = instrument * 60000;
+        let set1 = [block1, block3, block5], day1 = 0;
+        let set2 = [block2, block4], day2 = 0;
+        set1 = sort_info(set1, 'day', 'high');
+        set2 = sort_info(set2, 'day', 'high');
+        function sort_info(x, y, z){
+          x.sort( compare );
+          function compare( a, b ) {
+            if ( eval('a.' + y + ' < b.' + y ) ){ return -1 }
+            if ( eval('a.' + y + ' > b.' + y ) ){ return 1 }
+            return 0;
+          }
+          if(z == 'low'){return x};
+          if(z == 'high'){return x.reverse()};
+        };
+
+        inst_add(set1[0], half);
+        if(last < half){inst_add(set2[0], last)}
+        else{inst_add(set2[0], half)};
+
+        half = last / 2;
+        inst_add(set1[1], half);
+        if(last < half){inst_add(set2[1], last)}
+        else{inst_add(set2[1], half)};
+
+        inst_add(set1[2], last);
+
+        function inst_add(item, add){
+          let aval = 0, added = 0;
+          if(item.day - 600000 > 0){ aval = Math.trunc( (item.day - 600000) / 300000 ) * 300000 };
+          if(add >= aval){ item.instrument = aval; added = aval; }
+          else{ item.instrument = add; added = add; };
+          if(last - added <= 0){last = 0}
+          else{last -= added};
+        };
+
+        final(block1);
+        final(block2);
+        final(block3);
+        final(block4);
+        final(block5);
+
+        function final(block){
+
+          block.from = get_utc(block.from);
+          block.to = get_utc(block.to);
+
+          block.day = get_hhmm(block.day);
+          block.night = get_hhmm(block.night);
+
+          block.instrument = get_hhmm(block.instrument);
+
+          console.log(block);
+
+          function get_utc(time){
+            time = new Date(time);
+            hh = time.getUTCHours();
+            hh = ('0'+ hh).slice(-2);
+            mm = time.getUTCMinutes();
+            mm = ('0'+ mm).slice(-2);
+            return hh + ':' + mm;
+          };
+          function get_hhmm(block){
+            //block = (b - a)/60000;
+            block = block / 60000;
+            hh = Math.trunc(block / 60);
+            hh = ('0'+ hh).slice(-2);
+            mm = block % 60;
+            mm = ('0'+ mm).slice(-2);
+            return hh + ':' + mm;
+          };
+
+        };
+
+        ////////////////////////////////////////////////////////////////////////
+
+      };
+
+      function psrgenerate(){
+
+        var mywindow = window.open('', 'PRINT', '');
+
+        mywindow.document.write('<html><head><title>' + "AIC " + document.getElementById("flightNumber").value + '</title></head><body >');
+        var style = document.head.lastElementChild
+        mywindow.document.head.appendChild(style);
+
+        var table = document.getElementById("table");
+        mywindow.document.body.appendChild(table);
+
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+
+      };
 
     </script>
 
