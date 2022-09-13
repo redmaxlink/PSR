@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
-    <title>NEW</title>
+    <title>OLD</title>
     <style>
 
-      .b {border: 1px solid red;}
+      #draggable {width:50px;height:50px;background-color:#f00;position:absolute;}
 
       table {
         width: 100%;
         border: 1px solid black;
         border-collapse: collapse;
       }
-
       th, td {
         border: 1px solid black;
         border-collapse: collapse;
         text-align: center;
       }
-
     </style>
   </head>
+
+
   <body>
 
 
-    <div class="" style="display: block;">
-      AIC
-    <input type="text" id="number_in" required style="text-transform:uppercase; text-align: center;">
+    </br></br></br></br>
+
+    AIC
+    <input type="text" id="flightNumber" required style="text-transform:uppercase; text-align: center;">
 
     VT -
-    <select id="registeration_in">
+    <select id="registeration">
           <option value=" "> </option>
           <option value="ALF">ALF</option>
           <option value="ALG">ALG</option>
@@ -49,100 +51,169 @@
           <option value="ALX">ALX</option>
     </select>
 
-
-    </div>
-
-    <div class="" style="text-align: center;">
-      <input type="button" value="AUTO PSR" onclick="psr_generate()">
-    </div>
-
-    </br></br></br></br>
-    </br></br></br></br>
-    </br></br></br></br>
     </br></br></br></br>
 
+    <input type="text" id="departure" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="scheduleDep" required style="text-transform:uppercase; text-align: center;">
+    <input type="datetime-local" id="departureActual">
+    <select id="startLight">
+      <option value="DAY">DAY</option>
+      <option value="NIGHT">NIGHT</option>
+    </select>
+    <select id="departureDelay">
+      <option value=" "> </option>
+      <option value="CONSQ">CONSQ</option>
+      <option value="STN">STN</option>
+      <option value="ATC">ATC</option>
+      <option value="WX WIND">WX WIND</option>
+    </select>
+
+    </br></br>
+
+
+    <select id="light">
+      <option value="DAY">DAY</option>
+      <option value="NIGHT">NIGHT</option>
+    </select>
+    <input type="datetime-local" id="lightStart">
+    <input type="datetime-local" id="lightEnd">
 
 
 
-    <div class="" style="position: absolute; left: 0; width:18%; height: 400px;">
-      <div class="" style="text-align: center; margin-top: 320px;">
-      <input type="datetime-local" id="departureActual" value="2022-09-08T16:17:00.000" oninput="init()">
-    </div>
-    </div>
+    </br></br>
 
-    <div class="" style="position: absolute; right: 0; width:18%; height: 400px;">
-      <div class="" style="text-align: center; margin-top: 320px;">
-          <input type="datetime-local" id="destinationActual" value="2022-09-09T05:48:00.000" oninput="init()">
-      </div>
-    </div>
-
-
-
-
-
-
-    <div class="NIGHT" id="light" style="margin-left: -50px; position:absolute;" onclick="lightchange()">
-      <img class="" style="object-fit:fill; height:100px;" src="moon.png">
-      <output class="" style="display:block; text-align: center;"></output>
-    </div>
-
-    </br></br></br></br>
-    </br></br></br></br>
-
-    <div class="" id="line1" style="position:absolute;">
-      <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
-      <svg class = "" width="4" height="187">
-        <rect class = "line" width="8" height="187" style="fill:grey;" />
-      </svg>
-    </div>
-
-    <div class="" id="line2" style="position:absolute;">
-      <output class="" style="display: block; text-align: center;"></output>
-      <svg class = "" width="4" height="187">
-        <rect class = "line" width="8" height="187" style="fill:grey;" />
-      </svg>
-    </div>
+    <input type="text" id="destination" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="scheduleDes" required style="text-transform:uppercase; text-align: center;">
+    <input type="datetime-local" id="destinationActual">
+    <select id="endLight">
+      <option value="DAY">DAY</option>
+      <option value="NIGHT">NIGHT</option>
+    </select>
 
     </br></br></br></br>
+
+    <input class="b" id="instrumentflying" type="range" value="30" min="0" max="360" step="10" oninput="this.nextElementSibling.value = this.value" style="width: 100%;" >
+    <output> </output>
+
     </br></br></br></br>
 
-    <div class="" id="base" style="position: absolute; left: 20%; width: 60%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
-
-    </br></br></br></br>
-    </br></br></br></br>
-
-    <div class="" style="text-align: center;">
-      <input class="" id="instrumentflying" type="range" value="30" min="0" max="360" step="10" style="width: 60%;" oninput="this.nextElementSibling.value = this.value">
-      <output>30</output>
+    <div id="draggable" >
+      <output>100</output>
     </div>
 
     </br></br></br></br>
 
+    <select id="destinationDelay">
+      <option value=" "> </option>
+      <option value="CONSQ">CONSQ</option>
+      <option value="STN">STN</option>
+      <option value="ATC">ATC</option>
+      <option value="WX WIND">WX WIND</option>
+    </select>
 
+    </br></br></br></br>
 
-
-
-
+    <input type="text" id="quantity" required style="text-transform:uppercase; text-align: center;">
+    <select id="unit">
+      <option value=" "> </option>
+      <option value="LT">LT</option>
+      <option value="USG">USG</option>
+    </select>
+    <input type="text" id="spgr" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="temp" required style="text-transform:uppercase; text-align: center;">
 
 
     </br></br></br></br>
+
+    <input type="text" id="1name" required style="text-transform:uppercase; text-align: left;">
+    <input type="text" id="1staff" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="1sap" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="1ipltm" required style="text-transform:uppercase; text-align: center;">
+    <input type="time" id="1crt" required style="text-transform:uppercase; text-align: center;">
+    <select id="1status">
+      <option value=" "> </option>
+      <option value="PIC RC">PIC RC</option>
+      <option value="PC PF">RC PF</option>
+      <option value="RC PM">RC PM</option>
+      <option value="SLF">SLF</option>
+      <option value="SUT">SUT</option>
+      <option value="SNY">SNY</option>
+    </select>
+
+    </br></br>
+
+    <input type="text" id="2name" required style="text-transform:uppercase; text-align: left;">
+    <input type="text" id="2staff" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="2sap" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="2ipltm" required style="text-transform:uppercase; text-align: center;">
+    <input type="time" id="2crt" required style="text-transform:uppercase; text-align: center;">
+    <select id="2status">
+      <option value=" "> </option>
+      <option value="PIC RC">PIC RC</option>
+      <option value="PC PF">RC PF</option>
+      <option value="RC PM">RC PM</option>
+      <option value="SLF">SLF</option>
+      <option value="SUT">SUT</option>
+      <option value="SNY">SNY</option>
+    </select>
+
+    </br></br>
+
+    <input type="text" id="3name" required style="text-transform:uppercase; text-align: left;">
+    <input type="text" id="3staff" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="3sap" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="3ipltm" required style="text-transform:uppercase; text-align: center;">
+    <input type="time" id="3crt" required style="text-transform:uppercase; text-align: center;">
+    <select id="3status">
+      <option value=" "> </option>
+      <option value="PIC RC">PIC RC</option>
+      <option value="PC PF">RC PF</option>
+      <option value="RC PM">RC PM</option>
+      <option value="SLF">SLF</option>
+      <option value="SUT">SUT</option>
+      <option value="SNY">SNY</option>
+    </select>
+
+    </br></br>
+
+    <input type="text" id="4name" required style="text-transform:uppercase; text-align: left;">
+    <input type="text" id="4staff" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="4sap" required style="text-transform:uppercase; text-align: center;">
+    <input type="text" id="4ipltm" required style="text-transform:uppercase; text-align: center;">
+    <input type="time" id="4crt" required style="text-transform:uppercase; text-align: center;">
+    <select id="4status">
+      <option value=" "> </option>
+      <option value="PIC RC">PIC RC</option>
+      <option value="PC PF">RC PF</option>
+      <option value="RC PM">RC PM</option>
+      <option value="SLF">SLF</option>
+      <option value="SUT">SUT</option>
+      <option value="SNY">SNY</option>
+    </select>
+
     </br></br></br></br>
-    </br></br></br></br>
+
+    <input type="button" value="AUTO PSR" onclick="psrgenerate()">
+
     </br></br></br></br>
 
 
-    <div id = "table" style="font-family: Arial; position: relative; display: none;">
 
-      <img class="" style="position:absolute; height:36px; margin-top: -8px;object-fit:fill;" src="logo.png">
+
+
+
+
+    <div id = "table" style="font-family: Arial">
+
 
       <table id="0table" style="height:8mm; border: none;">
         <tr>
-          <th style="width:18%; border: none;"></th>
+          <th style="width:18%; border: none;"><img  style="object-fit:fill; height:30px;" src="logo.png"></th>
           <th style="width:18%; border: none;"></th>
           <th style="border: none;">PILOTS REPORT</th>
-          <td id="number_out" style="width:12%; border: none;"></td>
-          <td id="registeration_out" style="width:12%; border: none;"></td>
-          <td id="type_out" style="width:12%; border: none;"></td>
+          <th style="width:12%; border: none;">AI 187</th>
+          <th style="width:12%; border: none;">VT-ALN</th>
+          <th style="width:12%; border: none;">B777-300LR</th>
         </tr>
       </table>
 
@@ -168,9 +239,16 @@
           <td style="width: 6.8%;">FROM</td>
           <td style="width: 6.8%;">TO</td>
         </tr>
+
       </table>
 
+
+
+
+
       <table id="2table" style="height:85mm; font-size: 12px;">
+
+
 
         <tr style="height:5.5mm; font-size: 12px;">
           <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
@@ -208,7 +286,7 @@
         </tr>
 
         <tr style="height:5.5mm; font-size: 12px;">
-          <td style="width: 4.6%;" rowspan="2">2.</br>CDR</td>
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
           <td style="width: 20%;" rowspan="2"></td>
           <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
           <td style="width: 4.4%;" rowspan="3">HH:MM</td>
@@ -243,7 +321,7 @@
         </tr>
 
         <tr style="height:5.5mm; font-size: 12px;">
-          <td style="width: 4.6%;" rowspan="2">3.</br>CDR</td>
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
           <td style="width: 20%;" rowspan="2"></td>
           <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
           <td style="width: 4.4%;" rowspan="3">HH:MM</td>
@@ -278,7 +356,7 @@
         </tr>
 
         <tr style="height:5.5mm; font-size: 12px;">
-          <td style="width: 4.6%;" rowspan="2">4.</br>CDR</td>
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
           <td style="width: 20%;" rowspan="2"></td>
           <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
           <td style="width: 4.4%;" rowspan="3">HH:MM</td>
@@ -313,7 +391,7 @@
         </tr>
 
         <tr style="height:5.5mm; font-size: 12px;">
-          <td style="width: 4.6%;" rowspan="2">5.</br>CDR</td>
+          <td style="width: 4.6%;" rowspan="2">1.</br>CDR</td>
           <td style="width: 20%;" rowspan="2"></td>
           <td style="width: 9.2%; border-bottom: none;" rowspan="2">27627AT</td>
           <td style="width: 4.4%;" rowspan="3">HH:MM</td>
@@ -348,6 +426,13 @@
         </tr>
 
       </table>
+
+
+
+
+
+
+
 
       <table id="3table" style="margin:2px 0 0 0; height:12mm;">
         <tr style="height:5mm; font-size: 12px;">
@@ -518,171 +603,57 @@
         </tr>
       </table>
 
-    </div>
 
+    </div>
 
 
     <script type="text/javascript">
 
-      //////////////////////////////////////////////////////////////////////////
+    var draggable = document.getElementById('draggable');
+    draggable.style.left = window.innerWidth * 0.20 + 'px';
+    draggable.childNodes[1].value = window.innerWidth * 0.20;
 
-      var start, end, l1, light, l2, c;
-      init();
+    draggable.addEventListener('touchmove', function(event) {
+      var touch = event.targetTouches[0];
 
-      function init(){
+      // Place element where the finger is
+      let drag = 100;
+      if(touch.pageX-25 < window.innerWidth * 0.20){drag = window.innerWidth * 0.20}
+      else if(touch.pageX-25 > window.innerWidth * 0.80){drag = window.innerWidth * 0.80}
+      else{drag = touch.pageX-25};
 
-        start = document.getElementById('departureActual').valueAsNumber;
-        end = document.getElementById('destinationActual').valueAsNumber;
-        l1 = document.getElementById('line1');
-        light = document.getElementById('light');
-        l2 = document.getElementById('line2');
-
-        c = 60 / ((end - start)/60000);
-        l1.style.left = 20 + 60 * 0.33 + '%';
-        l1.firstElementChild.value = get_utc( start + 60000 * (60 * 0.33) / c );
-        l2.style.left = 20 + 60 * 0.66 + '%';
-        l2.firstElementChild.value = get_utc( start + 60000 * (60 * 0.66)/c );
-
-        light.style.left = 50 + '%';
-        let r = value(l2.style.left) - value(l1.style.left);
-        light.lastElementChild.value =  get_hhmm( (r / c).toFixed(0) * 60000 );
-
-      };
-
-      //////////////////////////////////////////////////////////////////////////
-
-      l1.addEventListener('touchmove', function(event) {
-
-        var touch = event.targetTouches[0].pageX / window.innerWidth * 100;
-
-        ////
-
-        if(touch <= 20){drag = 20}
-        else if( touch >= 80){drag = 80}
-        else{drag = touch};
-
-        ////
-
-        l1.style.left = drag + '%';
-        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/c ) );
-
-        ////
-
-        let diff = value(l2.style.left) - drag;
-        light.lastElementChild.value =  get_hhmm( Math.floor(diff / c) * 60000 );
-        light.style.left = drag + diff / 2 + '%';
-
-        ////
-
-        event.preventDefault();
-
-      }, false);
-
-      ////////////////
-
-      l2.addEventListener('touchmove', function(event) {
-
-        var touch = event.targetTouches[0].pageX / window.innerWidth * 100;
-
-        ////
-
-        let min = value(l1.style.left) + c * 10;
-        if(touch <= min){drag = min;}
-        else if(touch >= 80){drag = 80}
-        else{drag = touch};
-
-        ////
-
-        l2.style.left = drag + '%';
-        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/c ) );
-
-        ////
-
-        let diff = drag - value(l1.style.left);
-        light.lastElementChild.value =  get_hhmm( Math.floor(diff / c) * 60000 );
-        light.style.left = value(l1.style.left) + diff / 2 + '%';
-
-        ////
-
-        event.preventDefault();
-
-      }, false);
-
-      //////////////////////////////////////////////////////////////////////////
-
-      function value(data){
-        return Number(data.slice(0, data.length - 1));
-      };
-      function lightchange(){
-
-        if(light.firstElementChild.src.endsWith("sun.png")){
-          light.classList = ["NIGHT"];
-          light.firstElementChild.src = "moon.png";
-        }
-        else{
-          light.classList = ["DAY"];
-          light.firstElementChild.src = "sun.png";
-        };
-
-      };
-
-      function get_utc(time){
-        time = new Date(time);
-        hh = time.getUTCHours();
-        hh = ('0'+ hh).slice(-2);
-        mm = time.getUTCMinutes();
-        mm = ('0'+ mm).slice(-2);
-        return hh + ':' + mm;
-      };
-      function get_hhmm(block){
-
-        block = block / 60000;
-        hh = Math.trunc(block / 60);
-        hh = ('0'+ hh).slice(-2);
-        mm = block % 60;
-        mm = ('0'+ mm).slice(-2);
-        return hh + ':' + mm;
-
-      };
-
-      //////////////////////////////////////////////////////////////////////////
-
-      function psr_generate(){
-
-        document.getElementById('number_out').innerHTML = 'AIC ' + document.getElementById('number_in').value;
-        document.getElementById('registeration_out').innerHTML = 'VT - ' + document.getElementById('registeration_in').value;
-        let lr200 = ['ALF', 'ALG', 'ALH'], type = 'B777-300ER'
-        if(lr200.includes(document.getElementById('registeration_in').value)){type = 'B777-200LR'}
-        document.getElementById('type_out').innerHTML = type;
+      draggable.style.left = drag + 'px';
+      //draggable.style.top = touch.pageY-25 + 'px';
+      //this.childNodes[1].value = touch.pageX;
+      this.childNodes[1].value = drag;
+      // let rect = draggable.getBoundingClientRect();
+      // console.log(rect.left);
+      //document.getElementById('night').innerhtml = touch.pageX;
+      event.preventDefault();
+    }, false);
 
 
-        //time_generate();
 
-        // var table_data = document.getElementsByTagName('td');
-        // for(let i = 0; i < table_data.length; i++){table_data[i].setAttribute("contenteditable", "true")};
+      function psrgenerate(){
 
-        window_generate();
+        var table_data = document.getElementsByTagName('td');
+        for(let i = 0; i < table_data.length; i++){table_data[i].setAttribute("contenteditable", "true")}
+        
 
-      };
+/////////////////////////////////////
 
-      function time_generate(){
 
-        let ll, ls, le;
+        let start = document.getElementById('departureActual').valueAsNumber;
+        let startLight = document.getElementById('startLight').value;
 
-        if(light.classList[0] == 'NIGHT'){ll = 'NIGHT'}
-        else if(light.classList[0] == 'DAY'){ll = 'DAY'};
+        let ls = document.getElementById('lightStart').valueAsNumber;
+        let le = document.getElementById('lightEnd').valueAsNumber;
+        let ll = document.getElementById('light').value;
 
-        ls = start + 60000 * Math.floor( (value(l1.style.left) - 20) / c );
-        if(ls <= start){startLight = ll}
-        else if(ls > start){startLight = lc(ll)};
-        le = start + 60000 * Math.floor( (value(l2.style.left) - 20) / c );
-        if(le < end){endLight = lc(ll)}
-        else if(le >= end){endLight = ll};
+        let end = document.getElementById('destinationActual').valueAsNumber;
+        let endLight = document.getElementById('endLight').value;
 
-        function lc(info){
-          if(info == 'DAY'){return 'NIGHT'}
-          if(info == 'NIGHT'){return 'DAY'}
-        };
+        let lastlight = startLight;
 
         let instrument = document.getElementById('instrumentflying').valueAsNumber;
 
@@ -691,9 +662,6 @@
         console.log(end, endLight);
         console.log(instrument);
 
-        ////////////////////////////////////////////////////////////////////////
-
-        let lastlight = startLight;
 
         let one_start = start;
         let one_add = 3600000;
@@ -726,6 +694,9 @@
         let five_add = undefined;
         let five_end = end;
         let block5 = {'from': five_start, 'to': five_end};
+
+
+/////////////////////////////////////
 
         daynight(block1, 1);
         daynight(block2, 2);
@@ -774,6 +745,7 @@
 
         };
 
+/////////////////////////////////////
         console.log('value of instrument = ', instrument);
         let half = instrument * 60000 /2;
         let last = instrument * 60000;
@@ -791,6 +763,7 @@
           if(z == 'low'){return x};
           if(z == 'high'){return x.reverse()};
         };
+
 
         inst_add(set1[0], half);
         if(last < half){inst_add(set2[0], last)}
@@ -812,7 +785,9 @@
           else{last -= added};
         };
 
-        let time = [];
+
+
+/////////////////////////////////////
 
         final(block1);
         final(block2);
@@ -830,55 +805,66 @@
 
           block.instrument = get_hhmm(block.instrument);
 
-          let b = block.block;
-          delete block.block;
-          time['block' + b] = block;
+          console.log(block);
+
+          function get_utc(time){
+            time = new Date(time);
+            hh = time.getUTCHours();
+            hh = ('0'+ hh).slice(-2);
+            mm = time.getUTCMinutes();
+            mm = ('0'+ mm).slice(-2);
+            return hh + ':' + mm;
+          };
+          function get_hhmm(block){
+            //block = (b - a)/60000;
+            block = block / 60000;
+            hh = Math.trunc(block / 60);
+            hh = ('0'+ hh).slice(-2);
+            mm = block % 60;
+            mm = ('0'+ mm).slice(-2);
+            return hh + ':' + mm;
+          };
 
         };
 
-        ////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
 
-        return time;
 
-      };
+        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
-      function window_generate(){
 
-        var mywindow = window.open('', '', '');
-        mywindow.document.write('<!DOCTYPE html><html><head><title>')
-        ////////////////
 
-        let date = new Date(start);
 
-        mywindow.document.write(
-          //Change to Scheduled ADD DEP DES
-          "AI" + document.getElementById("number_in").value + ' ' +
-          date.toLocaleDateString()
-        );
+        mywindow.document.write('<html><head><title>' + "AIC " + document.getElementById("flightNumber").value + '</title></head><body >');
 
-        ////////////////
-        mywindow.document.write('</title></head><body >')
-        ////////////////
 
-        let node, clone;
 
-        node = document.head.lastElementChild;
-        clone = node.cloneNode(true);
-        mywindow.document.head.appendChild(clone);
+        var style = document.head.lastElementChild
+        mywindow.document.head.appendChild(style);
 
-        node = document.getElementById("table");
-        clone = node.cloneNode(true);
-        clone.style.display = 'block';
-        mywindow.document.body.appendChild(clone);
+        var table = document.getElementById("table");
+        mywindow.document.body.appendChild(table);
 
-        ////////////////
+
+
+
         mywindow.document.write('</body></html>');
+
         mywindow.document.close(); // necessary for IE >= 10
         mywindow.focus(); // necessary for IE >= 10*/
-      };
+
+/////////////////////////////////////
+
+    }
 
     </script>
 
 
+
+
+
   </body>
+
+
+
 </html>
