@@ -13,12 +13,48 @@
         border-collapse: collapse;
       }
 
+      th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+
     </style>
   </head>
   <body>
 
 
+    <div class="" style="display: block;">
+      AIC
+    <input type="text" id="number_in" required style="text-transform:uppercase; text-align: center;">
 
+    VT -
+    <select id="registeration_in">
+          <option value=" "> </option>
+          <option value="ALF">ALF</option>
+          <option value="ALG">ALG</option>
+          <option value="ALH">ALH</option>
+          <option value="ALJ">ALJ</option>
+          <option value="ALK">ALK</option>
+          <option value="ALL">ALL</option>
+          <option value="ALM">ALM</option>
+          <option value="ALN">ALN</option>
+          <option value="ALO">ALO</option>
+          <option value="ALP">ALP</option>
+          <option value="ALQ">ALQ</option>
+          <option value="ALR">ALR</option>
+          <option value="ALS">ALS</option>
+          <option value="ALT">ALT</option>
+          <option value="ALU">ALU</option>
+          <option value="ALX">ALX</option>
+    </select>
+
+
+    </div>
+
+    <div class="" style="text-align: center;">
+      <input type="button" value="AUTO PSR" onclick="psr_generate()">
+    </div>
 
     </br></br></br></br>
     </br></br></br></br>
@@ -87,9 +123,7 @@
 
 
 
-    <div class="" style="text-align: center;">
-      <input type="button" value="AUTO PSR" onclick="psrgenerate()">
-    </div>
+
 
     </br></br></br></br>
     </br></br></br></br>
@@ -97,29 +131,51 @@
     </br></br></br></br>
 
 
-    <div id = "table" style="font-family: Arial; position: relative;">
+    <div id = "table" style="font-family: Arial; position: relative; display: none;">
 
-      <img class="" style="position:absolute; height:60px; margin-top: -32px;object-fit:fill;" src="logo.png">
+      <img class="" style="position:absolute; height:36px; margin-top: -8px;object-fit:fill;" src="logo.png">
 
       <table id="0table" style="height:8mm; border: none;">
         <tr>
           <th style="width:18%; border: none;"></th>
           <th style="width:18%; border: none;"></th>
           <th style="border: none;">PILOTS REPORT</th>
-          <th id="flightNumber" style="width:12%; border: none;"></th>
-          <th id="registeration" style="width:12%; border: none;"></th>
-          <th id="a/ctype" style="width:12%; border: none;"></th>
+          <td id="number_out" style="width:12%; border: none;"></td>
+          <td id="registeration_out" style="width:12%; border: none;"></td>
+          <td id="type_out" style="width:12%; border: none;"></td>
         </tr>
       </table>
+
+      <table id="1table" style="height:10mm;">
+      <tr style="height:6mm; font-size: 11px;">
+        <td style="width: 24.6%; font-size: 14px;" rowspan="2">OPERATING CREW</td>
+        <td style="width: 9.2%;">STAFF NO.</br>(Suffix AT / IT)</td>
+        <td style="width: 4.4%;" rowspan="2">TRG</br>STS*</td>
+        <td style="width: 6.4%;" rowspan="2">CRT</br>(UTC)</br>HH:MM</td>
+        <td style="width: 6.4%;" colspan="2">SECTOR(S) OPTG</br>(4 letter ICAO)</td>
+        <td style="width: 6.8%; font-size: 16px;" colspan="6">MULTIPLE CREW LOG - ON CONTROLS TIMING</td>
+      </tr>
+      <tr style="height:4mm; font-size: 10px;">
+        <td style="width: 9.2%;">SAP NO.</td>
+
+
+        <td style="width: 6.4%;">FROM</td>
+        <td style="width: 6.4%;">TO</td>
+        <td style="width: 6.8%;">FROM</td>
+        <td style="width: 6.8%;">TO</td>
+        <td style="width: 6.8%;">FROM</td>
+        <td style="width: 6.8%;">TO</td>
+        <td style="width: 6.8%;">FROM</td>
+        <td style="width: 6.8%;">TO</td>
+      </tr>
+
+    </table>
 
     </div>
 
 
 
     <script type="text/javascript">
-
-      // var table_data = document.getElementsByTagName('td');
-      // for(let i = 0; i < table_data.length; i++){table_data[i].setAttribute("contenteditable", "true")};
 
       //////////////////////////////////////////////////////////////////////////
 
@@ -244,7 +300,25 @@
 
       //////////////////////////////////////////////////////////////////////////
 
-      function ppsrgenerate(){
+      function psr_generate(){
+
+        document.getElementById('number_out').innerHTML = 'AIC ' + document.getElementById('number_in').value;
+        document.getElementById('registeration_out').innerHTML = 'VT - ' + document.getElementById('registeration_in').value;
+        let lr200 = ['ALF', 'ALG', 'ALH'], type = 'B777-300ER'
+        if(lr200.includes(document.getElementById('registeration_in').value)){type = 'B777-200LR'}
+        document.getElementById('type_out').innerHTML = type;
+
+
+        //time_generate();
+
+        // var table_data = document.getElementsByTagName('td');
+        // for(let i = 0; i < table_data.length; i++){table_data[i].setAttribute("contenteditable", "true")};
+
+        window_generate();
+
+      };
+
+      function time_generate(){
 
         let ll, ls, le;
 
@@ -391,6 +465,8 @@
           else{last -= added};
         };
 
+        let time = [];
+
         final(block1);
         final(block2);
         final(block3);
@@ -407,48 +483,51 @@
 
           block.instrument = get_hhmm(block.instrument);
 
-          console.log(block);
-
-          function get_utc(time){
-            time = new Date(time);
-            hh = time.getUTCHours();
-            hh = ('0'+ hh).slice(-2);
-            mm = time.getUTCMinutes();
-            mm = ('0'+ mm).slice(-2);
-            return hh + ':' + mm;
-          };
-          function get_hhmm(block){
-            //block = (b - a)/60000;
-            block = block / 60000;
-            hh = Math.trunc(block / 60);
-            hh = ('0'+ hh).slice(-2);
-            mm = block % 60;
-            mm = ('0'+ mm).slice(-2);
-            return hh + ':' + mm;
-          };
+          let b = block.block;
+          delete block.block;
+          time['block' + b] = block;
 
         };
 
         ////////////////////////////////////////////////////////////////////////
 
+        return time;
+
       };
 
-      function psrgenerate(){
+      function window_generate(){
 
-        var mywindow = window.open('', 'PRINT', '');
+        var mywindow = window.open('', '', '');
+        mywindow.document.write('<!DOCTYPE html><html><head><title>')
+        ////////////////
 
-        mywindow.document.write('<html><head><title>' + "AIC " + document.getElementById("flightNumber").value + '</title></head><body >');
-        var style = document.head.lastElementChild
-        mywindow.document.head.appendChild(style);
+        let date = new Date(start);
 
-        var table = document.getElementById("table");
-        mywindow.document.body.appendChild(table);
+        mywindow.document.write(
+          //Change to Scheduled ADD DEP DES
+          "AI " + document.getElementById("number_in").value + ' ' +
+          date.toLocaleDateString()
+        );
 
+        ////////////////
+        mywindow.document.write('</title></head><body >')
+        ////////////////
+
+        let node, clone;
+
+        node = document.head.lastElementChild;
+        clone = node.cloneNode(true);
+        mywindow.document.head.appendChild(clone);
+
+        node = document.getElementById("table");
+        clone = node.cloneNode(true);
+        clone.style.display = 'block';
+        mywindow.document.body.appendChild(clone);
+
+        ////////////////
         mywindow.document.write('</body></html>');
-
         mywindow.document.close(); // necessary for IE >= 10
         mywindow.focus(); // necessary for IE >= 10*/
-
       };
 
     </script>
