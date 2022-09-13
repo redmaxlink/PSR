@@ -7,6 +7,8 @@
 
       .b {border: 1px solid red;}
 
+      input { border: 1px solid lightgrey; border-radius: 20px;}
+
       table {
         width: 100%;
         border: 1px solid black;
@@ -23,112 +25,255 @@
   </head>
   <body>
 
+    <div class="" id="basic" style="height:36vh;">
 
-    <div class="" style="display: block;">
-      AIC
-    <input type="text" id="number_in" required style="text-transform:uppercase; text-align: center;">
-
-    VT -
-    <select id="registeration_in">
-          <option value=" "> </option>
-          <option value="ALF">ALF</option>
-          <option value="ALG">ALG</option>
-          <option value="ALH">ALH</option>
-          <option value="ALJ">ALJ</option>
-          <option value="ALK">ALK</option>
-          <option value="ALL">ALL</option>
-          <option value="ALM">ALM</option>
-          <option value="ALN">ALN</option>
-          <option value="ALO">ALO</option>
-          <option value="ALP">ALP</option>
-          <option value="ALQ">ALQ</option>
-          <option value="ALR">ALR</option>
-          <option value="ALS">ALS</option>
-          <option value="ALT">ALT</option>
-          <option value="ALU">ALU</option>
-          <option value="ALX">ALX</option>
-    </select>
-
-
-    </div>
-
-    <div class="" style="text-align: center;">
-      <input type="button" value="AUTO PSR" onclick="psr_generate()">
-    </div>
-
-    </br></br></br></br>
-    </br></br></br></br>
-    </br></br></br></br>
-    </br></br></br></br>
-
-
-
-
-    <div class="" style="position: absolute; left: 0; width:18%; height: 400px;">
-      <div class="" style="text-align: center; margin-top: 320px;">
-      <input type="datetime-local" id="departureActual" value="2022-09-08T16:17:00.000" oninput="init()">
-    </div>
-    </div>
-
-    <div class="" style="position: absolute; right: 0; width:18%; height: 400px;">
-      <div class="" style="text-align: center; margin-top: 320px;">
-          <input type="datetime-local" id="destinationActual" value="2022-09-09T05:48:00.000" oninput="init()">
+      <div class="" style="font-size:40px; width:100vw; margin-top: 1%; text-align: center;">
+        <input type="text" id="number_in" required style="font-size:40px; text-transform:uppercase; text-align: center;">
+        <select id="registeration_in" style="font-size:40px;">
+            <option value=" "> </option>
+            <option value="VT-ALF">VT-ALF</option>
+            <option value="VT-ALG">VT-ALG</option>
+            <option value="VT-ALH">VT-ALH</option>
+            <option value="VT-ALJ">VT-ALJ</option>
+            <option value="VT-ALK">VT-ALK</option>
+            <option value="VT-ALL">VT-ALL</option>
+            <option value="VT-ALM">VT-ALM</option>
+            <option value="VT-ALN">VT-ALN</option>
+            <option value="VT-ALO">VT-ALO</option>
+            <option value="VT-ALP">VT-ALP</option>
+            <option value="VT-ALQ">VT-ALQ</option>
+            <option value="VT-ALR">VT-ALR</option>
+            <option value="VT-ALS">VT-ALS</option>
+            <option value="VT-ALT">VT-ALT</option>
+            <option value="VT-ALU">VT-ALU</option>
+            <option value="VT-ALX">VT-ALX</option>
+        </select>
       </div>
+
+      <div class="" style="position:relative; margin-top: 3%;">
+        <div class="" style="position: absolute; left:0; width:40vw; height:50px; text-align:center;">
+          <input type="text" id="departure_in" required style="font-size:40px; text-transform:uppercase; text-align: center; display: block;">
+          <input type="datetime-local" id="departureSked_in" style="font-size:20px; color: grey; text-align: center; display: block;">
+        </div>
+        <div class="" style="position: absolute; right:0; width:40vw; height:50px;">
+          <input type="text" id="destination_in" required style="font-size:40px; text-transform:uppercase; text-align: center; display: block;">
+          <input type="datetime-local" id="destinationSked_in" style="font-size:20px; color: grey; text-align: center; display: block;">
+        </div>
+      </div>
+
+      <div class="" style="font-size:40px; width:100vw; margin-top: 4%; text-align: center;">
+
+        </br></br>
+
+        <div class="">
+          <input type="time" id="crt_in" required style="font-size: 40px; text-transform:uppercase; text-align: center;">
+        </div>
+
+        <div class="">
+          <input type="text" id="fuelQt_in" required style="font-size: 24px; text-transform:uppercase; text-align: center;">
+          <select id="fuelUt_in">
+            <option value="LT">LT</option>
+            <option value="USG">USG</option>
+          </select>
+          <input type="text" id="fuelSp_in" required style="font-size: 24px; text-transform:uppercase; text-align: center;">
+          <input type="text" id="fuelTp_in" required style="font-size: 24px; text-transform:uppercase; text-align: center;">
+        </div>
+
+      </div>
+
+
     </div>
 
 
+    <div class="" style="width:100%; height:50vh;">
 
 
+      <div class="" style="position:relative;">
+        <div class="" style="position: absolute; left:0; width:40vw; height:50px; text-align:center;" onclick="display()">
+          <h1>CREW</h1>
+        </div>
+        <div class="" style="position: absolute; right:0; width:40vw; height:50px; text-align:center;" onclick="display()">
+          <h1>TIMING</h1>
+        </div>
+      </div>
 
 
-    <div class="NIGHT" id="light" style="margin-left: -50px; position:absolute;" onclick="lightchange()">
-      <img class="" style="object-fit:fill; height:100px;" src="moon.png">
-      <output class="" style="display:block; text-align: center;"></output>
+      </br></br></br></br>
+
+
+      <div class="" id="crew" style="width:100%; text-align:center; display: block;">
+
+        </br></br></br></br>
+
+        <input type="text" id="1name_in" required style="text-transform:uppercase; text-align: left;">
+        <input type="text" id="1staff_in" required style="text-transform:uppercase; text-align: center;">
+        <input type="text" id="1sap_in" required style="text-transform:uppercase; text-align: center;">
+        <input type="text" id="1ipltm_in" required style="text-transform:uppercase; text-align: center;">
+        <select id="1status_in">
+          <option value=" "> </option>
+          <option value="PIC RC">PIC RC</option>
+          <option value="PC PF">RC PF</option>
+          <option value="RC PM">RC PM</option>
+          <option value="SLF">SLF</option>
+          <option value="SUT">SUT</option>
+          <option value="SNY">SNY</option>
+        </select>
+
+        </br></br>
+
+        <input type="text" id="2name_in" required style="text-transform:uppercase; text-align: left;">
+        <input type="text" id="2staff_in" required style="text-transform:uppercase; text-align: center;">
+        <input type="text" id="2sap_in" required style="text-transform:uppercase; text-align: center;">
+        <input type="text" id="2ipltm_in" required style="text-transform:uppercase; text-align: center;">
+        <select id="2status_in">
+          <option value=" "> </option>
+          <option value="PIC RC">PIC RC</option>
+          <option value="PC PF">RC PF</option>
+          <option value="RC PM">RC PM</option>
+          <option value="SLF">SLF</option>
+          <option value="SUT">SUT</option>
+          <option value="SNY">SNY</option>
+        </select>
+
+        </br></br>
+
+        <input type="text" id="3name_in" required style="text-transform:uppercase; text-align: left;">
+        <input type="text" id="3staff_in" required style="text-transform:uppercase; text-align: center;">
+        <input type="text" id="3sap_in" required style="text-transform:uppercase; text-align: center;">
+        <input type="text" id="3ipltm_in" required style="text-transform:uppercase; text-align: center;">
+        <select id="3status_in">
+          <option value=" "> </option>
+          <option value="PIC RC">PIC RC</option>
+          <option value="PC PF">RC PF</option>
+          <option value="RC PM">RC PM</option>
+          <option value="SLF">SLF</option>
+          <option value="SUT">SUT</option>
+          <option value="SNY">SNY</option>
+        </select>
+
+        </br></br>
+
+        <input type="text" id="4name_in" required style="text-transform:uppercase; text-align: left;">
+        <input type="text" id="4staff_in" required style="text-transform:uppercase; text-align: center;">
+        <input type="text" id="4sap_in" required style="text-transform:uppercase; text-align: center;">
+        <input type="text" id="4ipltm_in" required style="text-transform:uppercase; text-align: center;">
+        <select id="4status_in">
+          <option value=" "> </option>
+          <option value="PIC RC">PIC RC</option>
+          <option value="PC PF">RC PF</option>
+          <option value="RC PM">RC PM</option>
+          <option value="SLF">SLF</option>
+          <option value="SUT">SUT</option>
+          <option value="SNY">SNY</option>
+        </select>
+
+
+        <div class="" style="position: absolute; left: 0; width: 40%; height: 20%;">
+
+          </br></br></br></br>
+
+          <div class="" id="departureSeatLeft_in" style="width:30px; height:30px; background-color:red; position: absolute; left: 0;" onclick="seat('departureSeatLeft_in')"></div>
+          <div class="" id="departureSeatRight_in" style="width:30px; height:30px; background-color:lightgrey; position: absolute; right: 0;" onclick="seat('departureSeatRight_in')"></div>
+
+          <input type="text" id="departureLeft_in" required style="text-align: center;">
+          <input type="text" id="departureRight_in" required style="text-align: center;">
+
+        </div>
+
+        <div class="" style="position: absolute; right: 0; width: 40%; height: 20%;">
+
+          </br></br></br></br>
+
+          <div class="" id="destinationSeatLeft_in" style="width:30px; height:30px; background-color:red; position: absolute; left: 0;" onclick="seat('destinationSeatLeft_in')"></div>
+          <div class="" id="destinationSeatRight_in" style="width:30px; height:30px; background-color:lightgrey; position: absolute; right: 0;" onclick="seat('destinationSeatRight_in')"></div>
+
+          <input type="text" id="destinationLeft_in" required style="text-align: center;">
+          <input type="text" id="destinationRight_in" required style="text-align: center;">
+
+        </div>
+
+      </div>
+
+
+      <div class="" id="time" style="width:100%; text-align:center; display: none;">
+
+        <div class="" style="position: absolute; left: 0; width:18%; height: 400px;">
+
+          <div class="" style="text-align: center; margin-top: 320px;">
+            <input type="datetime-local" id="departureActual_in" style="font-size:20px;" value="2022-09-08T16:17:00.000" oninput="init()">
+            </br></br></br>
+            <div class="">
+              <select id="departureDelay_in" style="font-size:20px; display:none;">
+                  <option value="CONSQ">CONSQ</option>
+                  <option value="STN">STN</option>
+                  <option value="ATC" selected="selected">ATC</option>
+                  <option value="WX WIND">WX WIND</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="" style="position: absolute; right: 0; width:18%; height: 400px;">
+
+          <div class="" style="text-align: center; margin-top: 320px;">
+            <input type="datetime-local" id="destinationActual_in" style="font-size:20px;" value="2022-09-09T05:48:00.000" oninput="init()">
+            </br></br></br>
+            <div class="">
+              <select id="destinationDelay_in" style="font-size:20px; display:none;">
+                  <option value="CONSQ">CONSQ</option>
+                  <option value="STN">STN</option>
+                  <option value="ATC">ATC</option>
+                  <option value="WX WIND">WX WIND</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="NIGHT" id="light" style="margin-left: -50px; position:absolute;" onclick="lightchange()">
+          <img class="" style="object-fit:fill; height:100px;" src="moon.png">
+          <output class="" style="display:block; text-align: center;"></output>
+        </div>
+
+        </br></br></br></br>
+        </br></br></br></br>
+
+        <div class="" id="line1" style="position:absolute;">
+          <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
+          <svg class = "" width="4" height="187">
+            <rect class = "line" width="8" height="187" style="fill:grey;" />
+          </svg>
+        </div>
+
+        <div class="" id="line2" style="position:absolute;">
+          <output class="" style="display: block; text-align: center;"></output>
+          <svg class = "" width="4" height="187">
+            <rect class = "line" width="8" height="187" style="fill:grey;" />
+          </svg>
+        </div>
+
+        </br></br></br></br>
+        </br></br></br></br>
+
+        <div class="" id="base" style="position: absolute; left: 20%; width: 60%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
+
+        </br></br></br></br>
+
+        <div class="" style="text-align: center;">
+          <input class="" id="instrumentflying" type="range" value="30" min="0" max="360" step="10" style="width: 60%;" oninput="this.nextElementSibling.value = this.value">
+          <output>30</output>
+        </div>
+
+      </div>
+
+
     </div>
 
-    </br></br></br></br>
-    </br></br></br></br>
-
-    <div class="" id="line1" style="position:absolute;">
-      <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
-      <svg class = "" width="4" height="187">
-        <rect class = "line" width="8" height="187" style="fill:grey;" />
-      </svg>
-    </div>
-
-    <div class="" id="line2" style="position:absolute;">
-      <output class="" style="display: block; text-align: center;"></output>
-      <svg class = "" width="4" height="187">
-        <rect class = "line" width="8" height="187" style="fill:grey;" />
-      </svg>
-    </div>
-
-    </br></br></br></br>
-    </br></br></br></br>
-
-    <div class="" id="base" style="position: absolute; left: 20%; width: 60%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
-
-    </br></br></br></br>
-    </br></br></br></br>
 
     <div class="" style="text-align: center;">
-      <input class="" id="instrumentflying" type="range" value="30" min="0" max="360" step="10" style="width: 60%;" oninput="this.nextElementSibling.value = this.value">
-      <output>30</output>
+      <input type="button" value="AUTO PSR" onclick="psr_generate()" style="font-size:60px;">
     </div>
-
-    </br></br></br></br>
-
-
-
-
-
-
-
-
-    </br></br></br></br>
-    </br></br></br></br>
-    </br></br></br></br>
-    </br></br></br></br>
 
 
     <div id = "table" style="font-family: Arial; position: relative; display: none;">
@@ -390,8 +535,44 @@
         </tr>
       </table>
 
-      <table id="4table" style="height:42mm;">
-        <tr>
+      <table id="4table" style="height:42mm; font-size: 18px;">
+        <tr style="height:7mm;">
+          <td id="departureDate_out" style="width: 9.4%;"></td>
+          <td id="departure_out" style="width: 7.2%; border-bottom: none;"></td>
+          <td id="departureSked_out" style="width: 6%;"></td>
+          <td id="departureActual_out" style="width: 6%;"></td>
+          <td id="departureDelay_out" style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 5.6%;"></td>
+          <td id="total_out" style="width: 6.6%;"></td>
+          <td id="night_out" style="width: 6.6%;"></td>
+          <td id="instrumentflying_out" style="width: 6.6%;"></td>
+          <td id="fuelQt_out" style="width: 8.4%;"></td>
+          <td id="fuelUt_out" style="width: 3.6%;"></td>
+          <td id="fuelSp_out" style="width: 4%;"></td>
+        </tr>
+        <tr style="height:7mm;">
+          <td id="destinationDate_out" style="width: 9.4%;"></td>
+          <td id="destination_out" style="width: 7.2%; border-top: none;"></td>
+          <td id="destinationSked_out" style="width: 6%;"></td>
+          <td id="destinationActual_out"style="width: 6%;"></td>
+          <td id="destinationDelay_out" style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 6%;"></td>
+          <td style="width: 5.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 6.6%;"></td>
+          <td style="width: 8.4%;"></td>
+          <td style="width: 3.6%;"></td>
+          <td id="fuelTp_out" style="width: 4%;"></td>
+        </tr>
+        <tr style="height:7mm;">
           <td style="width: 9.4%;"></td>
           <td style="width: 7.2%; border-bottom: none;"></td>
           <td style="width: 6%;"></td>
@@ -409,7 +590,7 @@
           <td style="width: 3.6%;"></td>
           <td style="width: 4%;"></td>
         </tr>
-        <tr>
+        <tr style="height:7mm;">
           <td style="width: 9.4%;"></td>
           <td style="width: 7.2%; border-top: none;"></td>
           <td style="width: 6%;"></td>
@@ -427,7 +608,7 @@
           <td style="width: 3.6%;"></td>
           <td style="width: 4%;"></td>
         </tr>
-        <tr>
+        <tr style="height:7mm;">
           <td style="width: 9.4%;"></td>
           <td style="width: 7.2%; border-bottom: none;"></td>
           <td style="width: 6%;"></td>
@@ -445,43 +626,7 @@
           <td style="width: 3.6%;"></td>
           <td style="width: 4%;"></td>
         </tr>
-        <tr>
-          <td style="width: 9.4%;"></td>
-          <td style="width: 7.2%; border-top: none;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 5.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 8.4%;"></td>
-          <td style="width: 3.6%;"></td>
-          <td style="width: 4%;"></td>
-        </tr>
-        <tr>
-          <td style="width: 9.4%;"></td>
-          <td style="width: 7.2%; border-bottom: none;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 5.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 8.4%;"></td>
-          <td style="width: 3.6%;"></td>
-          <td style="width: 4%;"></td>
-        </tr>
-        <tr>
+        <tr style="height:7mm;">
           <td style="width: 9.4%;"></td>
           <td style="width: 7.2%; border-top: none;"></td>
           <td style="width: 6%;"></td>
@@ -521,21 +666,27 @@
     </div>
 
 
-
     <script type="text/javascript">
 
       //////////////////////////////////////////////////////////////////////////
 
       var start, end, l1, light, l2, c;
+      var depSkd, desSkd, depDly, desDly;
       init();
 
       function init(){
 
-        start = document.getElementById('departureActual').valueAsNumber;
-        end = document.getElementById('destinationActual').valueAsNumber;
+
+        start = document.getElementById('departureActual_in').valueAsNumber;
+        end = document.getElementById('destinationActual_in').valueAsNumber;
         l1 = document.getElementById('line1');
         light = document.getElementById('light');
         l2 = document.getElementById('line2');
+
+        depSkd = document.getElementById('departureSked_in').valueAsNumber;
+        desSkd = document.getElementById('destinationSked_in').valueAsNumber;
+        depDly = document.getElementById('departureDelay_in');
+        desDly = document.getElementById('destinationDelay_in');
 
         c = 60 / ((end - start)/60000);
         l1.style.left = 20 + 60 * 0.33 + '%';
@@ -547,6 +698,10 @@
         let r = value(l2.style.left) - value(l1.style.left);
         light.lastElementChild.value =  get_hhmm( (r / c).toFixed(0) * 60000 );
 
+        if(start <= depSkd){depDly.style.display = 'none'};
+        if(end <= desSkd){desDly.style.display = 'none'};
+        if(start > depSkd){depDly.style.display = 'block'};
+        if(end > desSkd){desDly.style.display = 'block'};
       };
 
       //////////////////////////////////////////////////////////////////////////
@@ -645,18 +800,98 @@
 
       };
 
+      function display(){
+         let d = document.getElementById('crew').style.display;
+         if(d == 'block'){
+           document.getElementById('crew').style.display = 'none';
+           document.getElementById('time').style.display = 'block';
+         }
+         else if(d == 'none'){
+           document.getElementById('crew').style.display = 'block';
+           document.getElementById('time').style.display = 'none';
+         }
+      };
+      function seat(info){
+        if(info == 'departureSeatLeft_in'){
+          document.getElementById('departureSeatLeft_in').style['background-color'] = 'lightgrey';
+          document.getElementById('departureSeatLeft_in').classList = [];
+          document.getElementById('departureSeatRight_in').style['background-color'] = 'red';
+          document.getElementById('destinationSeatLeft_in').classList = ["ACTIVE"];
+        }
+        else if(info == 'departureSeatRight_in'){
+          document.getElementById('departureSeatLeft_in').style['background-color'] = 'red';
+          document.getElementById('departureSeatLeft_in').classList = ["ACTIVE"];
+          document.getElementById('departureSeatRight_in').style['background-color'] = 'lightgrey';
+          document.getElementById('destinationSeatLeft_in').classList = [];
+        }
+        else if(info == 'destinationSeatLeft_in'){
+          document.getElementById('destinationSeatLeft_in').style['background-color'] = 'lightgrey';
+          document.getElementById('departureSeatLeft_in').classList = [];
+          document.getElementById('destinationSeatRight_in').style['background-color'] = 'red';
+          document.getElementById('destinationSeatLeft_in').classList = ["ACTIVE"];
+        }
+        else if(info == 'destinationSeatRight_in'){
+          document.getElementById('destinationSeatLeft_in').style['background-color'] = 'red';
+          document.getElementById('departureSeatLeft_in').classList = ["ACTIVE"];
+          document.getElementById('destinationSeatRight_in').style['background-color'] = 'lightgrey';
+          document.getElementById('destinationSeatLeft_in').classList = [];
+        };
+      };
+
       //////////////////////////////////////////////////////////////////////////
 
       function psr_generate(){
 
         document.getElementById('number_out').innerHTML = 'AIC ' + document.getElementById('number_in').value;
         document.getElementById('registeration_out').innerHTML = 'VT - ' + document.getElementById('registeration_in').value;
-        let lr200 = ['ALF', 'ALG', 'ALH'], type = 'B777-300ER'
+        let lr200 = ['VT-ALF', 'VT-ALG', 'VT-ALH'], type = 'B777-300ER'
         if(lr200.includes(document.getElementById('registeration_in').value)){type = 'B777-200LR'}
         document.getElementById('type_out').innerHTML = type;
 
+        let date = new Date(start);
+        document.getElementById('departureDate_out').innerHTML = date.toLocaleDateString();
+        date = new Date(end);
+        document.getElementById('destinationDate_out').innerHTML = date.toLocaleDateString();
 
-        //time_generate();
+        document.getElementById('departure_out').innerHTML = document.getElementById('departure_in').value.toUpperCase();
+        document.getElementById('destination_out').innerHTML = document.getElementById('destination_in').value.toUpperCase();
+
+        document.getElementById('departureSked_out').innerHTML = get_utc(depSkd);
+        document.getElementById('destinationSked_out').innerHTML = get_utc(desSkd);
+
+        document.getElementById('departureActual_out').innerHTML = get_utc(start);
+        document.getElementById('destinationActual_out').innerHTML = get_utc(end);
+
+        if(start > depSkd){
+          document.getElementById('departureDelay_out').innerHTML = get_hhmm(start - depSkd);
+          // let depDly = 'dep' + document.getElementById('departureDelay_in').value;
+          // document.getElementById('destinationActual_out').innerHTML = get_utc(end);
+        };
+
+        if(end > desSkd){ document.getElementById('destinationDelay_out').innerHTML = get_hhmm(end - desSkd)};
+        // document.getElementById('destinationActual_out').innerHTML = '';
+        //
+
+        //
+        // document.getElementById('departurePf_out').innerHTML = '';
+        // document.getElementById('destinationPf_out').innerHTML = '';
+        //
+        document.getElementById('total_out').innerHTML = get_hhmm(end - start);
+
+        // let totalNight = 0;
+        // if(light.classList == ["NIGHT"]){totalNight = l2 - l1}
+        // else if(light.classList == ["DAY"]){totalNight = (l1 - start) + (end - l1)}
+        // document.getElementById('night_out').innerHTML = get_hhmm(totalNight);
+
+        let inst = document.getElementById('instrumentflying').valueAsNumber * 60000;
+        document.getElementById('instrumentflying_out').innerHTML = get_hhmm(inst);
+
+        document.getElementById('fuelQt_out').innerHTML = document.getElementById('fuelQt_in').value;
+        document.getElementById('fuelUt_out').innerHTML = document.getElementById('fuelUt_in').value;
+        document.getElementById('fuelSp_out').innerHTML = document.getElementById('fuelSp_in').value;
+        document.getElementById('fuelTp_out').innerHTML = document.getElementById('fuelTp_in').value;
+
+        time_generate();
 
         // var table_data = document.getElementsByTagName('td');
         // for(let i = 0; i < table_data.length; i++){table_data[i].setAttribute("contenteditable", "true")};
@@ -833,6 +1068,7 @@
           let b = block.block;
           delete block.block;
           time['block' + b] = block;
+          console.log(block);
 
         };
 
@@ -853,7 +1089,10 @@
         mywindow.document.write(
           //Change to Scheduled ADD DEP DES
           "AI" + document.getElementById("number_in").value + ' ' +
-          date.toLocaleDateString()
+          date.toLocaleDateString() + ' ' +
+          document.getElementById("departure_in").value.toUpperCase() + '-' +
+          document.getElementById("destination_in").value.toUpperCase()
+
         );
 
         ////////////////
