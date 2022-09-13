@@ -15,17 +15,12 @@
       <input type="datetime-local" id="destinationActual" value="2022-09-09T05:48:00.000">
     </div>
 
-    <input class="b" id="instrumentflying" type="range" value="30" min="0" max="360" step="10" style="width: 80%;" oninput="this.nextElementSibling.value = this.value">
-    <output> </output>
-
-    <h1 style="position:absolute; left:25%;">HI</h1>
-
     </br></br></br></br>
     </br></br></br></br>
     </br></br></br></br>
     </br></br></br></br>
 
-    <div class="" id="light" style="position:absolute;" onclick="lightchange()">
+    <div class="" id="light" style="margin-left: -50px; position:absolute;" onclick="lightchange()">
       <img class="" style="object-fit:fill; height:100px;" src="moon.png">
       <output class="" style="display:block; text-align: center;">HI</output>
     </div>
@@ -35,15 +30,15 @@
 
     <div class="" id="line1" style="position:absolute;">
       <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
-      <svg class = "" width="4" height="300">
-        <rect class = "line" width="8" height="300" style="fill:grey;" />
+      <svg class = "" width="4" height="187">
+        <rect class = "line" width="8" height="187" style="fill:grey;" />
       </svg>
     </div>
 
     <div class="" id="line2" style="position:absolute;">
       <output class="" style="display: block; text-align: center;"></output>
-      <svg class = "" width="4" height="300">
-        <rect class = "line" width="8" height="300" style="fill:grey;" />
+      <svg class = "" width="4" height="187">
+        <rect class = "line" width="8" height="187" style="fill:grey;" />
       </svg>
     </div>
 
@@ -59,85 +54,90 @@
 
       //////////////////////////////////////////////////////////////////////////
 
-      // let width_start = window.innerWidth * 0.20;
-      // let width_end = window.innerWidth * 0.80;
-      let start = document.getElementById('departureActual').valueAsNumber;
-      let end = document.getElementById('destinationActual').valueAsNumber;
-      //let a = width_end - width_start;
-      let b = (end - start)/60000;
-      let c = (100 / b);
+      const start = document.getElementById('departureActual').valueAsNumber;
+      const end = document.getElementById('destinationActual').valueAsNumber;
+      const l1 = document.getElementById('line1');
+      const light = document.getElementById('light');
+      const l2 = document.getElementById('line2');
 
       //////////////////////////////////////////////////////////////////////////
 
-      var l1 = document.getElementById('line1');
-      var light = document.getElementById('light');
-      var l2 = document.getElementById('line2');
-      // var base = document.getElementById('base');
-      // var outer = '', inner = '';
-      // if(light.firstElementChild.src.endsWith("sun.png")){ outer = 'grey'; inner = 'yellow'; }
-      // else{ outer = 'yellow'; inner = 'grey'; };
+      var c = 60 / ((end - start)/60000);
 
-      let l1_pos = 20 + 60 * 0.33;
-      l1.style.left = l1_pos + '%';
-      l1.firstElementChild.value = get_utc( start + 60000 * (60 * 0.33)/c );
+      ////
 
+      l1.style.left = 20 + 60 * 0.33 + '%';
+      l1.firstElementChild.value = get_utc( start + 60000 * (60 * 0.33) / c );
       l1.addEventListener('touchmove', function(event) {
 
         var touch = event.targetTouches[0].pageX / window.innerWidth * 100;
+
+        ////
 
         if(touch <= 20){drag = 20}
         else if( touch >= 80){drag = 80}
         else{drag = touch};
 
+        ////
+
         l1.style.left = drag + '%';
+        this.firstElementChild.value = get_utc( start + 60000 * (drag - 20)/c );
+
+        ////
 
         let diff = value(l2.style.left) - drag;
         light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
-        light.style.left = diff / 2 + '%';
+        light.style.left = drag + diff / 2 + '%';
 
-        drag = get_utc( start + 60000 * (drag - 20)/c );
-        this.firstElementChild.value = drag;
-
-        //base_color();
-
+        ////
+        
         event.preventDefault();
 
       }, false);
 
+      ////////////////
 
-      let l2_pos = 20 + 60 * 0.66;
-      l2.style.left = l2_pos + '%';
+      l2.style.left = 20 + 60 * 0.66 + '%';
       l2.firstElementChild.value = get_utc( start + 60000 * (60 * 0.66)/c );
       l2.addEventListener('touchmove', function(event) {
 
         var touch = event.targetTouches[0].pageX / window.innerWidth * 100;
+
+        ////
 
         let min = value(l1.style.left) + c * 10;
         if(touch <= min){drag = min;}
         else if(touch >= 80){drag = 80}
         else{drag = touch};
 
+        ////
+
         l2.style.left = drag + '%';
+        this.firstElementChild.value = get_utc( start + 60000 * (drag - 20)/c );
+
+        ////
 
         let diff = drag - value(l1.style.left);
         light.lastElementChild.value =  get_hhmm( (diff / c).toFixed(0) * 60000 );
-        light.style.left = 20 + diff / 2 + '%';
+        light.style.left = value(l1.style.left) + diff / 2 + '%';
 
-        drag = get_utc( start + 60000 * (drag - 20)/c );
-        this.firstElementChild.value = drag;
-
-        //base_color();
+        ////
 
         event.preventDefault();
 
       }, false);
 
+      ////////////////
 
-      //let light_pos = (l2_pos - l1_pos) / 2;
       light.style.left = 50 + '%';
+      let r = value(l2.style.left) - value(l1.style.left);
+      light.lastElementChild.value =  get_hhmm( (r / c).toFixed(0) * 60000 );
 
       //////////////////////////////////////////////////////////////////////////
 
+      function value(data){
+        return Number(data.slice(0, data.length - 1));
+      };
       function lightchange(){
 
         if(light.firstElementChild.src.endsWith("sun.png")){
@@ -155,20 +155,6 @@
         base_color();
       };
 
-      function value(data){
-        return Number(data.slice(0, data.length - 1));
-      };
-
-      function base_color(){
-        let first = (value(l1.style.left) - width_start) / (width_end - width_start) * 100;
-        let mid = value(l1.style.left) + ( value(l2.style.left) - value(l1.style.left) ) / 2;
-        mid = (mid - width_start) / (width_end - width_start) * 100;
-        let second = (value(l2.style.left) - width_start) / (width_end - width_start) * 100;
-        let grad = 'linear-gradient(90deg, ' + outer + ' ' + first + '%, ' + inner + ' ' + mid + '%, ' + outer + ' ' + second + '%)';
-
-        base.style['background-image'] = grad;
-      }
-
       function get_utc(time){
         time = new Date(time);
         hh = time.getUTCHours();
@@ -178,13 +164,14 @@
         return hh + ':' + mm;
       };
       function get_hhmm(block){
-        //block = (b - a)/60000;
+
         block = block / 60000;
         hh = Math.trunc(block / 60);
         hh = ('0'+ hh).slice(-2);
         mm = block % 60;
         mm = ('0'+ mm).slice(-2);
         return hh + ':' + mm;
+
       };
 
       //////////////////////////////////////////////////////////////////////////
