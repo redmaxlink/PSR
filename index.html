@@ -5,6 +5,11 @@
     <title>NEW</title>
     <style>
 
+      ::placeholder{
+        color: red;
+        opacity: 0.5;
+      }
+
       .b {border: 1px solid red;}
 
       input { border: 1px solid lightgrey; border-radius: 20px;}
@@ -28,7 +33,7 @@
     <div class="" id="basic" style="height:36vh;">
 
       <div class="" style="font-size:40px; width:100vw; margin-top: 1%; text-align: center;">
-        <input type="text" id="number_in" required style="font-size:40px; text-transform:uppercase; text-align: center;">
+        <input type="text" id="number_in" required style="font-size:40px; text-transform:uppercase; text-align: center;" placeholder="FLIGHT NUMBER">
         <select id="registeration_in" style="font-size:40px;">
             <option value=" "> </option>
             <option value="VT-ALF">VT-ALF</option>
@@ -672,6 +677,7 @@
 
       var start, end, l1, light, l2, c;
       var depSkd, desSkd, depDly, delay1 = 0, delay2 = 0, desDly;
+      var night;
       init();
 
       function init(){
@@ -695,8 +701,7 @@
         l2.firstElementChild.value = get_utc( start + 60000 * (60 * 0.66)/c );
 
         light.style.left = 50 + '%';
-        let r = value(l2.style.left) - value(l1.style.left);
-        light.lastElementChild.value =  get_hhmm( (r / c).toFixed(0) * 60000 );
+        calc_night();
 
 
         if(start > depSkd){delay1 = start - depSkd}
@@ -728,13 +733,13 @@
         ////
 
         l1.style.left = drag + '%';
+
         this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/c ) );
 
         ////
 
         let diff = value(l2.style.left) - drag;
-        light.lastElementChild.value =  get_hhmm( Math.floor(diff / c) * 60000 );
-        light.style.left = drag + diff / 2 + '%';
+        calc_night();
 
         ////
 
@@ -763,8 +768,7 @@
         ////
 
         let diff = drag - value(l1.style.left);
-        light.lastElementChild.value =  get_hhmm( Math.floor(diff / c) * 60000 );
-        light.style.left = value(l1.style.left) + diff / 2 + '%';
+        calc_night();
 
         ////
 
@@ -788,6 +792,11 @@
           light.firstElementChild.src = "sun.png";
         };
 
+      };
+      function calc_night(){
+        let l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/c ) );
+        let l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/c ) );
+        light.lastElementChild.value =  get_hhmm(l_e - l_s);
       };
 
       function get_utc(time){
@@ -899,10 +908,14 @@
 
         document.getElementById('total_out').innerHTML = get_hhmm(end - start);
 
-        // let totalNight = 0;
-        // if(light.classList == ["NIGHT"]){totalNight = l2 - l1}
-        // else if(light.classList == ["DAY"]){totalNight = (l1 - start) + (end - l1)}
-        // document.getElementById('night_out').innerHTML = get_hhmm(totalNight);
+        let totalNight = 0;
+        if(light.classList[0] == "NIGHT"){totalNight = light.lastElementChild.value}
+        else if(light.classList[0] == "DAY"){
+          let l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/c ) );
+          let l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/c ) );
+          totalNight = get_hhmm( (l_s - start) + (end - l_e) );
+        }
+        document.getElementById('night_out').innerHTML = totalNight;
 
         let inst = document.getElementById('instrumentflying').valueAsNumber * 60000;
         document.getElementById('instrumentflying_out').innerHTML = get_hhmm(inst);
