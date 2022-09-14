@@ -53,11 +53,11 @@
       <div class="" style="position:relative; margin-top: 3%;">
         <div class="" style="position: absolute; left:0; width:40vw; height:50px; text-align:center;">
           <input type="text" id="departure_in" required style="font-size:40px; text-transform:uppercase; text-align: center; display: block;">
-          <input type="datetime-local" id="departureSked_in" style="font-size:20px; color: grey; text-align: center; display: block;">
+          <input type="datetime-local" id="departureSked_in"  value="2022-09-08T16:15:00.000" style="font-size:20px; color: grey; text-align: center; display: block;">
         </div>
         <div class="" style="position: absolute; right:0; width:40vw; height:50px;">
           <input type="text" id="destination_in" required style="font-size:40px; text-transform:uppercase; text-align: center; display: block;">
-          <input type="datetime-local" id="destinationSked_in" style="font-size:20px; color: grey; text-align: center; display: block;">
+          <input type="datetime-local" id="destinationSked_in"  value="2022-09-09T06:45:00.000" style="font-size:20px; color: grey; text-align: center; display: block;">
         </div>
       </div>
 
@@ -172,7 +172,7 @@
 
           </br></br></br></br>
 
-          <div class="" id="departureSeatLeft_in" style="width:30px; height:30px; background-color:red; position: absolute; left: 0;" onclick="seat('departureSeatLeft_in')"></div>
+          <div class="ACTIVE" id="departureSeatLeft_in" style="width:30px; height:30px; background-color:red; position: absolute; left: 0;" onclick="seat('departureSeatLeft_in')"></div>
           <div class="" id="departureSeatRight_in" style="width:30px; height:30px; background-color:lightgrey; position: absolute; right: 0;" onclick="seat('departureSeatRight_in')"></div>
 
           <input type="text" id="departureLeft_in" required style="text-align: center;">
@@ -184,7 +184,7 @@
 
           </br></br></br></br>
 
-          <div class="" id="destinationSeatLeft_in" style="width:30px; height:30px; background-color:red; position: absolute; left: 0;" onclick="seat('destinationSeatLeft_in')"></div>
+          <div class="ACTIVE" id="destinationSeatLeft_in" style="width:30px; height:30px; background-color:red; position: absolute; left: 0;" onclick="seat('destinationSeatLeft_in')"></div>
           <div class="" id="destinationSeatRight_in" style="width:30px; height:30px; background-color:lightgrey; position: absolute; right: 0;" onclick="seat('destinationSeatRight_in')"></div>
 
           <input type="text" id="destinationLeft_in" required style="text-align: center;">
@@ -202,13 +202,13 @@
           <div class="" style="text-align: center; margin-top: 320px;">
             <input type="datetime-local" id="departureActual_in" style="font-size:20px;" value="2022-09-08T16:17:00.000" oninput="init()">
             </br></br></br>
-            <div class="">
-              <select id="departureDelay_in" style="font-size:20px; display:none;">
-                  <option value="CONSQ">CONSQ</option>
+            <div class="" style="display:none;">
+              <select id="departureDelay_in" style="font-size:20px;">
                   <option value="STN">STN</option>
                   <option value="ATC" selected="selected">ATC</option>
                   <option value="WX WIND">WX WIND</option>
               </select>
+              <output></output>
             </div>
           </div>
 
@@ -219,13 +219,13 @@
           <div class="" style="text-align: center; margin-top: 320px;">
             <input type="datetime-local" id="destinationActual_in" style="font-size:20px;" value="2022-09-09T05:48:00.000" oninput="init()">
             </br></br></br>
-            <div class="">
-              <select id="destinationDelay_in" style="font-size:20px; display:none;">
-                  <option value="CONSQ">CONSQ</option>
-                  <option value="STN">STN</option>
+            <div class="" style="display:none;">
+              <select id="destinationDelay_in" style="font-size:20px;">
+                  <option value="WX WIND" selected="selected">WX WIND</option>
                   <option value="ATC">ATC</option>
-                  <option value="WX WIND">WX WIND</option>
+                  <option value="STN">STN</option>
               </select>
+              <output></output>
             </div>
           </div>
         </div>
@@ -542,14 +542,14 @@
           <td id="departureSked_out" style="width: 6%;"></td>
           <td id="departureActual_out" style="width: 6%;"></td>
           <td id="departureDelay_out" style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 5.6%;"></td>
-          <td id="total_out" style="width: 6.6%;"></td>
-          <td id="night_out" style="width: 6.6%;"></td>
-          <td id="instrumentflying_out" style="width: 6.6%;"></td>
+          <td id="depCONSQ_out" style="width: 6%;"></td>
+          <td id="depSTN_out" style="width: 6%;"></td>
+          <td id="depATC_out" style="width: 6%;"></td>
+          <td id="depWX WIND_out" style="width: 6%;"></td>
+          <td id="departurePf_out" style="width: 5.6%;"></td>
+          <td id="total_out" style="width: 6.6%;" rowspan="2"></td>
+          <td id="night_out" style="width: 6.6%;" rowspan="2"></td>
+          <td id="instrumentflying_out" style="width: 6.6%;" rowspan="2"></td>
           <td id="fuelQt_out" style="width: 8.4%;"></td>
           <td id="fuelUt_out" style="width: 3.6%;"></td>
           <td id="fuelSp_out" style="width: 4%;"></td>
@@ -560,14 +560,14 @@
           <td id="destinationSked_out" style="width: 6%;"></td>
           <td id="destinationActual_out"style="width: 6%;"></td>
           <td id="destinationDelay_out" style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 5.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
+          <td id="desCONSQ_out" style="width: 6%;"></td>
+          <td id="desSTN_out" style="width: 6%;"></td>
+          <td id="desATC_out" style="width: 6%;"></td>
+          <td id="desWX WIND_out" style="width: 6%;"></td>
+          <td id="destinationPf_out" style="width: 5.6%;"></td>
+
+
+
           <td style="width: 8.4%;"></td>
           <td style="width: 3.6%;"></td>
           <td id="fuelTp_out" style="width: 4%;"></td>
@@ -671,7 +671,7 @@
       //////////////////////////////////////////////////////////////////////////
 
       var start, end, l1, light, l2, c;
-      var depSkd, desSkd, depDly, desDly;
+      var depSkd, desSkd, depDly, delay1 = 0, delay2 = 0, desDly;
       init();
 
       function init(){
@@ -698,10 +698,19 @@
         let r = value(l2.style.left) - value(l1.style.left);
         light.lastElementChild.value =  get_hhmm( (r / c).toFixed(0) * 60000 );
 
-        if(start <= depSkd){depDly.style.display = 'none'};
-        if(end <= desSkd){desDly.style.display = 'none'};
-        if(start > depSkd){depDly.style.display = 'block'};
-        if(end > desSkd){desDly.style.display = 'block'};
+
+        if(start > depSkd){delay1 = start - depSkd}
+        else{delay1 = 0};
+
+        if(end - desSkd > delay1){delay2 = end - (desSkd + delay1)}
+        else{delay2 = 0};
+
+        if(delay1 > 0){depDly.parentNode.style.display = 'block'; depDly.nextElementSibling.value = get_hhmm(delay1);}
+        else{depDly.parentNode.style.display = 'none'};
+
+        if(delay2 > 0){desDly.parentNode.style.display = 'block'; desDly.nextElementSibling.value = get_hhmm(delay2);}
+        else{desDly.parentNode.style.display = 'none'};
+
       };
 
       //////////////////////////////////////////////////////////////////////////
@@ -813,27 +822,27 @@
       };
       function seat(info){
         if(info == 'departureSeatLeft_in'){
-          document.getElementById('departureSeatLeft_in').style['background-color'] = 'lightgrey';
+          document.getElementById('departureSeatLeft_in').style['background-color'] = 'red';
           document.getElementById('departureSeatLeft_in').classList = [];
-          document.getElementById('departureSeatRight_in').style['background-color'] = 'red';
+          document.getElementById('departureSeatRight_in').style['background-color'] = 'lightgrey';
           document.getElementById('destinationSeatLeft_in').classList = ["ACTIVE"];
         }
         else if(info == 'departureSeatRight_in'){
-          document.getElementById('departureSeatLeft_in').style['background-color'] = 'red';
+          document.getElementById('departureSeatLeft_in').style['background-color'] = 'lightgrey';
           document.getElementById('departureSeatLeft_in').classList = ["ACTIVE"];
-          document.getElementById('departureSeatRight_in').style['background-color'] = 'lightgrey';
+          document.getElementById('departureSeatRight_in').style['background-color'] = 'red';
           document.getElementById('destinationSeatLeft_in').classList = [];
         }
         else if(info == 'destinationSeatLeft_in'){
-          document.getElementById('destinationSeatLeft_in').style['background-color'] = 'lightgrey';
+          document.getElementById('destinationSeatLeft_in').style['background-color'] = 'red';
           document.getElementById('departureSeatLeft_in').classList = [];
-          document.getElementById('destinationSeatRight_in').style['background-color'] = 'red';
+          document.getElementById('destinationSeatRight_in').style['background-color'] = 'lightgrey';
           document.getElementById('destinationSeatLeft_in').classList = ["ACTIVE"];
         }
         else if(info == 'destinationSeatRight_in'){
-          document.getElementById('destinationSeatLeft_in').style['background-color'] = 'red';
+          document.getElementById('destinationSeatLeft_in').style['background-color'] = 'lightgrey';
           document.getElementById('departureSeatLeft_in').classList = ["ACTIVE"];
-          document.getElementById('destinationSeatRight_in').style['background-color'] = 'lightgrey';
+          document.getElementById('destinationSeatRight_in').style['background-color'] = 'red';
           document.getElementById('destinationSeatLeft_in').classList = [];
         };
       };
@@ -862,20 +871,32 @@
         document.getElementById('departureActual_out').innerHTML = get_utc(start);
         document.getElementById('destinationActual_out').innerHTML = get_utc(end);
 
-        if(start > depSkd){
-          document.getElementById('departureDelay_out').innerHTML = get_hhmm(start - depSkd);
-          // let depDly = 'dep' + document.getElementById('departureDelay_in').value;
-          // document.getElementById('destinationActual_out').innerHTML = get_utc(end);
+
+        if(depDly.style.display == 'block'){
+          document.getElementById('departureDelay_out').innerHTML = depDly.nextElementSibling.value;
+          document.getElementById('dep' + depDly.value + '_out').innerHTML = depDly.nextElementSibling.value;
         };
 
-        if(end > desSkd){ document.getElementById('destinationDelay_out').innerHTML = get_hhmm(end - desSkd)};
-        // document.getElementById('destinationActual_out').innerHTML = '';
+        if(delay1 > 0){
+          document.getElementById('departureDelay_out').innerHTML = get_hhmm(delay1);
+          document.getElementById('dep' + depDly.value + '_out').innerHTML = get_hhmm(delay1);
+        };
+
+        if(end - desSkd > 0){
+          document.getElementById('destinationDelay_out').innerHTML = get_hhmm(end - desSkd);
+          if(delay1 > 0){document.getElementById('desCONSQ_out').innerHTML = get_hhmm(delay1)};
+          if(delay2 > 0){document.getElementById('des' + desDly.value + '_out').innerHTML = get_hhmm(delay2)};
+        };
         //
 
-        //
+        console.log(document.getElementById('departureLeft_in').value, document.getElementById('departureSeatLeft_in').classList);
+        console.log(document.getElementById('departureRight_in').value, document.getElementById('departureSeatRight_in').classList);
+        console.log(document.getElementById('destinationLeft_in').value, document.getElementById('destinationSeatLeft_in').classList);
+        console.log(document.getElementById('destinationRight_in').value, document.getElementById('destinationSeatRight_in').classList);
+
         // document.getElementById('departurePf_out').innerHTML = '';
         // document.getElementById('destinationPf_out').innerHTML = '';
-        //
+
         document.getElementById('total_out').innerHTML = get_hhmm(end - start);
 
         // let totalNight = 0;
