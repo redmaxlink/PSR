@@ -111,76 +111,96 @@
 
       <div class="" id="crew" style="width:100%; height: 45vh; display: block;">
 
-          <input type="text" id="1name_in" required style="text-transform:uppercase; text-align: left;">
-          <input type="text" id="1staff_in" required style="text-transform:uppercase; text-align: center;">
-          <input type="text" id="1sap_in" required style="text-transform:uppercase; text-align: center;">
-          <input type="text" id="1ipltm_in" required style="text-transform:uppercase; text-align: center;">
-          <select id="1status_in">
-            <option value=" "> </option>
-            <option value="PIC RC">PIC RC</option>
-            <option value="PC PF">RC PF</option>
-            <option value="RC PM">RC PM</option>
-            <option value="SLF">SLF</option>
-            <option value="SUT">SUT</option>
-            <option value="SNY">SNY</option>
-          </select>
-          <span class="false" id="1cruise" onclick="cruise(this)" style="color: lightgrey;">CRUISE</span>
+      </br></br></br></br></br></br>
+
+            <div class="flex-row">
+
+              <div class="" style="width:80%">
+
+                <input type="text" id="1name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;">
+                <input type="text" id="1staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <input type="text" id="1sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <input type="text" id="1ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <select id="1status_in" style="font-size:14px; ">
+                  <option value=" "> </option>
+                  <option value="PIC RC">PIC RC</option>
+                  <option value="PC PF">RC PF</option>
+                  <option value="RC PM">RC PM</option>
+                  <option value="SLF">SLF</option>
+                  <option value="SUT">SUT</option>
+                  <option value="SNY">SNY</option>
+                </select>
+                <span class="false" id="1takeoffland_in" onclick="takeoffland(this)" style="margin-left: 20px; color: lightgrey;"><< TAKEOFF & LANDING PILOT</span>
+
+                </br></br>
+
+                <input type="text" id="2name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;">
+                <input type="text" id="2staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <input type="text" id="2sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <input type="text" id="2ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <select id="2status_in" style="font-size:14px; ">
+                  <option value=" "> </option>
+                  <option value="PIC RC">PIC RC</option>
+                  <option value="PC PF">RC PF</option>
+                  <option value="RC PM">RC PM</option>
+                  <option value="SLF">SLF</option>
+                  <option value="SUT">SUT</option>
+                  <option value="SNY">SNY</option>
+                </select>
+                <span class="false" id="2takeoffland_in" onclick="takeoffland(this)" style="margin-left: 20px; color: lightgrey;"><< TAKEOFF & LANDING PILOT</span>
 
 
-          </br></br>
+                </br></br>
 
-          <input type="text" id="2name_in" required style="text-transform:uppercase; text-align: left;">
-          <input type="text" id="2staff_in" required style="text-transform:uppercase; text-align: center;">
-          <input type="text" id="2sap_in" required style="text-transform:uppercase; text-align: center;">
-          <input type="text" id="2ipltm_in" required style="text-transform:uppercase; text-align: center;">
-          <select id="2status_in">
-            <option value=" "> </option>
-            <option value="PIC RC">PIC RC</option>
-            <option value="PC PF">RC PF</option>
-            <option value="RC PM">RC PM</option>
-            <option value="SLF">SLF</option>
-            <option value="SUT">SUT</option>
-            <option value="SNY">SNY</option>
-          </select>
-          <span class="false" id="2cruise" onclick="cruise(this)" style="color: lightgrey;">CRUISE</span>
+                <input type="text" id="3name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;">
+                <input type="text" id="3staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <input type="text" id="3sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <input type="text" id="3ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <select id="3status_in" style="font-size:14px; ">
+                  <option value=" "> </option>
+                  <option value="PIC RC">PIC RC</option>
+                  <option value="PC PF">RC PF</option>
+                  <option value="RC PM">RC PM</option>
+                  <option value="SLF">SLF</option>
+                  <option value="SUT">SUT</option>
+                  <option value="SNY">SNY</option>
+                </select>
+                <span class="false" id="3takeoffland_in" onclick="takeoffland(this)" style="margin-left: 20px; color: lightgrey;"><< TAKEOFF & LANDING PILOT</span>
 
-          </br></br>
 
-          <input type="text" id="3name_in" required style="text-transform:uppercase; text-align: left;">
-          <input type="text" id="3staff_in" required style="text-transform:uppercase; text-align: center;">
-          <input type="text" id="3sap_in" required style="text-transform:uppercase; text-align: center;">
-          <input type="text" id="3ipltm_in" required style="text-transform:uppercase; text-align: center;">
-          <select id="3status_in">
-            <option value=" "> </option>
-            <option value="PIC RC">PIC RC</option>
-            <option value="PC PF">RC PF</option>
-            <option value="RC PM">RC PM</option>
-            <option value="SLF">SLF</option>
-            <option value="SUT">SUT</option>
-            <option value="SNY">SNY</option>
-          </select>
-          <span class="false" id="3cruise" onclick="cruise(this)" style="color: lightgrey;">CRUISE</span>
+                </br></br>
 
-          </br></br>
+                <input type="text" id="4name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;">
+                <input type="text" id="4staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <input type="text" id="4sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <input type="text" id="4ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
+                <select id="4status_in" style="font-size:14px; ">
+                  <option value=" "> </option>
+                  <option value="PIC RC">PIC RC</option>
+                  <option value="PC PF">RC PF</option>
+                  <option value="RC PM">RC PM</option>
+                  <option value="SLF">SLF</option>
+                  <option value="SUT">SUT</option>
+                  <option value="SNY">SNY</option>
+                </select>
+                <span class="false" id="4takeoffland_in" onclick="takeoffland(this)" style="margin-left: 20px; color: lightgrey;"><< TAKEOFF & LANDING PILOT</span>
 
-          <input type="text" id="4name_in" required style="text-transform:uppercase; text-align: left;">
-          <input type="text" id="4staff_in" required style="text-transform:uppercase; text-align: center;">
-          <input type="text" id="4sap_in" required style="text-transform:uppercase; text-align: center;">
-          <input type="text" id="4ipltm_in" required style="text-transform:uppercase; text-align: center;">
-          <select id="4status_in">
-            <option value=" "> </option>
-            <option value="PIC RC">PIC RC</option>
-            <option value="PC PF">RC PF</option>
-            <option value="RC PM">RC PM</option>
-            <option value="SLF">SLF</option>
-            <option value="SUT">SUT</option>
-            <option value="SNY">SNY</option>
-          </select>
-          <span class="false" id="4cruise" onclick="cruise(this)" style="color: lightgrey;">CRUISE</span>
+                <div class="FIRST" id="half_in" style="margin:2% 0 0 77%; color: grey; display: none;" onclick="half(this)">SITING FIRST HALF</div>
 
+              </div>
+
+              <div class="flex-column" style="width:15%">
+
+                <div class="" style="margin-top:0px;">TakeOff</div>
+                <input type="text" id="departurePf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1L">
+
+                <div class="" style="margin-top:40px;">Landing</div>
+                <input type="text" id="destinationPf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1l">
+              </div>
+
+            </div>
 
       </div>
-
 
       <div class="" id="time" style="width:100%;  height: 45vh; text-align:center; display: none;">
 
@@ -253,7 +273,7 @@
         </div>
 
       </div>
-(
+
 
     </div>
 
@@ -699,7 +719,7 @@
         else{desDly.parentNode.style.display = 'none'};
 
       };
-)
+
       //////////////////////////////////////////////////////////////////////////
 
       l1.addEventListener('touchmove', function(event) {
@@ -811,18 +831,32 @@
            document.getElementById('time').style.display = 'none';
          }
       };
-      function cruise(item){
+      function takeoffland(item){
 
-        if(item.style.color == 'lightgrey'){
-          item.style.color = 'black';
-          let count = 0;
-          for(i=1; i<5; i++){if(document.getElementById(i + 'cruise').style.color == 'black'){count++}};
-          if(count > 2){
-              for(i=1; i<5; i++){ document.getElementById(i + 'cruise').style.color = 'lightgrey' };
-          }
+        if(item.style.color == 'lightgrey'){item.style.color = 'black'}
+        else if(item.style.color == 'black'){item.style.color = 'lightgrey'};
+
+        let count = 0;
+        for(i=1; i<5; i++){if(document.getElementById(i + 'takeoffland_in').style.color == 'black'){count++}};
+
+        if(count == 0 || count > 2){document.getElementById('half_in').style.display = 'none'}
+        else{document.getElementById('half_in').style.display = 'block'};
+
+        if(count > 2){
+            for(i=1; i<5; i++){document.getElementById(i + 'takeoffland_in').style.color = 'lightgrey'};
         }
-        else if(item.style.color == 'black'){
-          item.style.color = 'lightgrey';
+
+      };
+
+      function half(item){
+
+        if(item.classList[0] == "FIRST"){
+          item.innerHTML = "SITING SECOND HALF";
+          item.className = "SECOND";
+        }
+        else if(item.classList[0] == "SECOND"){
+          item.innerHTML = 'SITING FIRST HALF';
+          item.className = "FIRST";
         };
 
       };
@@ -867,15 +901,9 @@
           if(delay1 > 0){document.getElementById('desCONSQ_out').innerHTML = get_hhmm(delay1)};
           if(delay2 > 0){document.getElementById('des' + desDly.value + '_out').innerHTML = get_hhmm(delay2)};
         };
-        //
 
-        console.log(document.getElementById('departureLeft_in').value, document.getElementById('departureSeatLeft_in').classList);
-        console.log(document.getElementById('departureRight_in').value, document.getElementById('departureSeatRight_in').classList);
-        console.log(document.getElementById('destinationLeft_in').value, document.getElementById('destinationSeatLeft_in').classList);
-        console.log(document.getElementById('destinationRight_in').value, document.getElementById('destinationSeatRight_in').classList);
-
-        // document.getElementById('departurePf_out').innerHTML = '';
-        // document.getElementById('destinationPf_out').innerHTML = '';
+        document.getElementById('departurePf_out').innerHTML = document.getElementById('departurePf_in').value.toUpperCase();
+        document.getElementById('destinationPf_out').innerHTML = document.getElementById('destinationPf_in').value.toUpperCase();
 
         document.getElementById('total_out').innerHTML = get_hhmm(end - start);
 
