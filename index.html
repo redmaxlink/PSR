@@ -780,6 +780,46 @@
 
       //////////////////////////////////////////////////////////////////////////
 
+      function display(){
+         let d = document.getElementById('crew').style.display;
+         if(d == 'block'){
+           document.getElementById('crew').style.display = 'none';
+           document.getElementById('time').style.display = 'block';
+         }
+         else if(d == 'none'){
+           document.getElementById('crew').style.display = 'block';
+           document.getElementById('time').style.display = 'none';
+         }
+      };
+      function takeoffland(item){
+
+        if(item.style.color == 'lightgrey'){item.style.color = 'black'}
+        else if(item.style.color == 'black'){item.style.color = 'lightgrey'};
+
+        let count = 0;
+        for(i=1; i<5; i++){if(document.getElementById(i + 'takeoffland_in').style.color == 'black'){count++}};
+
+        if(count == 0 || count > 2){document.getElementById('half_in').style.display = 'none'}
+        else{document.getElementById('half_in').style.display = 'block'};
+
+        if(count > 2){
+            for(i=1; i<5; i++){document.getElementById(i + 'takeoffland_in').style.color = 'lightgrey'};
+        }
+
+      };
+      function half(item){
+
+        if(item.classList[0] == "FIRST"){
+          item.innerHTML = "SITING SECOND HALF";
+          item.className = "SECOND";
+        }
+        else if(item.classList[0] == "SECOND"){
+          item.innerHTML = 'SITING FIRST HALF';
+          item.className = "FIRST";
+        };
+
+      };
+
       function value(data){
         return Number(data.slice(0, data.length - 1));
       };
@@ -820,53 +860,12 @@
 
       };
 
-      function display(){
-         let d = document.getElementById('crew').style.display;
-         if(d == 'block'){
-           document.getElementById('crew').style.display = 'none';
-           document.getElementById('time').style.display = 'block';
-         }
-         else if(d == 'none'){
-           document.getElementById('crew').style.display = 'block';
-           document.getElementById('time').style.display = 'none';
-         }
-      };
-      function takeoffland(item){
-
-        if(item.style.color == 'lightgrey'){item.style.color = 'black'}
-        else if(item.style.color == 'black'){item.style.color = 'lightgrey'};
-
-        let count = 0;
-        for(i=1; i<5; i++){if(document.getElementById(i + 'takeoffland_in').style.color == 'black'){count++}};
-
-        if(count == 0 || count > 2){document.getElementById('half_in').style.display = 'none'}
-        else{document.getElementById('half_in').style.display = 'block'};
-
-        if(count > 2){
-            for(i=1; i<5; i++){document.getElementById(i + 'takeoffland_in').style.color = 'lightgrey'};
-        }
-
-      };
-
-      function half(item){
-
-        if(item.classList[0] == "FIRST"){
-          item.innerHTML = "SITING SECOND HALF";
-          item.className = "SECOND";
-        }
-        else if(item.classList[0] == "SECOND"){
-          item.innerHTML = 'SITING FIRST HALF';
-          item.className = "FIRST";
-        };
-
-      };
-
       //////////////////////////////////////////////////////////////////////////
 
       function psr_generate(){
 
         document.getElementById('number_out').innerHTML = 'AIC ' + document.getElementById('number_in').value;
-        document.getElementById('registeration_out').innerHTML = 'VT - ' + document.getElementById('registeration_in').value;
+        document.getElementById('registeration_out').innerHTML = document.getElementById('registeration_in').value;
         let lr200 = ['VT-ALF', 'VT-ALG', 'VT-ALH'], type = 'B777-300ER'
         if(lr200.includes(document.getElementById('registeration_in').value)){type = 'B777-200LR'}
         document.getElementById('type_out').innerHTML = type;
