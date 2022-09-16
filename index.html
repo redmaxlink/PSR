@@ -680,7 +680,7 @@
       var start, end, l1, light, l2, c;
       var depSkd, desSkd, depDly, delay1 = 0, delay2 = 0, desDly;
       var night;
-      var time;
+      var calc_time;
       init();
 
       function init(){
@@ -950,7 +950,7 @@
 
 
 
-        time = time_generate();
+        calc_time = time_generate();
 
         // var table_data = document.getElementsByTagName('td');
         // for(let i = 0; i < table_data.length; i++){table_data[i].setAttribute("contenteditable", "true")};
@@ -1017,7 +1017,7 @@
         // console.log(end, endLight);
         // console.log(instrument);
 
-        console.log(get_hhmm(one_add), get_hhmm(two_add), get_hhmm(three_add),get_hhmm(four_add),get_hhmm(five_add));
+        //console.log(get_hhmm(one_add), get_hhmm(two_add), get_hhmm(three_add),get_hhmm(four_add),get_hhmm(five_add));
 
         ////////////////////////////////////////////////////////////////////////
 
@@ -1132,7 +1132,7 @@
         else{add_inst = dayset2}
         if(half < add_inst){add_inst = half};
 
-        console.log(instrument, dayset1/60000, dayset2/60000, add_inst/60000);
+        // console.log(instrument, dayset1/60000, dayset2/60000, add_inst/60000);
 
         inst_add(set1, add_inst);
         inst_add(set2, add_inst);
@@ -1154,7 +1154,7 @@
 
         };
 
-        let time = [];
+        let time = {};
 
         final(block1);
         final(block2);
@@ -1217,7 +1217,11 @@
         clone = node.cloneNode(true);
         clone.style.display = 'block';
         mywindow.document.body.appendChild(clone);
-        
+
+
+        Object.values(calc_time).forEach((x)=>{
+          mywindow.document.write('<h4>'+ JSON.stringify(x) +'</h4>')
+        });
 
         ////////////////
         mywindow.document.write('</body></html>');
