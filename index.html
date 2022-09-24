@@ -677,7 +677,7 @@
 
       //////////////////////////////////////////////////////////////////////////
 
-      var start, end, l1, light, l2, c;
+      var start, end, l1, light, l2, c, l_s, l_e;
       var depSkd, desSkd, depDly, delay1 = 0, delay2 = 0, desDly;
       var night;
       var calc_time;
@@ -837,8 +837,8 @@
 
       };
       function calc_night(){
-        let l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/c ) );
-        let l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/c ) );
+        l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/c ) );
+        l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/c ) );
         light.lastElementChild.value =  get_hhmm(l_e - l_s);
       };
 
@@ -989,17 +989,17 @@
 
         ////////////////////
 
-        let ll, ls, le;
+        let ll;
 
         if(light.classList[0] == 'NIGHT'){ll = 'NIGHT'}
         else if(light.classList[0] == 'DAY'){ll = 'DAY'};
 
-        ls = start + 60000 * Math.floor( (value(l1.style.left) - 20) / c );
-        if(ls <= start){startLight = ll}
-        else if(ls > start){startLight = lc(ll)};
-        le = start + 60000 * Math.floor( (value(l2.style.left) - 20) / c );
-        if(le < end){endLight = lc(ll)}
-        else if(le >= end){endLight = ll};
+        //l_s = start + 60000 * Math.floor( (value(l1.style.left) - 20) / c );
+        if(l_s <= start){startLight = ll}
+        else if(l_s > start){startLight = lc(ll)};
+        //le = start + 60000 * Math.floor( (value(l2.style.left) - 20) / c );
+        if(l_e < end){endLight = lc(ll)}
+        else if(l_e >= end){endLight = ll};
 
         function lc(info){
           if(info == 'DAY'){return 'NIGHT'}
@@ -1062,29 +1062,29 @@
 
           let day = 0, night = 0;
 
-          if(le <= block.from || ls >= block.to){
+          if(l_e <= block.from || l_s >= block.to){
             if(lastlight == 'DAY'){day = diff(block.from, block.to)}
             else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
           }
-          else if(ls <= block.from && le >= block.to){
+          else if(l_s <= block.from && l_e >= block.to){
             lastlight = ll;
             if(lastlight == 'DAY'){day = diff(block.from, block.to)}
             else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
           }
-          else if(ls <= block.from && le < block.to){
+          else if(l_s <= block.from && l_e < block.to){
             lastlight = ll;
-            if(lastlight == 'DAY'){day = diff(block.from, le); night = diff(le, block.to)}
-            else if(lastlight == 'NIGHT'){night = diff(block.from, le); day = diff(le, block.to)}
+            if(lastlight == 'DAY'){day = diff(block.from, l_e); night = diff(l_e, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, l_e); day = diff(l_e, block.to)}
           }
-          else if(ls > block.from && le >= block.to){
-            if(lastlight == 'DAY'){day = diff(block.from, ls); night = diff(ls, block.to)}
-            else if(lastlight == 'NIGHT'){night = diff(block.from, ls); day = diff(ls, block.to)}
+          else if(l_s > block.from && l_e >= block.to){
+            if(lastlight == 'DAY'){day = diff(block.from, l_s); night = diff(l_s, block.to)}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, l_s); day = diff(l_s, block.to)}
             lastlight = ll;
           }
-          else if(ls > block.from && le < block.to){
-            let a = diff(block.from, ls);
-            let b = diff(ls, le);
-            let c = diff(le, block.to);
+          else if(l_s > block.from && l_e < block.to){
+            let a = diff(block.from, l_s);
+            let b = diff(l_s, l_e);
+            let c = diff(l_e, block.to);
             if(lastlight == 'DAY'){day = a + c; night = b; ll = 'DAY';}
             else if(lastlight == 'NIGHT'){night = a + c; day = b; ll = 'NIGHT';}
           }
