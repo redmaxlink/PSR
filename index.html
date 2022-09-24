@@ -1005,6 +1005,7 @@
           if(info == 'DAY'){return 'NIGHT'}
           if(info == 'NIGHT'){return 'DAY'}
         };
+        let lastlight = startLight;
 
         ////////////////////
 
@@ -1021,7 +1022,7 @@
 
         ////////////////////////////////////////////////////////////////////////
 
-        let lastlight = startLight;
+
 
         let one_start = start;
         //let one_add = 3600000;
@@ -1067,26 +1068,24 @@
             else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
           }
           else if(l_s <= block.from && l_e >= block.to){
-            lastlight = ll;
+            //lastlight = ll;
             if(lastlight == 'DAY'){day = diff(block.from, block.to)}
             else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
           }
           else if(l_s <= block.from && l_e < block.to){
-            lastlight = ll;
-            if(lastlight == 'DAY'){day = diff(block.from, l_e); night = diff(l_e, block.to)}
-            else if(lastlight == 'NIGHT'){night = diff(block.from, l_e); day = diff(l_e, block.to)}
+            if(lastlight == 'DAY'){day = diff(block.from, l_e); night = diff(l_e, block.to); lastlight = 'NIGHT';}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, l_e); day = diff(l_e, block.to); lastlight = 'DAY';}
           }
           else if(l_s > block.from && l_e >= block.to){
-            if(lastlight == 'DAY'){day = diff(block.from, l_s); night = diff(l_s, block.to)}
-            else if(lastlight == 'NIGHT'){night = diff(block.from, l_s); day = diff(l_s, block.to)}
-            lastlight = ll;
+            if(lastlight == 'DAY'){day = diff(block.from, l_s); night = diff(l_s, block.to); lastlight = 'NIGHT';}
+            else if(lastlight == 'NIGHT'){night = diff(block.from, l_s); day = diff(l_s, block.to); lastlight = 'DAY';}
           }
           else if(l_s > block.from && l_e < block.to){
             let a = diff(block.from, l_s);
             let b = diff(l_s, l_e);
             let c = diff(l_e, block.to);
-            if(lastlight == 'DAY'){day = a + c; night = b; ll = 'DAY';}
-            else if(lastlight == 'NIGHT'){night = a + c; day = b; ll = 'NIGHT';}
+            if(lastlight == 'DAY'){day = a + c; night = b; ll = 'DAY'; lastlight = 'DAY';}
+            else if(lastlight == 'NIGHT'){night = a + c; day = b; ll = 'NIGHT'; lastlight = 'NIGHT';}
           }
 
           function diff(a, b){
@@ -1095,6 +1094,7 @@
 
           block.day = day;
           block.night = night;
+
           block.block = index;
 
         };
