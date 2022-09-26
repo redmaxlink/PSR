@@ -45,7 +45,7 @@
     <div class="flex-column" id="basic" style="margin-top: 40px; height:36vh;">
 
       <div class="flex-row" style="font-size:40px; width:100%; margin-top: 1%; text-align: center;">
-        <input type="text" id="number_in" required style="font-size:40px; text-transform:uppercase; text-align: center;" placeholder="FLIGHT NUMBER">
+        <input type="text" id="number_in" required style="font-size:40px; text-transform:uppercase; text-align: center;" placeholder="FLIGHT NUMBER" oninput="fill(this)">
       </div>
 
       <div class="flex-row" style="margin-top: 20px;">
@@ -73,14 +73,14 @@
       <div class="flex-row" style="position:relative; margin-top: 20px; width:100%;">
         <div class="flex-column" style="width:40vw; height:100px; text-align:center;">
           <input type="text" id="departure_in" required style="font-size:40px; text-transform:uppercase; text-align: center; display: block;"  placeholder="DEPARTURE">
-          <input type="datetime-local" id="departureSked_in"  value="2022-09-08T16:15:00.000" style="font-size:20px; color: grey; text-align: center; display: block;">
+          <input type="time" id="departureSked_in"  value="16:15:00.000" style="font-size:20px; color: grey; text-align: center; display: block;">
         </div>
         <div class="">
           <input type="time" id="crt_in" required style="font-size: 40px; text-transform:uppercase; text-align: center;" placeholder="CRT">
         </div>
         <div class="flex-column" style="width:40vw; height:100px;">
           <input type="text" id="destination_in" required style="font-size:40px; text-transform:uppercase; text-align: center; display: block;" placeholder="DESTINATION">
-          <input type="datetime-local" id="destinationSked_in"  value="2022-09-09T06:45:00.000" style="font-size:20px; color: grey; text-align: center; display: block;">
+          <input type="time" id="destinationSked_in"  value="2022-09-09T06:45:00.000" style="font-size:20px; color: grey; text-align: center; display: block;">
         </div>
       </div>
 
@@ -780,6 +780,43 @@
     <script type="text/javascript">
 
       //////////////////////////////////////////////////////////////////////////
+      function fill(item){
+        let n = item.value;
+        if(n == 101){populate('VIDP', 'KJFK', '20:15', '11:00')}
+        if(n == 102){populate('KJFK', 'VIDP', '16:30', '06:30')}
+
+        if(n == 105){populate('VIDP', 'KEWR', '21:15', '11:35')}
+        if(n == 106){populate('KEWR', 'VIDP', '16:15', '05:45')}
+
+        if(n == 191){populate('VABB', 'KEWR', '19:00', '11:55')}
+        if(n == 144){populate('KEWR', 'VABB', '16:05', '06:55')}
+
+        if(n == 187){populate('VIDP', 'CYYZ', '21:30', '12:45')}
+        if(n == 188){populate('CYYZ', 'VIDP', '16:15', '06:15')}
+
+        if(n == 126){populate('VIDP', 'KORD', '20:45', '12:25')}
+        if(n == 127){populate('KORD', 'VIDP', '17:00', '07:35')}
+
+        if(n == 173){populate('VIDP', 'KSFO', '22:00', '13:45')}
+        if(n == 174){populate('KSFO', 'VIDP', '17:30', '09:25')}
+
+        if(n == 183){populate('VIDP', 'KSFO', '09:30', '01:20')}
+        if(n == 184){populate('KSFO', 'VIDP', '05:00', '21:00')}
+
+        if(n == 185){populate('VIDP', 'CYVR', '23:45', '14:15')}
+        if(n == 186){populate('CYVR', 'VIDP', '17:15', '08:05')}
+
+      };
+
+      function populate(dep, des, depSkd, desSkd){
+
+        document.getElementById('departure_in').value = dep;
+        document.getElementById('destination_in').value = des;
+        document.getElementById('departureSked_in').value = depSkd;
+        document.getElementById('destinationSked_in').value = desSkd;
+        document.getElementById('crt_in').value = get_hhmm(document.getElementById('departureSked_in').valueAsNumber - 5400000);
+
+      };
 
       var start, end, l1, light, l2, c, l_s, l_e;
       var depSkd, desSkd, depDly, delay1 = 0, delay2 = 0, desDly;
@@ -977,9 +1014,11 @@
         document.getElementById('type_out').innerHTML = type;
 
         let date = new Date(start);
-        document.getElementById('departureDate_out').innerHTML = date.toLocaleDateString();
+        date = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+        document.getElementById('departureDate_out').innerHTML = date;
         date = new Date(end);
-        document.getElementById('destinationDate_out').innerHTML = date.toLocaleDateString();
+        date = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+        document.getElementById('destinationDate_out').innerHTML = date;
 
         document.getElementById('departure_out').innerHTML = document.getElementById('departure_in').value.toUpperCase();
         document.getElementById('destination_out').innerHTML = document.getElementById('destination_in').value.toUpperCase();
