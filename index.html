@@ -47,6 +47,22 @@
           backdrop-filter:blur(20px);
       }
 
+      .fromto{
+        font-size: 12px;
+      }
+      .day, .night{
+        color: green;
+        font-size: 11px;
+      }
+      /* .night{
+        color: orange;
+      } */
+      .instfly{
+        color: orange;
+        font-size: 11px;
+      }
+
+
       .flex-row{
         display: flex;
         flex-direction: row;
@@ -399,16 +415,16 @@
           <td style="width: 3%; border-bottom: none;">CDR.</td>
           <td id="1name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
           <td id="1staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
-          <td id="1crt_out" style="width: 6%;" rowspan="3"></td>
+          <td id="1crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td id="1status_out" style="width: 4%;" rowspan="3"></td>
-          <td id="11from_out" style="width: 6%;"></td>
-          <td id="11to_out" style="width: 6%;"></td>
-          <td id="12from_out" style="width: 6%;"></td>
-          <td id="12to_out" style="width: 6%;"></td>
-          <td id="14from_out" style="width: 6%;"></td>
-          <td id="14to_out" style="width: 6%;"></td>
+          <td class="fromto" id="11from_out" style="width: 6%;"></td>
+          <td class="fromto" id="11to_out" style="width: 6%;"></td>
+          <td class="fromto" id="12from_out" style="width: 6%;"></td>
+          <td class="fromto" id="12to_out" style="width: 6%;"></td>
+          <td class="fromto" id="14from_out" style="width: 6%;"></td>
+          <td class="fromto" id="14to_out" style="width: 6%;"></td>
           <td id="15day_out" style="width: 5%;" rowspan="3"></td>
           <td id="16night_out" style="width: 5%;" rowspan="3"></td>
           <td id="17instrument_out" style="width: 5%;" rowspan="3"></td>
@@ -418,12 +434,12 @@
 
 
 
-          <td id="11day_out" style="width: 6%;"></td>
-          <td id="11night_out" style="width: 6%;"></td>
-          <td id="12day_out" style="width: 6%;"></td>
-          <td id="12night_out" style="width: 6%;"></td>
-          <td id="14day_out" style="width: 6%;"></td>
-          <td id="14night_out" style="width: 6%;"></td>
+          <td class="day" id="11day_out" style="width: 6%;"></td>
+          <td class="night" id="11night_out" style="width: 6%;"></td>
+          <td class="day" id="12day_out" style="width: 6%;"></td>
+          <td class="night" id="12night_out" style="width: 6%;"></td>
+          <td class="day" id="14day_out" style="width: 6%;"></td>
+          <td class="night" id="14night_out" style="width: 6%;"></td>
 
         </tr>
         <tr style="height:4.5mm;">
@@ -431,11 +447,11 @@
           <td id="1ipltm_out" style="width: 19%; font-size: 12px;">IPLTM </td>
           <td id="1sap_out" style="width: 7%; border-top: none;"></td>
 
-          <td id="11instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="11instrument_out" style="width: 6%;"></td>
           <td id="11seat_out" style="width: 6%;"></td>
-          <td id="12instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="12instrument_out" style="width: 6%;"></td>
           <td id="12seat_out" style="width: 6%;"></td>
-          <td id="14instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="14instrument_out" style="width: 6%;"></td>
           <td id="14seat_out" style="width: 6%;"></td>
 
         </tr>
@@ -444,16 +460,16 @@
           <td style="width: 3%; border-bottom: none;">CDR.</td>
           <td id="2name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
           <td id="2staff_out" style="width: 7%;" rowspan="3"></td>
-          <td id="2crt_out" style="width: 6%;" rowspan="3"></td>
+          <td id="2crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td id="2status_out" style="width: 4%;" rowspan="3"></td>
-          <td id="21from_out" style="width: 6%;"></td>
-          <td id="21to_out" style="width: 6%;"></td>
-          <td id="22from_out" style="width: 6%;"></td>
-          <td id="22to_out" style="width: 6%;"></td>
-          <td id="24from_out" style="width: 6%;"></td>
-          <td id="24to_out" style="width: 6%;"></td>
+          <td class="fromto" id="21from_out" style="width: 6%;"></td>
+          <td class="fromto" id="21to_out" style="width: 6%;"></td>
+          <td class="fromto" id="22from_out" style="width: 6%;"></td>
+          <td class="fromto" id="22to_out" style="width: 6%;"></td>
+          <td class="fromto" id="24from_out" style="width: 6%;"></td>
+          <td class="fromto" id="24to_out" style="width: 6%;"></td>
           <td id="25day_out" style="width: 5%;" rowspan="3"></td>
           <td id="26night_out" style="width: 5%;" rowspan="3"></td>
           <td id="27instrument_out" style="width: 5%;" rowspan="3"></td>
@@ -463,12 +479,12 @@
 
 
 
-          <td id="21day_out" style="width: 6%;"></td>
-          <td id="21night_out" style="width: 6%;"></td>
-          <td id="22day_out" style="width: 6%;"></td>
-          <td id="22night_out" style="width: 6%;"></td>
-          <td id="24day_out" style="width: 6%;"></td>
-          <td id="24night_out" style="width: 6%;"></td>
+          <td class="day" id="21day_out" style="width: 6%;"></td>
+          <td class="night" id="21night_out" style="width: 6%;"></td>
+          <td class="day" id="22day_out" style="width: 6%;"></td>
+          <td class="night" id="22night_out" style="width: 6%;"></td>
+          <td class="day" id="24day_out" style="width: 6%;"></td>
+          <td class="night" id="24night_out" style="width: 6%;"></td>
 
         </tr>
         <tr style="height:4.5mm;">
@@ -476,11 +492,11 @@
           <td id="2ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
 
 
-          <td id="21instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="21instrument_out" style="width: 6%;"></td>
           <td id="21seat_out" style="width: 6%;"></td>
-          <td id="22instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="22instrument_out" style="width: 6%;"></td>
           <td id="22seat_out" style="width: 6%;"></td>
-          <td id="24instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="24instrument_out" style="width: 6%;"></td>
           <td id="24seat_out" style="width: 6%;"></td>
 
         </tr>
@@ -489,16 +505,16 @@
           <td style="width: 3%; border-bottom: none;">CDR.</td>
           <td id="3name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
           <td id="3staff_out" style="width: 7%;" rowspan="3"></td>
-          <td id="3crt_out" style="width: 6%;" rowspan="3"></td>
+          <td id="3crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td id="3status_out" style="width: 4%;" rowspan="3"></td>
-          <td id="31from_out" style="width: 6%;"></td>
-          <td id="31to_out" style="width: 6%;"></td>
-          <td id="32from_out" style="width: 6%;"></td>
-          <td id="32to_out" style="width: 6%;"></td>
-          <td id="34from_out" style="width: 6%;"></td>
-          <td id="34to_out" style="width: 6%;"></td>
+          <td class="fromto" id="31from_out" style="width: 6%;"></td>
+          <td class="fromto" id="31to_out" style="width: 6%;"></td>
+          <td class="fromto" id="32from_out" style="width: 6%;"></td>
+          <td class="fromto" id="32to_out" style="width: 6%;"></td>
+          <td class="fromto" id="34from_out" style="width: 6%;"></td>
+          <td class="fromto" id="34to_out" style="width: 6%;"></td>
           <td id="35day_out" style="width: 5%;" rowspan="3"></td>
           <td id="36night_out" style="width: 5%;" rowspan="3"></td>
           <td id="37instrument_out" style="width: 5%;" rowspan="3"></td>
@@ -508,12 +524,12 @@
 
 
 
-          <td id="31day_out" style="width: 6%;"></td>
-          <td id="31night_out" style="width: 6%;"></td>
-          <td id="32day_out" style="width: 6%;"></td>
-          <td id="32night_out" style="width: 6%;"></td>
-          <td id="34day_out" style="width: 6%;"></td>
-          <td id="34night_out" style="width: 6%;"></td>
+          <td class="day" id="31day_out" style="width: 6%;"></td>
+          <td class="night" id="31night_out" style="width: 6%;"></td>
+          <td class="day" id="32day_out" style="width: 6%;"></td>
+          <td class="night" id="32night_out" style="width: 6%;"></td>
+          <td class="day" id="34day_out" style="width: 6%;"></td>
+          <td class="night" id="34night_out" style="width: 6%;"></td>
 
         </tr>
         <tr style="height:4.5mm;">
@@ -521,11 +537,11 @@
           <td id="3ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
 
 
-          <td id="31instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="31instrument_out" style="width: 6%;"></td>
           <td id="31seat_out" style="width: 6%;"></td>
-          <td id="32instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="32instrument_out" style="width: 6%;"></td>
           <td id="32seat_out" style="width: 6%;"></td>
-          <td id="34instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="34instrument_out" style="width: 6%;"></td>
           <td id="34seat_out" style="width: 6%;"></td>
 
         </tr>
@@ -534,16 +550,16 @@
           <td style="width: 3%; border-bottom: none;">CDR.</td>
           <td id="4name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
           <td id="4staff_out" style="width: 7%;" rowspan="3"></td>
-          <td id="4crt_out" style="width: 6%;" rowspan="3"></td>
+          <td id="4crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td id="4status_out" style="width: 4%;" rowspan="3"></td>
-          <td id="41from_out" style="width: 6%;"></td>
-          <td id="41to_out" style="width: 6%;"></td>
-          <td id="42from_out" style="width: 6%;"></td>
-          <td id="42to_out" style="width: 6%;"></td>
-          <td id="44from_out" style="width: 6%;"></td>
-          <td id="44to_out" style="width: 6%;"></td>
+          <td class="fromto" id="41from_out" style="width: 6%;"></td>
+          <td class="fromto" id="41to_out" style="width: 6%;"></td>
+          <td class="fromto" id="42from_out" style="width: 6%;"></td>
+          <td class="fromto" id="42to_out" style="width: 6%;"></td>
+          <td class="fromto" id="44from_out" style="width: 6%;"></td>
+          <td class="fromto" id="44to_out" style="width: 6%;"></td>
           <td id="45day_out" style="width: 5%;" rowspan="3"></td>
           <td id="46night_out" style="width: 5%;" rowspan="3"></td>
           <td id="47instrument_out" style="width: 5%;" rowspan="3"></td>
@@ -553,12 +569,12 @@
 
 
 
-          <td id="41day_out" style="width: 6%;"></td>
-          <td id="41night_out" style="width: 6%;"></td>
-          <td id="42day_out" style="width: 6%;"></td>
-          <td id="42night_out" style="width: 6%;"></td>
-          <td id="44day_out" style="width: 6%;"></td>
-          <td id="44night_out" style="width: 6%;"></td>
+          <td class="day" id="41day_out" style="width: 6%;"></td>
+          <td class="night" id="41night_out" style="width: 6%;"></td>
+          <td class="day" id="42day_out" style="width: 6%;"></td>
+          <td class="night" id="42night_out" style="width: 6%;"></td>
+          <td class="day" id="44day_out" style="width: 6%;"></td>
+          <td class="night" id="44night_out" style="width: 6%;"></td>
 
         </tr>
         <tr style="height:4.5mm;">
@@ -566,11 +582,11 @@
           <td id="4ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
 
 
-          <td id="41instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="41instrument_out" style="width: 6%;"></td>
           <td id="41seat_out" style="width: 6%;"></td>
-          <td id="42instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="42instrument_out" style="width: 6%;"></td>
           <td id="42seat_out" style="width: 6%;"></td>
-          <td id="44instrument_out" style="width: 6%;"></td>
+          <td class="instfly" id="44instrument_out" style="width: 6%;"></td>
           <td id="44seat_out" style="width: 6%;"></td>
 
         </tr>
