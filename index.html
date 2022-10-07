@@ -460,7 +460,7 @@
         <tr style="height:4.5mm;">
           <td style="width: 3%; border-bottom: none; font-size: 10px;">CDR.</td>
           <td id="2name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="2staff_out" style="width: 7%;" rowspan="3"></td>
+          <td id="2staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
           <td id="2crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
@@ -491,7 +491,7 @@
         <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
           <td id="2ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
-
+          <td id="2sap_out" style="width: 7%; border-top: none;"></td>
 
           <td class="instfly" id="21instrument_out" style="width: 6%;"></td>
           <td id="21seat_out" style="width: 6%;"></td>
@@ -505,7 +505,7 @@
         <tr style="height:4.5mm;">
           <td style="width: 3%; border-bottom: none; font-size: 10px;">CDR.</td>
           <td id="3name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="3staff_out" style="width: 7%;" rowspan="3"></td>
+          <td id="3staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
           <td id="3crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
@@ -536,7 +536,7 @@
         <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
           <td id="3ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
-
+          <td id="3sap_out" style="width: 7%; border-top: none;"></td>
 
           <td class="instfly" id="31instrument_out" style="width: 6%;"></td>
           <td id="31seat_out" style="width: 6%;"></td>
@@ -550,7 +550,7 @@
         <tr style="height:4.5mm;">
           <td style="width: 3%; border-bottom: none; font-size: 10px;">CDR.</td>
           <td id="4name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="4staff_out" style="width: 7%;" rowspan="3"></td>
+          <td id="4staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
           <td id="4crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
@@ -581,7 +581,7 @@
         <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
           <td id="4ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
-
+          <td id="4sap_out" style="width: 7%; border-top: none;"></td>
 
           <td class="instfly" id="41instrument_out" style="width: 6%;"></td>
           <td id="41seat_out" style="width: 6%;"></td>
@@ -595,7 +595,7 @@
         <tr style="height:4.5mm;">
           <td style="width: 3%; border-bottom: none;"></td>
           <td id="5name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="5staff_out" style="width: 7%;" rowspan="3"></td>
+          <td id="5staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
           <td id="5crt_out" style="width: 6%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
@@ -626,7 +626,7 @@
         <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
           <td id="5ipltm_out" style="width: 19%; font-size: 12px;"></td>
-
+          <td id="1sap_out" style="width: 7%; border-top: none;"></td>
 
           <td id="51instrument_out" style="width: 6%;"></td>
           <td id="51seat_out" style="width: 6%;"></td>
@@ -1163,21 +1163,21 @@
 
         document.getElementById('2name_out').innerHTML = document.getElementById('2name_in').value.toUpperCase();
         document.getElementById('2staff_out').innerHTML = document.getElementById('2staff_in').value.toUpperCase();
-        //document.getElementById('2sap_out').innerHTML = document.getElementById('2sap_in').value.toUpperCase();
+        document.getElementById('2sap_out').innerHTML = document.getElementById('2sap_in').value.toUpperCase();
         document.getElementById('2ipltm_out').innerHTML = document.getElementById('2ipltm_in').value.toUpperCase();
         document.getElementById('2status_out').innerHTML = document.getElementById('2status_in').value.toUpperCase();
         document.getElementById('2crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
 
         document.getElementById('3name_out').innerHTML = document.getElementById('3name_in').value.toUpperCase();
         document.getElementById('3staff_out').innerHTML = document.getElementById('3staff_in').value.toUpperCase();
-        //document.getElementById('3sap_out').innerHTML = document.getElementById('3sap_in').value.toUpperCase();
+        document.getElementById('3sap_out').innerHTML = document.getElementById('3sap_in').value.toUpperCase();
         document.getElementById('3ipltm_out').innerHTML = document.getElementById('3ipltm_in').value.toUpperCase();
         document.getElementById('3status_out').innerHTML = document.getElementById('3status_in').value.toUpperCase();
         document.getElementById('3crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
 
         document.getElementById('4name_out').innerHTML = document.getElementById('4name_in').value.toUpperCase();
         document.getElementById('4staff_out').innerHTML = document.getElementById('4staff_in').value.toUpperCase();
-        //document.getElementById('4sap_out').innerHTML = document.getElementById('4sap_in').value.toUpperCase();
+        document.getElementById('4sap_out').innerHTML = document.getElementById('4sap_in').value.toUpperCase();
         document.getElementById('4ipltm_out').innerHTML = document.getElementById('4ipltm_in').value.toUpperCase();
         document.getElementById('4status_out').innerHTML = document.getElementById('4status_in').value.toUpperCase();
         document.getElementById('4crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
