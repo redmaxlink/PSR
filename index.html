@@ -171,7 +171,7 @@
                 <input type="text" id="fuelTp_in" title="FUEL TEMPERATURE" required style="font-size: 1.4vh; text-transform:uppercase; text-align: center;" placeholder="FUEL TEMPERATURE">
               </div
 
-              <img class="" src="moon.png" style="object-fit:fill; height:8vh; display: none;" >
+              <img class="" src="sun.png" style="object-fit:fill; height:8vh; display: none;" >
 
 
         </div>
@@ -971,11 +971,7 @@
 
         l1.style.left = drag + '%';
 
-        console.log(start, drag, fract, get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) ), 'One');
-
         this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) );
-
-        console.log(start, drag, fract, get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) ), 'Two');
 
         ////
 
