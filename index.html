@@ -1072,7 +1072,10 @@
         else{return hh + ':' + mm};
 
       };
-
+      function pad(item){
+        if(Number(item) < 10){return String(item).padStart(2, '0')}
+        else{return item}
+      }
       //////////////////////////////////////////////////////////////////////////
 
       function psr_generate(){
@@ -1084,10 +1087,10 @@
         document.getElementById('type_out').innerHTML = type;
 
         let date = new Date(start);
-        date = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+        date = pad(date.getUTCDate()) + '/' + pad(date.getUTCMonth()) + '/' + date.getUTCFullYear();
         document.getElementById('departureDate_out').innerHTML = date;
         date = new Date(end);
-        date = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+        date = pad(date.getUTCDate()) + '/' + pad(date.getUTCMonth()) + '/' + date.getUTCFullYear();
         document.getElementById('destinationDate_out').innerHTML = date;
 
         document.getElementById('departure_out').innerHTML = document.getElementById('departure_in').value.toUpperCase();
