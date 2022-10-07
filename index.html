@@ -906,7 +906,7 @@
 
       };
 
-      var start, end, l1, light, l2, c, l_s, l_e;
+      var start, end, l1, light, l2, fract, l_s, l_e;
       var depSkd, desSkd, depDly, delay1 = 0, delay2 = 0, desDly;
       var night;
       var calc_time;
@@ -926,11 +926,11 @@
         depDly = document.getElementById('departureDelay_in');
         desDly = document.getElementById('destinationDelay_in');
 
-        c = 60 / ((end - start)/60000);
+        fract = 60 / ((end - start)/60000);
         l1.style.left = 20 + 60 * 0.33 + '%';
-        l1.firstElementChild.value = get_utc( start + 60000 * (60 * 0.33) / c );
+        l1.firstElementChild.value = get_utc( start + 60000 * (60 * 0.33) / fract );
         l2.style.left = 20 + 60 * 0.66 + '%';
-        l2.firstElementChild.value = get_utc( start + 60000 * (60 * 0.66)/c );
+        l2.firstElementChild.value = get_utc( start + 60000 * (60 * 0.66)/fract );
 
         light.style.left = 50 + '%';
         calc_night();
@@ -971,7 +971,11 @@
 
         l1.style.left = drag + '%';
 
-        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/c ) );
+        console.log(start, drag, fract, get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) ), 'One');
+
+        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) );
+
+        console.log(start, drag, fract, get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) ), 'Two');
 
         ////
 
@@ -992,7 +996,7 @@
 
         ////
 
-        let min = value(l1.style.left) + c * 10;
+        let min = value(l1.style.left) + fract * 10;
         if(touch <= min){drag = min;}
         else if(touch >= 80){drag = 80}
         else{drag = touch};
@@ -1000,7 +1004,7 @@
         ////
 
         l2.style.left = drag + '%';
-        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/c ) );
+        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) );
 
         ////
 
@@ -1061,8 +1065,8 @@
 
       };
       function calc_night(){
-        l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/c ) );
-        l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/c ) );
+        l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/fract ) );
+        l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/fract ) );
         light.lastElementChild.value =  get_hhmm(l_e - l_s);
       };
 
@@ -1140,8 +1144,8 @@
         let totalNight = 0;
         if(light.classList[0] == "NIGHT"){totalNight = light.lastElementChild.value}
         else if(light.classList[0] == "DAY"){
-          let l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/c ) );
-          let l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/c ) );
+          let l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/fract ) );
+          let l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/fract ) );
           totalNight = get_hhmm( (l_s - start) + (end - l_e) );
         }
         document.getElementById('night_out').innerHTML = totalNight;
@@ -1258,10 +1262,10 @@
         if(light.classList[0] == 'NIGHT'){ll = 'NIGHT'}
         else if(light.classList[0] == 'DAY'){ll = 'DAY'};
 
-        //l_s = start + 60000 * Math.floor( (value(l1.style.left) - 20) / c );
+        //l_s = start + 60000 * Math.floor( (value(l1.style.left) - 20) / fract );
         if(l_s <= start){startLight = ll}
         else if(l_s > start){startLight = lc(ll)};
-        //le = start + 60000 * Math.floor( (value(l2.style.left) - 20) / c );
+        //le = start + 60000 * Math.floor( (value(l2.style.left) - 20) / fract );
         if(l_e < end){endLight = lc(ll)}
         else if(l_e >= end){endLight = ll};
 
