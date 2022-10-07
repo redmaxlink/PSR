@@ -8,6 +8,45 @@
 
       .b {border: 1px solid red;}
 
+      /* body {
+        background-image: url("background.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+      } */
+      #body {
+
+
+      }
+
+      #card1{
+
+          position: relative;
+          margin: 5vh 5vw 1vh 5vw;
+
+          height: 70vh;
+
+          border-radius: 2vw;
+          box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
+          background: rgba(255,255, 255, 0.6);
+          border-top: 0.17vw solid rgba(255, 255, 255, 0.5);
+          border-left: 0.17vw solid rgba(255, 255, 255, 0.5);
+
+          -webkit-backdrop-filter:blur(20px);
+          backdrop-filter:blur(20px);
+
+      }
+      #card2{
+          margin: 5vh 5vw 1vh 5vw;
+          width: 50vw;
+          border-radius: 2vw;
+          box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
+          background: rgba(255,255, 255, 0.6);
+          border-top: 0.17vw solid rgba(255, 255, 255, 0.5);
+          border-left: 0.17vw solid rgba(255, 255, 255, 0.5);
+          -webkit-backdrop-filter:blur(20px);
+          backdrop-filter:blur(20px);
+      }
+
       .flex-row{
         display: flex;
         flex-direction: row;
@@ -20,12 +59,21 @@
       }
 
       ::placeholder{
-        color: grey;
-        opacity: 0.2;
+        color: red;
+        opacity: 0.4;
       }
 
-      input { border: 1px solid lightgrey; border-radius: 20px;}
-
+      input {
+        border: 1px solid lightgrey;
+        /* border: none; */
+        border-radius: 5px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+      }
+      input:hover {
+        background-color: #eeeeee;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
       table {
         width: 100%;
         border: 1px solid black;
@@ -40,282 +88,258 @@
 
     </style>
   </head>
-  <body>
+  <body class="body" style="text-align: center; font-family: sans-serif; height: 100vh; background-image: radial-gradient(white); background-sizq: 100% 100%; background-repeat: no-repeat">
 
-    <div class="flex-column" id="basic" style="margin-top: 40px; height:36vh;">
-
-      <div class="flex-row" style="font-size:40px; width:100%; margin-top: 1%; text-align: center;">
-        <input type="text" id="number_in" required style="font-size:40px; text-transform:uppercase; text-align: center;" placeholder="FLIGHT NUMBER" oninput="fill(this)">
-      </div>
-
-      <div class="flex-row" style="margin-top: 20px;">
-        <select id="registeration_in" style="font-size:40px; width:25%;">
-            <option value="" selected="selected"></option>
-            <option value="VT-ALF">VT-ALF</option>
-            <option value="VT-ALG">VT-ALG</option>
-            <option value="VT-ALH">VT-ALH</option>
-            <option value="VT-ALJ">VT-ALJ</option>
-            <option value="VT-ALK">VT-ALK</option>
-            <option value="VT-ALL">VT-ALL</option>
-            <option value="VT-ALM">VT-ALM</option>
-            <option value="VT-ALN">VT-ALN</option>
-            <option value="VT-ALO">VT-ALO</option>
-            <option value="VT-ALP">VT-ALP</option>
-            <option value="VT-ALQ">VT-ALQ</option>
-            <option value="VT-ALR">VT-ALR</option>
-            <option value="VT-ALS">VT-ALS</option>
-            <option value="VT-ALT">VT-ALT</option>
-            <option value="VT-ALU">VT-ALU</option>
-            <option value="VT-ALX">VT-ALX</option>
-        </select>
-      </div>
-
-      <div class="flex-row" style="position:relative; margin-top: 20px; width:100%;">
-        <div class="flex-column" style="width:40vw; height:100px; text-align:center;">
-          <input type="text" id="departure_in" required style="font-size:40px; text-transform:uppercase; text-align: center; display: block;"  placeholder="DEPARTURE">
-          <input type="time" id="departureSked_in"  value="16:15:00.000" style="font-size:20px; color: grey; text-align: center; display: block;">
-        </div>
-        <div class="">
-          <input type="time" id="crt_in" required style="font-size: 40px; text-transform:uppercase; text-align: center;" placeholder="CRT">
-        </div>
-        <div class="flex-column" style="width:40vw; height:100px;">
-          <input type="text" id="destination_in" required style="font-size:40px; text-transform:uppercase; text-align: center; display: block;" placeholder="DESTINATION">
-          <input type="time" id="destinationSked_in"  value="2022-09-09T06:45:00.000" style="font-size:20px; color: grey; text-align: center; display: block;">
-        </div>
-      </div>
-
-      <div class="flex-row">
-        <input type="text" id="fuelQt_in" required style="font-size: 24px; text-transform:uppercase; text-align: center;">
-        <select id="fuelUt_in">
-          <option value="LT">LT</option>
-          <option value="USG">USG</option>
-        </select>
-        <input type="text" id="fuelSp_in" required style="font-size: 24px; text-transform:uppercase; text-align: center;">
-        <input type="text" id="fuelTp_in" required style="font-size: 24px; text-transform:uppercase; text-align: center;">
-      </div>
-
-    </div>
-
-
-
-
-
-
-
-    <div class="" style="width:100%;">
-
+    <div class="z-depth-3 flex-column" id="card1">
 
       <div class="flex-row" style="">
-        <div class="" style="text-align:center;" onclick="display()">
-          <h3>CREW</h3>
+        <div class="" style="text-align:center; color: orange;" onclick="display('flight')">
+          <h3>FLIGHT INFO</h3>
         </div>
-        <div class="" style="text-align:center;" onclick="display()">
-          <h3>TIMING</h3>
+        <div class="" style="text-align:center; color: orange;" onclick="display('crew')">
+          <h3>CREW INFO</h3>
+        </div>
+        <div class="" style="text-align:center; color: orange;" onclick="display('time')">
+          <h3>TIME INFO</h3>
         </div>
       </div>
 
-      <div class="" id="crew" style="width:100%; height: 45vh; display: block;">
+      <div class="" style="height: 100%; width: 100%;">
 
-            <div class="flex-row">
+        <div class="flex-column" id="flight" style="height: 100%; width:50%; text-align: center; transform: translateX(50%);">
 
-              <div class="" style="width:80%">
+              <input type="number" id="number_in" title="FLIGHT NUMBER" required style="font-size: 2.8vh; color: #9c27b0; text-transform:uppercase; text-align: center;" placeholder="FLIGHT NUMBER" oninput="fill(this)">
 
-                <input type="text" id="1name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;">
-                <input type="text" id="1staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <input type="text" id="1sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <input type="text" id="1ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <select id="1status_in" style="font-size:14px; ">
-                  <option value=" "> </option>
-                  <option value="PIC RC">PIC RC</option>
-                  <option value="PC PF">RC PF</option>
-                  <option value="RC PM">RC PM</option>
-                  <option value="SLF">SLF</option>
-                  <option value="SUT">SUT</option>
-                  <option value="SNY">SNY</option>
-                </select>
-                <select id="1seat_in" style="font-size:14px; ">
-                  <option value="1tL" selected="selected">L Seat = TO LDG</option>
-                  <option value="1tR">R Seat = TO LDG</option>
-                  <option value="1cL">L Seat = CRUISE</option>
-                  <option value="1cR">R Seat = CRUISE</option>
-                </select>
+              <input type="time" id="crt_in" title="CREW REPORTING TIME"  required style="font-size: 1.4vh; color: black; text-transform:uppercase; text-align: center;" placeholder="CRT">
+
+              <input type="text" id="departure_in" title="DEPARTURE AIRPORT"  required style="font-size: 2.8vh; color: #009688; text-transform:uppercase; text-align: center;" placeholder="DEPARTURE">
+
+              <input type="datetime-local" id="departureSked_in" title="SCHEDULED DEPARTURE"   value="16:15:00.000" style="font-size: 1.4vh; color: #009688; text-align: center;">
+
+              <input type="text" id="destination_in" title="DESITINATION AIRPORT"  required style="font-size: 2.8vh; text-transform:uppercase; color: #ff9800; text-align: center;" placeholder="DESTINATION">
+
+              <input type="datetime-local" id="destinationSked_in" title="SCHEDULED ARRIVAL"   value="2022-09-09T06:45:00.000" style="font-size: 1.4vh; color: #ff9800; text-align: center;">
 
 
-                </br></br>
 
-                <input type="text" id="2name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;">
-                <input type="text" id="2staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <input type="text" id="2sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <input type="text" id="2ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <select id="2status_in" style="font-size:14px; ">
-                  <option value=" "> </option>
-                  <option value="PIC RC">PIC RC</option>
-                  <option value="PC PF">RC PF</option>
-                  <option value="RC PM">RC PM</option>
-                  <option value="SLF">SLF</option>
-                  <option value="SUT">SUT</option>
-                  <option value="SNY">SNY</option>
-                </select>
-                <select id="2seat_in" style="font-size:14px; ">
-                  <option value="2tL">L Seat = TO LDG</option>
-                  <option value="2tR" selected="selected">R Seat = TO LDG</option>
-                  <option value="2cL">L Seat = CRUISE</option>
-                  <option value="2cR">R Seat = CRUISE</option>
+              <select id="registeration_in" title="AIRCRAFT REGISTERATION"  style="font-size: 2vh; color: red; text-align: center;">
+                    <option value="" selected="selected"></option>
+                    <option value="VT-ALF">VT-ALF</option>
+                    <option value="VT-ALG">VT-ALG</option>
+                    <option value="VT-ALH">VT-ALH</option>
+                    <option value="VT-ALJ">VT-ALJ</option>
+                    <option value="VT-ALK">VT-ALK</option>
+                    <option value="VT-ALL">VT-ALL</option>
+                    <option value="VT-ALM">VT-ALM</option>
+                    <option value="VT-ALN">VT-ALN</option>
+                    <option value="VT-ALO">VT-ALO</option>
+                    <option value="VT-ALP">VT-ALP</option>
+                    <option value="VT-ALQ">VT-ALQ</option>
+                    <option value="VT-ALR">VT-ALR</option>
+                    <option value="VT-ALS">VT-ALS</option>
+                    <option value="VT-ALT">VT-ALT</option>
+                    <option value="VT-ALU">VT-ALU</option>
+                    <option value="VT-ALX">VT-ALX</option>
                 </select>
 
-
-
-                </br></br>
-
-                <input type="text" id="3name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;">
-                <input type="text" id="3staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <input type="text" id="3sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <input type="text" id="3ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <select id="3status_in" style="font-size:14px; ">
-                  <option value=" "> </option>
-                  <option value="PIC RC">PIC RC</option>
-                  <option value="PC PF">RC PF</option>
-                  <option value="RC PM">RC PM</option>
-                  <option value="SLF">SLF</option>
-                  <option value="SUT">SUT</option>
-                  <option value="SNY">SNY</option>
+              <div class="flex-row" style="">
+                <span>FUEL : </span>
+                <input type="text" id="fuelQt_in" title="FUEL QUANTITY" required style="font-size: 1.4vh; text-transform:uppercase; text-align: center;" placeholder="QUANTITY">
+                <select id="fuelUt_in"  title="FUEL UPLIFT VOLUME "  >
+                  <option value="LT">LT</option>
+                  <option value="USG">USG</option>
                 </select>
-                <select id="3seat_in" style="font-size:14px; ">
-                  <option value="3tL">L Seat = TO LDG</option>
-                  <option value="3tR">R Seat = TO LDG</option>
-                  <option value="3cL" selected="selected">L Seat = CRUISE</option>
-                  <option value="3cR">R Seat = CRUISE</option>
-                </select>
-
-
-
-                </br></br>
-
-                <input type="text" id="4name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;">
-                <input type="text" id="4staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <input type="text" id="4sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <input type="text" id="4ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;">
-                <select id="4status_in" style="font-size:14px; ">
-                  <option value=" "> </option>
-                  <option value="PIC RC">PIC RC</option>
-                  <option value="PC PF">RC PF</option>
-                  <option value="RC PM">RC PM</option>
-                  <option value="SLF">SLF</option>
-                  <option value="SUT">SUT</option>
-                  <option value="SNY">SNY</option>
-                </select>
-                <select id="4seat_in" style="font-size:14px; ">
-                  <option value="4tL">L Seat = TO LDG</option>
-                  <option value="4tR">R Seat = TO LDG</option>
-                  <option value="4cL">L Seat = CRUISE</option>
-                  <option value="4cR" selected="selected">R Seat = CRUISE</option>
-                </select>
-
-                <div class="FIRST" id="half_in" style="margin:2% 0 0 77%; color: grey; display: block;" onclick="half(this)">PIC SITTING FIRST HALF</div>
-
-
+                <input type="text" id="fuelSp_in" title="FUEL SPECIFIC GRAVITY" required style="font-size: 1.4vh; text-transform:uppercase; text-align: center;" placeholder="SPECIFIC GRAVITY">
+                <input type="text" id="fuelTp_in" title="FUEL TEMPERATURE" required style="font-size: 1.4vh; text-transform:uppercase; text-align: center;" placeholder="FUEL TEMPERATURE">
               </div>
 
-              <div class="flex-column" style="width:15%">
-                <div class="" style="margin-top:0px;">TakeOff</div>
-                <input type="text" id="departurePf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1L">
+        </div>
 
-                <div class="" style="margin-top:40px;">Landing</div>
-                <input type="text" id="destinationPf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1l">
-              </div>
+        <div class="flex-column" id="crew" style="height: 100%; width:100%; display: none;">
 
-            </div>
+          <div class="  " style="text-align: center;">
+            <input type="text" id="1name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
+            <input type="text" id="1staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
+            <input type="text" id="1sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
+            <input type="text" id="1ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="IPLTM No." value="IPLTM 2020">
+            <select id="1status_in" style="font-size:14px; ">
+              <option value=" "> </option>
+              <option value="PIC RC">PIC RC</option>
+              <option value="PC PF">RC PF</option>
+              <option value="RC PM">RC PM</option>
+              <option value="SLF">SLF</option>
+              <option value="SUT">SUT</option>
+              <option value="SNY">SNY</option>
+            </select>
+            <select id="1seat_in" style="font-size:14px; ">
+              <option value="1tL" selected="selected">L Seat = TO LDG</option>
+              <option value="1tR">R Seat = TO LDG</option>
+              <option value="1cL">L Seat = CRUISE</option>
+              <option value="1cR">R Seat = CRUISE</option>
+            </select>
+          </div>
 
-      </div>
+          <div class="  " style="text-align: center;">
+            <input type="text" id="2name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
+            <input type="text" id="2staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
+            <input type="text" id="2sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
+            <input type="text" id="2ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="IPLTM No." value="IPLTM 2020">
+            <select id="2status_in" style="font-size:14px; ">
+              <option value=" "> </option>
+              <option value="PIC RC">PIC RC</option>
+              <option value="PC PF">RC PF</option>
+              <option value="RC PM">RC PM</option>
+              <option value="SLF">SLF</option>
+              <option value="SUT">SUT</option>
+              <option value="SNY">SNY</option>
+            </select>
+            <select id="2seat_in" style="font-size:14px; ">
+              <option value="2tL">L Seat = TO LDG</option>
+              <option value="2tR" selected="selected">R Seat = TO LDG</option>
+              <option value="2cL">L Seat = CRUISE</option>
+              <option value="2cR">R Seat = CRUISE</option>
+            </select>
+          </div>
 
+          <div class="  " style="text-align: center;">
+            <input type="text" id="3name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
+            <input type="text" id="3staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
+            <input type="text" id="3sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
+            <input type="text" id="3ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="IPLTM No." value="IPLTM 2020">
+            <select id="3status_in" style="font-size:14px; ">
+              <option value=" "> </option>
+              <option value="PIC RC">PIC RC</option>
+              <option value="PC PF">RC PF</option>
+              <option value="RC PM">RC PM</option>
+              <option value="SLF">SLF</option>
+              <option value="SUT">SUT</option>
+              <option value="SNY">SNY</option>
+            </select>
+            <select id="3seat_in" style="font-size:14px; ">
+              <option value="3tL">L Seat = TO LDG</option>
+              <option value="3tR">R Seat = TO LDG</option>
+              <option value="3cL" selected="selected">L Seat = CRUISE</option>
+              <option value="3cR">R Seat = CRUISE</option>
+            </select>
+          </div>
 
+          <div class="  " style="text-align: center;">
+            <input type="text" id="4name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
+            <input type="text" id="4staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
+            <input type="text" id="4sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
+            <input type="text" id="4ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="IPLTM No." value="IPLTM 2020">
+            <select id="4status_in" style="font-size:14px; ">
+              <option value=" "> </option>
+              <option value="PIC RC">PIC RC</option>
+              <option value="PC PF">RC PF</option>
+              <option value="RC PM">RC PM</option>
+              <option value="SLF">SLF</option>
+              <option value="SUT">SUT</option>
+              <option value="SNY">SNY</option>
+            </select>
+            <select id="4seat_in" style="font-size:14px; ">
+              <option value="4tL">L Seat = TO LDG</option>
+              <option value="4tR">R Seat = TO LDG</option>
+              <option value="4cL">L Seat = CRUISE</option>
+              <option value="4cR" selected="selected">R Seat = CRUISE</option>
+            </select>
+          </div>
 
-      <div class="" id="time" style="width:100%;  height: 45vh; text-align:center; display: none;">
+          <div class="  " style="text-align: center;">
+            <div class="" style="">TakeOff</div>
+            <input type="text" id="departurePf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1L">
+            <div class="" style="">Landing</div>
+            <input type="text" id="destinationPf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1l">
+          </div>
 
-        <div class="" style="position: absolute; left: 0; width:18%; height: 400px;">
-
-          <div class="" style="text-align: center; margin-top: 320px;">
-            <input type="datetime-local" id="departureActual_in" style="font-size:20px;" value="2022-09-08T16:17:00.000" oninput="init()">
-            </br></br></br>
-            <div class="" style="display:none;">
-              <select id="departureDelay_in" style="font-size:20px;">
-                  <option value="STN">STN</option>
-                  <option value="ATC" selected="selected">ATC</option>
-                  <option value="WX WIND">WX WIND</option>
-              </select>
-              <output></output>
-            </div>
+          <div class="  " style="text-align: center;">
+            <div class="FIRST" id="half_in" style="color: grey;" onclick="half(this)">PIC SITTING FIRST HALF</div>
           </div>
 
         </div>
 
-        <div class="" style="position: absolute; right: 0; width:18%; height: 400px;">
+        <div class="flex-column" id="time" style="height: 100%; width:100%; display: none;">
 
-          <div class="" style="text-align: center; margin-top: 320px;">
-            <input type="datetime-local" id="destinationActual_in" style="font-size:20px;" value="2022-09-09T05:48:00.000" oninput="init()">
-            </br></br></br>
-            <div class="" style="display:none;">
-              <select id="destinationDelay_in" style="font-size:20px;">
-                  <option value="WX WIND" selected="selected">WX WIND</option>
-                  <option value="ATC">ATC</option>
-                  <option value="STN">STN</option>
-              </select>
-              <output></output>
+          <div class="" style="height: 60%;">
+
+            <div class="NIGHT" id="light" style=" position:absolute; margin-left: -50px;" onclick="lightchange()">
+              <img class="" style="object-fit:fill; height:100px;" src="moon.png">
+              <output class="" style="display:block; text-align: center;"></output>
             </div>
+
+            </br></br></br></br>
+            </br></br></br></br>
+
+            <div class="" id="line1" style="position:absolute;">
+              <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
+              <svg class = "" width="8" height="187">
+                <rect class = "line" width="8" height="187" style="fill:grey;" />
+              </svg>
+            </div>
+
+            <div class="" id="line2" style="position:absolute;">
+              <output class="" style="display: block; text-align: center;"></output>
+              <svg class = "" width="8" height="187">
+                <rect class = "line" width="8" height="187" style="fill:grey;" />
+              </svg>
+            </div>
+
+            </br></br></br></br>
+            </br></br></br></br>
+
+            <div class="" id="base" style="position: absolute; left: 20%; width: 61%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
+
+
           </div>
-        </div>
+          <div class="flex-row" style="height: 20%;">
 
 
-        <div class="NIGHT" id="light" style="margin-left: -50px; position:absolute;" onclick="lightchange()">
-          <img class="" style="object-fit:fill; height:100px;" src="moon.png">
-          <output class="" style="display:block; text-align: center;"></output>
-        </div>
+              <div class="" style="text-align: center;">
+                <input type="datetime-local" id="departureActual_in" style="font-size:20px;" value="" oninput="init()">
+                </br></br></br>
+                <div class="" style="display:none;">
+                  <select id="departureDelay_in" style="font-size:20px;">
+                      <option value="STN" selected="selected">STN</option>
+                      <option value="ATC">ATC</option>
+                      <option value="WX WIND">WX WIND</option>
+                  </select>
+                  <output></output>
+                </div>
+              </div>
 
-        </br></br></br></br>
-        </br></br></br></br>
+              <div class="" style="text-align: center;">
+                <input type="datetime-local" id="destinationActual_in" style="font-size:20px;" value="" oninput="init()">
+                </br></br></br>
+                <div class="" style="display:none;">
+                  <select id="destinationDelay_in" style="font-size:20px;">
+                      <option value="WX WIND" selected="selected">WX WIND</option>
+                      <option value="ATC">ATC</option>
+                      <option value="STN">STN</option>
+                  </select>
+                  <output></output>
+                </div>
+              </div>
 
-        <div class="" id="line1" style="position:absolute;">
-          <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
-          <svg class = "" width="4" height="187">
-            <rect class = "line" width="8" height="187" style="fill:grey;" />
-          </svg>
-        </div>
 
-        <div class="" id="line2" style="position:absolute;">
-          <output class="" style="display: block; text-align: center;"></output>
-          <svg class = "" width="4" height="187">
-            <rect class = "line" width="8" height="187" style="fill:grey;" />
-          </svg>
-        </div>
+          </div>
+          <div class="" style="height: 20%;">
 
-        </br></br></br></br>
-        </br></br></br></br>
+            <div class="" style="text-align: center;">
+              <span>INSTRUMENT FLYING : </span>
+              <input class="" id="instrumentflying" type="range" value="120" min="0" max="360" step="10" style="margin: 0 2% 0 2%; width: 40%;" oninput="this.nextElementSibling.value = this.value">
+              <output>120</output>
+              <span>mins</span>
+            </div>
 
-        <div class="" id="base" style="position: absolute; left: 20%; width: 60%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
+          </div>
 
-        </br></br></br></br>
-
-        <div class="" style="text-align: center;">
-          <input class="" id="instrumentflying" type="range" value="30" min="0" max="360" step="10" style="width: 60%;" oninput="this.nextElementSibling.value = this.value">
-          <output>30</output>
         </div>
 
       </div>
 
-
     </div>
 
-
-
-
-
-
-
-
-    <div class="flex-row">
-      <input type="button" value="AUTO PSR" onclick="psr_generate()" style="font-size:60px;">
-    </div>
-
+    <button id="card2" type="button" name="AUTO PSR" style="width: 40%; translateX: 50%; font-size:30px; text-align: center; color: green;" onclick="psr_generate()">AUTO PSR</button>
 
     <div id = "table" style="font-family: Arial; position: relative; display: none;">
 
@@ -362,12 +386,12 @@
         </tr>
       </table>
 
-      <table id="2table" style="height:67.5mm; font-size: 8px;">
+      <table id="2table" style="height:67.5mm; font-size: 12px;">
 
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-bottom: none;">CDR.</td>
           <td id="1name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="1staff_out" style="width: 7%;" rowspan="3"></td>
+          <td id="1staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
           <td id="1crt_out" style="width: 6%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
           <td style="width: 5%;" rowspan="3"></td>
@@ -382,7 +406,7 @@
           <td id="16night_out" style="width: 5%;" rowspan="3"></td>
           <td id="17instrument_out" style="width: 5%;" rowspan="3"></td>
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none; border-bottom: none;">1</td>
 
 
@@ -395,10 +419,10 @@
           <td id="14night_out" style="width: 6%;"></td>
 
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
           <td id="1ipltm_out" style="width: 19%; font-size: 12px;">IPLTM </td>
-
+          <td id="1sap_out" style="width: 7%; border-top: none;"></td>
 
           <td id="11instrument_out" style="width: 6%;"></td>
           <td id="11seat_out" style="width: 6%;"></td>
@@ -409,7 +433,7 @@
 
         </tr>
 
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-bottom: none;">CDR.</td>
           <td id="2name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
           <td id="2staff_out" style="width: 7%;" rowspan="3"></td>
@@ -427,7 +451,7 @@
           <td id="26night_out" style="width: 5%;" rowspan="3"></td>
           <td id="27instrument_out" style="width: 5%;" rowspan="3"></td>
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none; border-bottom: none;">2</td>
 
 
@@ -440,7 +464,7 @@
           <td id="24night_out" style="width: 6%;"></td>
 
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
           <td id="2ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
 
@@ -454,7 +478,7 @@
 
         </tr>
 
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-bottom: none;">CDR.</td>
           <td id="3name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
           <td id="3staff_out" style="width: 7%;" rowspan="3"></td>
@@ -472,7 +496,7 @@
           <td id="36night_out" style="width: 5%;" rowspan="3"></td>
           <td id="37instrument_out" style="width: 5%;" rowspan="3"></td>
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none; border-bottom: none;">3</td>
 
 
@@ -485,7 +509,7 @@
           <td id="34night_out" style="width: 6%;"></td>
 
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
           <td id="3ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
 
@@ -499,7 +523,7 @@
 
         </tr>
 
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-bottom: none;">CDR.</td>
           <td id="4name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
           <td id="4staff_out" style="width: 7%;" rowspan="3"></td>
@@ -517,7 +541,7 @@
           <td id="46night_out" style="width: 5%;" rowspan="3"></td>
           <td id="47instrument_out" style="width: 5%;" rowspan="3"></td>
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none; border-bottom: none;">4</td>
 
 
@@ -530,7 +554,7 @@
           <td id="44night_out" style="width: 6%;"></td>
 
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
           <td id="4ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
 
@@ -544,8 +568,8 @@
 
         </tr>
 
-        <tr style="height:4.5mm; font-size: 8px;">
-          <td style="width: 3%; border-bottom: none;">CDR.</td>
+        <tr style="height:4.5mm;">
+          <td style="width: 3%; border-bottom: none;"></td>
           <td id="5name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
           <td id="5staff_out" style="width: 7%;" rowspan="3"></td>
           <td id="5crt_out" style="width: 6%;" rowspan="3"></td>
@@ -562,7 +586,7 @@
           <td id="46night_out" style="width: 5%;" rowspan="3"></td>
           <td id="47instrument_out" style="width: 5%;" rowspan="3"></td>
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none; border-bottom: none;">5</td>
 
 
@@ -575,9 +599,9 @@
           <td id="54night_out" style="width: 6%;"></td>
 
         </tr>
-        <tr style="height:4.5mm; font-size: 8px;">
+        <tr style="height:4.5mm;">
           <td style="width: 3%; border-top: none;"></td>
-          <td id="5ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
+          <td id="5ipltm_out" style="width: 19%; font-size: 12px;"></td>
 
 
           <td id="51instrument_out" style="width: 6%;"></td>
@@ -591,169 +615,183 @@
 
       </table>
 
-      <table id="3table" style="margin:1px 0 0 0; height:12mm;">
+      <table id="3table" style="margin:1px 0 0 0; height:10mm;">
+
         <tr style="height:5mm; font-size: 8px;">
-          <td style="width: 9.4%; border-bottom: none;" rowspan="2">DATE</br>(UTC)</td>
-          <td style="width: 7.2%; border-bottom: none;" rowspan="2">STATION</br>4 letter</td>
-          <td style="width: 6%; border-bottom: none;" rowspan="2">SKED</br>(UTC)</td>
-          <td style="width: 6%; border-bottom: none;" rowspan="2">ACTUAL</br>(UTC)</td>
-          <td style="width: 6%; border-bottom: none;" rowspan="2">TOTAL</br>DELAY</td>
-          <td style="width: 6%; border-bottom: none;" rowspan="2">CONSQ</td>
-          <td style="width: 6%; border-bottom: none;" rowspan="2">STN</td>
-          <td style="width: 6%; border-bottom: none;" rowspan="2">ATC</td>
-          <td style="width: 6%; border-bottom: none;" rowspan="2">WX</br>WIND</td>
-          <td style="width: 5.6%; border-bottom: none;" rowspan="3">PF</td>
-          <td style="width: 6.6%; border-bottom: none;" rowspan="2">TOTAL</br>FLT.TIME</td>
-          <td style="width: 6.6%; border-bottom: none;" rowspan="2">NIGHT</br>FLYING</td>
-          <td style="width: 6.6%; border-bottom: none;" rowspan="2">INST</br>FLYING</td>
-          <td style="width: 8.4%; border-bottom: none;" colspan="3">FUEL UPLIFT</td>
+          <td style="width: 9.2%; border-bottom: none;" rowspan="2">DATE</br>(UTC)</td>
+          <td style="width: 7%; border-bottom: none;" rowspan="2">STATION</br>4 letter</td>
+          <td style="width: 5.8%; border-bottom: none;" rowspan="2">SKED</br>(UTC)</td>
+          <td style="width: 5.8%; border-bottom: none;" rowspan="2">ACTUAL</br>(UTC)</td>
+          <td style="width: 5.8%; border-bottom: none;" rowspan="2">TOTAL</br>DELAY</td>
+          <td style="width: 5.8%; border-bottom: none;" rowspan="2">CONSQ</td>
+          <td style="width: 5.8%; border-bottom: none;" rowspan="2">STN</td>
+          <td style="width: 5.8%; border-bottom: none;" rowspan="2">ATC</td>
+          <td style="width: 5.8%; border-bottom: none;" rowspan="2">WX</br>WIND</td>
+          <td style="width: 5.4%; border-bottom: none;" rowspan="3">PF</td>
+          <td style="width: 6.4%; border-bottom: none;" rowspan="2">TOTAL</br>FLT.TIME</td>
+          <td style="width: 6.4%; border-bottom: none;" rowspan="2">NIGHT</br>FLYING</td>
+          <td style="width: 6.4%; border-bottom: none;" rowspan="2">INST</br>FLYING</td>
+          <td style="width: 3.2%; border-bottom: none;" rowspan="2" colspan="2">CAT II / III</br>RECORD</td>
+          <td style="width: 6.2%; border-bottom: none;" colspan="3" rowspan="2">FUEL UPLIFT</td>
         </tr>
-        <tr style="height:4mm; font-size: 8px;">
-          <td style="width: 8.4%; border: none;"></td>
-          <td style="width: 3.6%; border: none;"></td>
-          <td style="width: 4%;">SPGR</td>
-        </tr>
+        <tr style="height:2mm; font-size: 8px;"></tr>
         <tr style="height:3mm; font-size: 8px;">
-          <td style="width: 9.4%; border-top: none;">DD-MM-YYYY</td>
-          <td style="width: 7.2%">ICAO CODE</td>
-          <td style="width: 6%">HH:MM</td>
-          <td style="width: 6%">HH:MM</td>
-          <td style="width: 6%">HH:MM</td>
-          <td style="width: 6%">HH:MM</td>
-          <td style="width: 6%">HH:MM</td>
-          <td style="width: 6%">HH:MM</td>
-          <td style="width: 6%">HH:MM</td>
-          <td style="width: 6.6%">HH:MM</td>
-          <td style="width: 6.6%">HH:MM</td>
-          <td style="width: 6.6%">HH:MM</td>
-          <td style="width: 8.4%">QUANTITY</td>
-          <td style="width: 3.6%">UNIT</td>
-          <td style="width: 4%">TEMP</td>
-        </tr>
-      </table>
-
-      <table id="4table" style="height:30mm; font-size: 8px;">
-        <tr style="height:5mm;">
-          <td id="departureDate_out" style="width: 9.4%;"></td>
-          <td id="departure_out" style="width: 7.2%; border-bottom: none;"></td>
-          <td id="departureSked_out" style="width: 6%;"></td>
-          <td id="departureActual_out" style="width: 6%;"></td>
-          <td id="departureDelay_out" style="width: 6%;"></td>
-          <td id="depCONSQ_out" style="width: 6%;"></td>
-          <td id="depSTN_out" style="width: 6%;"></td>
-          <td id="depATC_out" style="width: 6%;"></td>
-          <td id="depWX WIND_out" style="width: 6%;"></td>
-          <td id="departurePf_out" style="width: 5.6%;"></td>
-          <td id="total_out" style="width: 6.6%;" rowspan="2"></td>
-          <td id="night_out" style="width: 6.6%;" rowspan="2"></td>
-          <td id="instrumentflying_out" style="width: 6.6%;" rowspan="2"></td>
-          <td id="fuelQt_out" style="width: 8.4%;"></td>
-          <td id="fuelUt_out" style="width: 3.6%;"></td>
-          <td id="fuelSp_out" style="width: 4%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td id="destinationDate_out" style="width: 9.4%;"></td>
-          <td id="destination_out" style="width: 7.2%; border-top: none;"></td>
-          <td id="destinationSked_out" style="width: 6%;"></td>
-          <td id="destinationActual_out"style="width: 6%;"></td>
-          <td id="destinationDelay_out" style="width: 6%;"></td>
-          <td id="desCONSQ_out" style="width: 6%;"></td>
-          <td id="desSTN_out" style="width: 6%;"></td>
-          <td id="desATC_out" style="width: 6%;"></td>
-          <td id="desWX WIND_out" style="width: 6%;"></td>
-          <td id="destinationPf_out" style="width: 5.6%;"></td>
-
-
-
-          <td style="width: 8.4%;"></td>
-          <td style="width: 3.6%;"></td>
-          <td id="fuelTp_out" style="width: 4%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td style="width: 9.4%;"></td>
-          <td style="width: 7.2%; border-bottom: none;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 5.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 8.4%;"></td>
-          <td style="width: 3.6%;"></td>
-          <td style="width: 4%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td style="width: 9.4%;"></td>
-          <td style="width: 7.2%; border-top: none;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 5.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 8.4%;"></td>
-          <td style="width: 3.6%;"></td>
-          <td style="width: 4%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td style="width: 9.4%;"></td>
-          <td style="width: 7.2%; border-bottom: none;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 5.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 8.4%;"></td>
-          <td style="width: 3.6%;"></td>
-          <td style="width: 4%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td style="width: 9.4%;"></td>
-          <td style="width: 7.2%; border-top: none;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 6%;"></td>
-          <td style="width: 5.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 6.6%;"></td>
-          <td style="width: 8.4%;"></td>
-          <td style="width: 3.6%;"></td>
-          <td style="width: 4%;"></td>
+          <td style="width: 9.2%; border-top: none;">DD-MM-YYYY</td>
+          <td style="width: 7%">ICAO CODE</td>
+          <td style="width: 5.8%">HH:MM</td>
+          <td style="width: 5.8%">HH:MM</td>
+          <td style="width: 5.8%">HH:MM</td>
+          <td style="width: 5.8%">HH:MM</td>
+          <td style="width: 5.8%">HH:MM</td>
+          <td style="width: 5.8%">HH:MM</td>
+          <td style="width: 5.8%">HH:MM</td>
+          <td style="width: 6.4%">HH:MM</td>
+          <td style="width: 6.4%">HH:MM</td>
+          <td style="width: 6.4%">HH:MM</td>
+          <td style="width: 3.2%">PF</td>
+          <td style="width: 3.2%">PM</td>
+          <td style="width: 6.2%">QUANTITY</td>
+          <td style="width: 3%">UNIT</td>
+          <td style="width: 3%">Sg</td>
         </tr>
 
       </table>
 
-      <table id="5table" style="margin:1px 0 0 0; height:10mm;">
-        <tr>
-          <td style="font-size: 8px; border: none;  text-align: left;">REMARKS :</td>
+      <table id="4table" style="height:30mm; font-size: 12px;">
+
+        <tr style="height:5mm;">
+          <td id="departureDate_out" style="width: 9.2%;"></td>
+          <td id="departure_out" style="width: 7%;"></td>
+          <td id="departureSked_out" style="width: 5.8%;"></td>
+          <td id="departureActual_out" style="width: 5.8%;"></td>
+          <td id="departureDelay_out" style="width: 5.8%;"></td>
+          <td id="depCONSQ_out" style="width: 5.8%;"></td>
+          <td id="depSTN_out" style="width: 5.8%;"></td>
+          <td id="depATC_out" style="width: 5.8%;"></td>
+          <td id="depWX WIND_out" style="width: 5.8%;"></td>
+          <td id="departurePf_out" style="width: 5.4%;"></td>
+
+          <td id="total_out" style="width: 6.4%;" rowspan="2"></td>
+          <td id="night_out" style="width: 6.4%;" rowspan="2"></td>
+          <td id="instrumentflying_out" style="width: 6.4%;" rowspan="2"></td>
+          <td id="" style="width: 3.2%;"></td>
+          <td id="" style="width: 3.2%;"></td>
+          <td id="fuelQt_out" style="width: 6.2%;" rowspan="2"></td>
+          <td id="fuelUt_out" style="width: 3%;" rowspan="2"></td>
+          <td id="fuelSp_out" style="width: 3%;"></td>
         </tr>
-        <tr>
-          <td style="font-size: 8px; border: none;  text-align: left;">FDTL EXTENSION AVAILED [  ]</td>
+        <tr style="height:5mm;">
+          <td id="destinationDate_out" style="width: 9.2%;"></td>
+          <td id="destination_out" style="width: 7%; border-bottom: none;"></td>
+          <td id="destinationSked_out" style="width: 5.8%;"></td>
+          <td id="destinationActual_out"style="width: 5.8%;"></td>
+          <td id="destinationDelay_out" style="width: 5.8%;"></td>
+          <td id="desCONSQ_out" style="width: 5.8%;"></td>
+          <td id="desSTN_out" style="width: 5.8%;"></td>
+          <td id="desATC_out" style="width: 5.8%;"></td>
+          <td id="desWX WIND_out" style="width: 5.8%;"></td>
+          <td id="destinationPf_out" style="width: 5.4%;"></td>
+
+
+
+          <td id="" style="width: 3.2%;" colspan="2"></td>
+          <td id="fuelTp_out" style="width: 3%;"></td>
+        </tr>
+        <tr style="height:5mm;">
+          <td style="width: 9.2%;"></td>
+          <td style="width: 7%; border-top: none;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td id="" style="width: 3.2%;"></td>
+          <td id="" style="width: 3.2%;"></td>
+          <td style="width: 6.2%;" rowspan="2"></td>
+          <td style="width: 3%;" rowspan="2"></td>
+          <td style="width: 3%;"></td>
+        </tr>
+        <tr style="height:5mm;">
+          <td style="width: 9.2%;"></td>
+          <td style="width: 7%; border-bottom: none;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td id="" style="width: 3.2%;" colspan="2"></td>
+          <td style="width: 3%;"></td>
+        </tr>
+        <tr style="height:5mm;">
+          <td style="width: 9.2%;"></td>
+          <td style="width: 7%; border-top: none;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td id="" style="width: 3.2%;"></td>
+          <td id="" style="width: 3.2%;"></td>
+          <td style="width: 6.2%;" rowspan="2"></td>
+          <td style="width: 3%;" rowspan="2"></td>
+          <td style="width: 3%;"></td>
+        </tr>
+        <tr style="height:5mm;">
+          <td style="width: 9.2%;"></td>
+          <td style="width: 7%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.8%;"></td>
+          <td style="width: 5.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td style="width: 6.4%;"></td>
+          <td id="" style="width: 3.2%;" colspan="2"></td>
+          <td style="width: 3%;"></td>
+        </tr>
+
+      </table>
+
+      <table id="5table" style="margin:1px 0 0 0; height:9mm; font-size: 7.5px;">
+        <tr style="height: 2.5mm">
+          <td style="border: none; text-align: left; width: 87.8%" rowspan="2">REMARKS&nbsp;&nbsp;:</td>
+          <td style="width: 6.2%"></td>
+          <td style="width: 6%">:</td>
+        </tr>
+        <tr style="height: 2.5mm">
+          <td style="width: 6.2%"></td>
+          <td style="width: 6%">:</td>
+        </tr style="height: 3mm">
+        <tr style="height: 2.5mm">
+          <td style="border: none; text-align: left; width: 87.8%">FDTL EXTENSION AVAILED&nbsp;&nbsp;[&nbsp;&nbsp;]</td>
+          <td style="width: 6.2%"></td>
+          <td style="width: 6%">:</td>
         </tr>
       </table>
 
-      <table id="6table" style="font-size: 8px; margin:1px 0 0 0; padding:0; height:5mm;">
+      <table id="6table" style="font-size: 8px; margin:1px 0 0 0; padding:0; height:4mm;">
         <tr>
           <td style="width: 16%; text-align: left;">REPORTS&nbsp;&nbsp;(&nbsp;&#10003;&nbsp;)&nbsp;&nbsp;Attached</td>
           <td style="width: 8%;">PSR&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)</td>
@@ -767,7 +805,7 @@
         </tr>
       </table>
 
-      <table id="7table" style="height:9mm; border: none;">
+      <table id="7table" style="height:8mm; border: none;">
         <tr>
           <td style="font-size: 8px; border: none; text-align: left;">NOTE : UNDER PF coloumn enter the Crew Serial Number, Seat Occupied [L/R] and Circle [D/N] for [Day/Night] T.O / Landing.  Tick [&nbsp;&nbsp;] IF FDTL EXTENSION AVAILED.</br>
           * TRG STS = PIC RC, RCPF, RCPM, SLF, SNY, SUT  Important Email ID's : FLIGHT SAFETY : flightsafety.airindia.in CMS : cms.psrupdation@airindia.in</td>
@@ -776,45 +814,74 @@
 
     </div>
 
-
     <script type="text/javascript">
 
       //////////////////////////////////////////////////////////////////////////
-      function fill(item){
-        let n = item.value;
-        if(n == 101){populate('VIDP', 'KJFK', '20:15', '11:00')}
-        if(n == 102){populate('KJFK', 'VIDP', '16:30', '06:30')}
+      function display(item){
 
-        if(n == 105){populate('VIDP', 'KEWR', '21:15', '11:35')}
-        if(n == 106){populate('KEWR', 'VIDP', '16:15', '05:45')}
-
-        if(n == 191){populate('VABB', 'KEWR', '19:00', '11:55')}
-        if(n == 144){populate('KEWR', 'VABB', '16:05', '06:55')}
-
-        if(n == 187){populate('VIDP', 'CYYZ', '21:30', '12:45')}
-        if(n == 188){populate('CYYZ', 'VIDP', '16:15', '06:15')}
-
-        if(n == 126){populate('VIDP', 'KORD', '20:45', '12:25')}
-        if(n == 127){populate('KORD', 'VIDP', '17:00', '07:35')}
-
-        if(n == 173){populate('VIDP', 'KSFO', '22:00', '13:45')}
-        if(n == 174){populate('KSFO', 'VIDP', '17:30', '09:25')}
-
-        if(n == 183){populate('VIDP', 'KSFO', '09:30', '01:20')}
-        if(n == 184){populate('KSFO', 'VIDP', '05:00', '21:00')}
-
-        if(n == 185){populate('VIDP', 'CYVR', '23:45', '14:15')}
-        if(n == 186){populate('CYVR', 'VIDP', '17:15', '08:05')}
+        document.getElementById('flight').style.display = 'none';
+        document.getElementById('crew').style.display = 'none';
+        document.getElementById('time').style.display = 'none';
+        let a = 'flex';
+        if(item == 'time'){a = 'block'};
+        document.getElementById(item).style.display = a;
 
       };
 
-      function populate(dep, des, depSkd, desSkd){
+
+      function fill(item){
+        let n = item.value;
+        if(n == 101){populate('VIDP', 'KJFK', 20, 15, 885)}
+        if(n == 102){populate('KJFK', 'VIDP', 16, 30, 840)}
+
+        if(n == 105){populate('VIDP', 'KEWR', 21, 15, 860)}
+        if(n == 106){populate('KEWR', 'VIDP', 16, 15, 810)}
+
+        if(n == 191){populate('VABB', 'KEWR', 19, 00, 1015)}
+        if(n == 144){populate('KEWR', 'VABB', 16, 05, 890)}
+
+        if(n == 187){populate('VIDP', 'CYYZ', 21, 30, 915)}
+        if(n == 188){populate('CYYZ', 'VIDP', 16, 15, 840)}
+
+        if(n == 127){populate('VIDP', 'KORD', 20, 45, 940)}
+        if(n == 126){populate('KORD', 'VIDP', 17, 00, 875)}
+
+        if(n == 173){populate('VIDP', 'KSFO', 22, 00, 945)}
+        if(n == 174){populate('KSFO', 'VIDP', 17, 30, 955)}
+
+        if(n == 183){populate('VIDP', 'KSFO', 09, 30, 950)}
+        if(n == 184){populate('KSFO', 'VIDP', 05, 00, 960)}
+
+        if(n == 185){populate('VIDP', 'CYVR', 23, 45, 870)}
+        if(n == 186){populate('CYVR', 'VIDP', 17, 15, 890)}
+
+      };
+
+      function populate(dep, des, hh, mm, block){
 
         document.getElementById('departure_in').value = dep;
         document.getElementById('destination_in').value = des;
-        document.getElementById('departureSked_in').value = depSkd;
-        document.getElementById('destinationSked_in').value = desSkd;
-        document.getElementById('crt_in').value = get_hhmm(document.getElementById('departureSked_in').valueAsNumber - 5400000);
+
+        let d = new Date();
+        d.setUTCHours(hh);
+        d.setUTCMinutes(mm);
+        d.setUTCSeconds(0);
+        d.setUTCMilliseconds(0);
+        let c = new Date();
+
+        if (d > c){d.setUTCDate(d.getUTCDate() - 1)}
+
+        document.getElementById('departureSked_in').value = d.toISOString().slice(0, -1);
+        document.getElementById('departureActual_in').value = d.toISOString().slice(0, -1);
+
+        d = d.valueOf() + block * 60000;
+        document.getElementById('destinationSked_in').value = new Date(d).toISOString().slice(0, -1);
+        document.getElementById('destinationActual_in').value = new Date(d).toISOString().slice(0, -1);
+
+        d = document.getElementById('departureSked_in').valueAsNumber - 5400000;
+        d = new Date(d).toISOString().slice(11, 16);
+        document.getElementById('crt_in').value = d;
+        init();
 
       };
 
@@ -846,7 +913,6 @@
 
         light.style.left = 50 + '%';
         calc_night();
-
 
         if(start > depSkd){delay1 = start - depSkd}
         else{delay1 = 0};
@@ -922,17 +988,7 @@
 
       //////////////////////////////////////////////////////////////////////////
 
-      function display(){
-         let d = document.getElementById('crew').style.display;
-         if(d == 'block'){
-           document.getElementById('crew').style.display = 'none';
-           document.getElementById('time').style.display = 'block';
-         }
-         else if(d == 'none'){
-           document.getElementById('crew').style.display = 'block';
-           document.getElementById('time').style.display = 'none';
-         }
-      };
+
       function takeoffland(item){
 
         if(item.style.color == 'lightgrey'){item.style.color = 'black'}
@@ -1070,36 +1126,36 @@
 
         document.getElementById('1name_out').innerHTML = document.getElementById('1name_in').value.toUpperCase();
         document.getElementById('1staff_out').innerHTML = document.getElementById('1staff_in').value.toUpperCase();
-        //document.getElementById('1sap_out').innerHTML = document.getElementById('1sap_in').value.toUpperCase();
-        document.getElementById('1ipltm_out').innerHTML = 'IPLTM ' + document.getElementById('1ipltm_in').value.toUpperCase();
+        document.getElementById('1sap_out').innerHTML = document.getElementById('1sap_in').value.toUpperCase();
+        document.getElementById('1ipltm_out').innerHTML = document.getElementById('1ipltm_in').value.toUpperCase();
         document.getElementById('1status_out').innerHTML = document.getElementById('1status_in').value.toUpperCase();
         document.getElementById('1crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
 
         document.getElementById('2name_out').innerHTML = document.getElementById('2name_in').value.toUpperCase();
         document.getElementById('2staff_out').innerHTML = document.getElementById('2staff_in').value.toUpperCase();
         //document.getElementById('2sap_out').innerHTML = document.getElementById('2sap_in').value.toUpperCase();
-        document.getElementById('2ipltm_out').innerHTML = 'IPLTM ' + document.getElementById('2ipltm_in').value.toUpperCase();
+        document.getElementById('2ipltm_out').innerHTML = document.getElementById('2ipltm_in').value.toUpperCase();
         document.getElementById('2status_out').innerHTML = document.getElementById('2status_in').value.toUpperCase();
         document.getElementById('2crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
 
         document.getElementById('3name_out').innerHTML = document.getElementById('3name_in').value.toUpperCase();
         document.getElementById('3staff_out').innerHTML = document.getElementById('3staff_in').value.toUpperCase();
         //document.getElementById('3sap_out').innerHTML = document.getElementById('3sap_in').value.toUpperCase();
-        document.getElementById('3ipltm_out').innerHTML = 'IPLTM ' + document.getElementById('3ipltm_in').value.toUpperCase();
+        document.getElementById('3ipltm_out').innerHTML = document.getElementById('3ipltm_in').value.toUpperCase();
         document.getElementById('3status_out').innerHTML = document.getElementById('3status_in').value.toUpperCase();
         document.getElementById('3crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
 
         document.getElementById('4name_out').innerHTML = document.getElementById('4name_in').value.toUpperCase();
         document.getElementById('4staff_out').innerHTML = document.getElementById('4staff_in').value.toUpperCase();
         //document.getElementById('4sap_out').innerHTML = document.getElementById('4sap_in').value.toUpperCase();
-        document.getElementById('4ipltm_out').innerHTML = 'IPLTM ' + document.getElementById('4ipltm_in').value.toUpperCase();
+        document.getElementById('4ipltm_out').innerHTML = document.getElementById('4ipltm_in').value.toUpperCase();
         document.getElementById('4status_out').innerHTML = document.getElementById('4status_in').value.toUpperCase();
         document.getElementById('4crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
 
         calc_time = time_generate();
 
 
-        console.log(calc_time);
+        //console.log(calc_time);
 
         distribute(document.getElementById('1seat_in').value);
         distribute(document.getElementById('2seat_in').value);
@@ -1439,7 +1495,6 @@
       };
 
     </script>
-
 
   </body>
 </html>
