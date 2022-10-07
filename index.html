@@ -16,7 +16,7 @@
         background-size: cover;
       } */
 
-      #bbody {}
+      #body {}
 
       #card1{
 
@@ -91,7 +91,7 @@
   </head>
 
 
-  <body class="bbody" style="text-align: center; font-family: sans-serif; height: 100vh; background-color: #d7ccc8;">
+  <body class="body" style="text-align: center; font-family: sans-serif; height: 100vh; background-color: #bcaaa4;">
 
     <div class="z-depth-3 flex-column" id="card1">
 
@@ -113,15 +113,15 @@
 
               <input type="number" id="number_in" title="FLIGHT NUMBER" required style="font-size: 2.8vh; color: #9c27b0; text-transform:uppercase; text-align: center;" placeholder="FLIGHT NUMBER" oninput="fill(this)">
 
-              <input type="time" id="crt_in" title="CREW REPORTING TIME"  required style="font-size: 1.4vh; color: black; text-transform:uppercase; text-align: center;" placeholder="CRT">
+              <input type="time" id="crt_in" title="CREW REPORTING TIME"  required style="font-size: 2.2vh; width:20vw; color: black; text-transform:uppercase; text-align: center; transform: translateX(50%);" placeholder="CRT">
 
               <input type="text" id="departure_in" title="DEPARTURE AIRPORT"  required style="font-size: 2.8vh; color: #009688; text-transform:uppercase; text-align: center;" placeholder="DEPARTURE">
 
-              <input type="datetime-local" id="departureSked_in" title="SCHEDULED DEPARTURE"   value="16:15:00.000" style="font-size: 1.4vh; color: #009688; text-align: center;">
+              <input type="datetime-local" id="departureSked_in" title="SCHEDULED DEPARTURE"   value="16:15:00.000" style="font-size: 2.2vh; width:20vw; color: #009688; text-align: center; transform: translateX(50%);">
 
-              <input type="text" id="destination_in" title="DESITINATION AIRPORT"  required style="font-size: 2.8vh; text-transform:uppercase; color: #ff9800; text-align: center;" placeholder="DESTINATION">
+              <input type="text" id="destination_in" title="DESITINATION AIRPORT"  required style="font-size: 2.8vh; text-transform:uppercase; color: #009688; text-align: center;" placeholder="DESTINATION">
 
-              <input type="datetime-local" id="destinationSked_in" title="SCHEDULED ARRIVAL"   value="2022-09-09T06:45:00.000" style="font-size: 1.4vh; color: #ff9800; text-align: center;">
+              <input type="datetime-local" id="destinationSked_in" title="SCHEDULED ARRIVAL"   value="2022-09-09T06:45:00.000" style="font-size: 2.2vh; width:20vw; color: #009688; text-align: center; transform: translateX(50%);">
 
 
 
@@ -184,7 +184,7 @@
             </select>
           </div>
 
-          <div class="  " style="text-align: center;">
+          <div class="  " style="text-align: center; font-size:3vh;">
             <input type="text" id="2name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
             <input type="text" id="2staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
             <input type="text" id="2sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
@@ -206,7 +206,7 @@
             </select>
           </div>
 
-          <div class="  " style="text-align: center;">
+          <div class="  " style="text-align: center; font-size:3vh;">
             <input type="text" id="3name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
             <input type="text" id="3staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
             <input type="text" id="3sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
@@ -228,7 +228,7 @@
             </select>
           </div>
 
-          <div class="  " style="text-align: center;">
+          <div class="  " style="text-align: center; font-size:3vh;">
             <input type="text" id="4name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
             <input type="text" id="4staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
             <input type="text" id="4sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
@@ -251,13 +251,13 @@
           </div>
 
           <div class="  " style="text-align: center;">
-            <div class="" style="">TakeOff</div>
+            <div class="" style="">TakeOff CREW / SEAT</div>
             <input type="text" id="departurePf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1L">
-            <div class="" style="">Landing</div>
+            <div class="" style="margin-top:2vh;">Landing CREW / SEAT</div>
             <input type="text" id="destinationPf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1l">
           </div>
 
-          <div class="  " style="text-align: center;">
+          <div class="  " style="text-align: center; font-size:3vh;">
             <div class="FIRST" id="half_in" style="color: grey;" onclick="half(this)">PIC SITTING FIRST HALF</div>
           </div>
 
@@ -265,38 +265,31 @@
 
         <div class="flex-column" id="time" style="height: 100%; width:100%; display: none;">
 
-          <div class="" style="height: 60%;">
+          <div class="" style="height: 50%; position: relative;">
 
             <div class="NIGHT" id="light" style=" position:absolute; margin-left: -50px;" onclick="lightchange()">
-              <img class="" style="object-fit:fill; height:100px;" src="moon.png">
+              <img class="" style="object-fit:fill; height:8vh;" src="moon.png">
               <output class="" style="display:block; text-align: center;"></output>
             </div>
 
-            </br></br></br></br>
-            </br></br></br></br>
-
-            <div class="" id="line1" style="position:absolute;">
+            <div class="" id="line1" style="position:absolute; bottom: 14%;">
               <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
-              <svg class = "" width="8" height="187">
-                <rect class = "line" width="8" height="187" style="fill:grey;" />
+              <svg class = "" width="8" height="12vh">
+                <rect class = "line" width="8" height="12vh" style="fill:grey;" />
               </svg>
             </div>
 
-            <div class="" id="line2" style="position:absolute;">
+            <div class="" id="line2" style="position:absolute; bottom: 14%;">
               <output class="" style="display: block; text-align: center;"></output>
-              <svg class = "" width="8" height="187">
-                <rect class = "line" width="8" height="187" style="fill:grey;" />
+              <svg class = "" width="8" height="12vh">
+                <rect class = "line" width="8" height="12vh" style="fill:grey;" />
               </svg>
             </div>
 
-            </br></br></br></br>
-            </br></br></br></br>
-
-            <div class="" id="base" style="position: absolute; left: 20%; width: 61%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
-
+            <div class="" id="base" style="position: absolute; left: 20%; bottom: 16%; width: 61%; height: 50px; border-radius: 25px; border: 2px solid grey;"></div>
 
           </div>
-          <div class="flex-row" style="height: 20%;">
+          <div class="flex-row" style="height: 30%;">
 
 
               <div class="" style="text-align: center;">
@@ -339,7 +332,7 @@
           </div>
           <div class="" style="height: 20%;">
 
-            <div class="" style="text-align: center; margin-top: 2%;">
+            <div class="" style="text-align: center; margin-top: 5vh;">
               <span>INSTRUMENT FLYING : </span>
               <input class="" id="instrumentflying" type="range" value="120" min="0" max="360" step="10" style="margin: 0 2% 0 2%; width: 40%;" oninput="this.nextElementSibling.value = this.value">
               <output>120</output>
