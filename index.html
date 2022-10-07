@@ -946,9 +946,9 @@
 
         if(delay2 > 0){
           desDly.parentNode.style.display = 'block';
-          delay1 = get_hhmm(delay1);
-          if(delay1 == ''){delay1 = '0 min'}
-          desDly.parentNode.childNodes[5].innerHTML  = delay1;
+          let dddd = get_hhmm(delay1);
+          if(dddd == ''){dddd = '0 min'}
+          desDly.parentNode.childNodes[5].innerHTML  = dddd;
           desDly.parentNode.childNodes[9].innerHTML  = get_hhmm(delay2);
         }
         else{desDly.parentNode.style.display = 'none'};
@@ -1116,10 +1116,10 @@
         document.getElementById('destinationActual_out').innerHTML = get_utc(end);
 
 
-        if(depDly.style.display == 'block'){
-          document.getElementById('departureDelay_out').innerHTML = depDly.nextElementSibling.value;
-          document.getElementById('dep' + depDly.value + '_out').innerHTML = depDly.nextElementSibling.value;
-        };
+        // if(depDly.style.display == 'block'){
+        //   document.getElementById('departureDelay_out').innerHTML = depDly.nextElementSibling.value;
+        //   document.getElementById('dep' + depDly.value + '_out').innerHTML = depDly.nextElementSibling.value;
+        // };
 
         if(delay1 > 0){
           document.getElementById('departureDelay_out').innerHTML = get_hhmm(delay1);
