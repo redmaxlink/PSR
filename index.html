@@ -1,1532 +1,184 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PSR CALCULATOR</title>
+</head>
+<body>
+  <h1>PSR TIME CALCULATOR</h1>
 
 
-  <head>
+  <br><br><br><br>
 
-    <title>PSR</title>
+  <div>CHOCKSOFF &nbsp
+    <input type="datetime-local" id="start" style="font-size: 2.2vh; width:20vw; color: black; text-align: center; transform: translateX(50%);" >
+  </div>
+  <div>AIRBORNE &nbsp &nbsp &nbsp
+    <input type="datetime-local" id="airborne" style="font-size: 2.2vh; width:20vw; color: black; text-align: center; transform: translateX(50%);" >
+  </div>
+  <div>TOUCHDOWN
+    <input type="datetime-local" id="touchdown" style="font-size: 2.2vh; width:20vw; color: black; text-align: center; transform: translateX(50%);" >
+  </div>
+  <div>CHOCKSON &nbsp &nbsp  
+    <input type="datetime-local" id="end" style="font-size: 2.2vh; width:20vw; color: black; text-align: center; transform: translateX(50%);" >
+  </div>
 
-    <style>
+  <br><br>
 
-      .b {border: 1px solid red;}
+  <label class="switch">
+    <input id="seq" type="checkbox">
+    <span class="slider round"></span>
+    <span>OPERATING CREW RESTING IN SECOND HALF</span>
+  </label>
 
-      /* body {
-        background-image: url("background.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-      } */
+  <br><br>
 
-      #body {}
+  <label class="switch">
+    <input id="ulr" type="checkbox">
+    <span class="slider round"></span>
+    <span>ULR FLIGHT</span>
+  </label>
 
-      #card1{
+  <br><br>
 
-          position: relative;
-          margin: 5vh 5vw 1vh 5vw;
+  <button type="button" onclick="calculate()">CALCULATE</button> 
+  <br><br><br><br>
 
-          height: 70vh;
 
-          border-radius: 2vw;
-          box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
-          background: rgba(255,255, 255, 0.6);
-          border-top: 0.17vw solid rgba(255, 255, 255, 0.5);
-          border-left: 0.17vw solid rgba(255, 255, 255, 0.5);
+  <div><h2><span>Operating Crew : </span>&nbsp<span id="one">0</span>&nbsp+&nbsp<span id="three">0</span>&nbsp+&nbsp<span id="five">0</span>&nbsp &nbsp = <span id="total0">0</span></h2></div>
+  <br><br>
+  <div><h2><span>Cruise Crew : </span>&nbsp<span id="two">0</span>&nbsp+&nbsp<span id="four">0</span>&nbsp &nbsp = <span id="total1">0</span></h2></div>
 
-          -webkit-backdrop-filter:blur(20px);
-          backdrop-filter:blur(20px);
 
-      }
-      #card2{
-          margin: 5vh 5vw 1vh 5vw;
-          width: 50vw;
-          border-radius: 2vw;
-          box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
-          background: rgba(255,255, 255, 0.6);
-          border-top: 0.17vw solid rgba(255, 255, 255, 0.5);
-          border-left: 0.17vw solid rgba(255, 255, 255, 0.5);
-          -webkit-backdrop-filter:blur(20px);
-          backdrop-filter:blur(20px);
-      }
 
-      .fromto{
-        font-size: 11px;
-      }
-      .day{
-        color: green;
-        font-size: 10px;
-      }
-      .night{
-        color: green;
-        font-size: 10px;
-      }
-      .instfly{
-        color: green;
-        font-size: 10px;
-      }
+  <script type="text/javascript">
+    
+    function calculate(){
 
+      let start = document.getElementById("start").valueAsNumber;
+      let airborne = document.getElementById("airborne").valueAsNumber;
+      let touchdown = document.getElementById("touchdown").valueAsNumber;
+      let end = document.getElementById("end").valueAsNumber;
 
-      .flex-row{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .flex-column{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-      }
+      let seq = document.getElementById("seq").checked;
+      let ulr = document.getElementById("ulr").checked
+      
+      
 
-      ::placeholder{
-        color: red;
-        opacity: 0.4;
-      }
 
-      input {
-        border: 1px solid lightgrey;
-        /* border: none; */
-        border-radius: 5px;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
-      }
-      input:hover {
-        background-color: #eeeeee;
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-      }
-      table {
-        width: 100%;
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
+      ////////////////////////////////////////
 
-      th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        text-align: center;
-      }
+      let one_add = 0, two_add = 0, three_add = 0, four_add = 0, five_add = 0;
 
-    </style>
 
-  </head>
+      
 
+      let startTrim = airborne - start;
+      let endTrim = end - touchdown;
+      //let totaltrim = (touchdown - airborne - 4 * 60000)/60000;
+      
+      let tt = (end - start - 4 * 60000)/60000;
+      let tl = (Math.floor(tt/2) + tt%2) * 60000;
+      //let tl = (Math.floor(tt/2) + tt%2) * 60000 - startTrim - endTrim;
+      let cr = Math.floor(tt/2) * 60000;
 
-  <body class="body" style="text-align: center; font-family: sans-serif; height: 100vh; background-color: #bcaaa4;">
 
-    <div class="z-depth-3 flex-column" id="card1">
+          
+      //console.log(start, airborne, touchdown, end, tt, get_hhmm(tl), get_hhmm(cr), seq, ulr)
+      
+      if(ulr){
 
-      <div class="flex-row" style="">
-        <div class="" style="text-align:center; color: #009688;" onclick="display('flight')">
-          <h3>FLIGHT INFO</h3>
-        </div>
-        <div class="" style="text-align:center; color: #009688;" onclick="display('crew')">
-          <h3>CREW INFO</h3>
-        </div>
-        <div class="" style="text-align:center; color: #009688;" onclick="display('time')">
-          <h3>TIME INFO</h3>
-        </div>
-      </div>
+        if(!seq){
 
-      <div class="" style="height: 100%; width: 100%;">
-
-        <div class="flex-column" id="flight" style="height: 100%; width:50%; text-align: center; transform: translateX(50%);">
-
-              <input type="number" id="number_in" title="FLIGHT NUMBER" required style="font-size: 2.8vh; color: #9c27b0; text-transform:uppercase; text-align: center;" placeholder="FLIGHT NUMBER" oninput="fill(this)">
-
-              <input type="time" id="crt_in" title="CREW REPORTING TIME"  required style="font-size: 2.2vh; width:20vw; color: black; text-transform:uppercase; text-align: center; transform: translateX(50%);" placeholder="CRT">
-
-              <input type="text" id="departure_in" title="DEPARTURE AIRPORT"  required style="font-size: 2.8vh; color: #009688; text-transform:uppercase; text-align: center;" placeholder="DEPARTURE">
-
-              <input type="datetime-local" id="departureSked_in" title="SCHEDULED DEPARTURE"   value="16:15:00.000" style="font-size: 2.2vh; width:20vw; color: #009688; text-align: center; transform: translateX(50%);">
-
-              <input type="text" id="destination_in" title="DESITINATION AIRPORT"  required style="font-size: 2.8vh; text-transform:uppercase; color: #009688; text-align: center;" placeholder="DESTINATION">
-
-              <input type="datetime-local" id="destinationSked_in" title="SCHEDULED ARRIVAL"   value="2022-09-09T06:45:00.000" style="font-size: 2.2vh; width:20vw; color: #009688; text-align: center; transform: translateX(50%);">
-
-              <select id="registeration_in" title="AIRCRAFT REGISTERATION"  style="font-size: 2vh; color: red; text-align: center;">
-                    <option value="" selected="selected"></option>
-                    <option value="VT-ALF">VT-ALF</option>
-                    <option value="VT-ALG">VT-ALG</option>
-                    <option value="VT-ALH">VT-ALH</option>
-                    <option value="VT-ALJ">VT-ALJ</option>
-                    <option value="VT-ALK">VT-ALK</option>
-                    <option value="VT-ALL">VT-ALL</option>
-                    <option value="VT-ALM">VT-ALM</option>
-                    <option value="VT-ALN">VT-ALN</option>
-                    <option value="VT-ALO">VT-ALO</option>
-                    <option value="VT-ALP">VT-ALP</option>
-                    <option value="VT-ALQ">VT-ALQ</option>
-                    <option value="VT-ALR">VT-ALR</option>
-                    <option value="VT-ALS">VT-ALS</option>
-                    <option value="VT-ALT">VT-ALT</option>
-                    <option value="VT-ALU">VT-ALU</option>
-                    <option value="VT-ALX">VT-ALX</option>
-                </select>
-
-              <div class="" style="">
-                <span>FUEL : </span>
-                <input type="text" id="fuelQt_in" title="FUEL QUANTITY" required style="font-size: 1.4vh; text-transform:uppercase; text-align: center;" placeholder="QUANTITY">
-                <select id="fuelUt_in"  title="FUEL UPLIFT VOLUME "  >
-                  <option value="LT">LT</option>
-                  <option value="USG">USG</option>
-                </select>
-                <input type="text" id="fuelSp_in" title="FUEL SPECIFIC GRAVITY" required style="font-size: 1.4vh; text-transform:uppercase; text-align: center;" placeholder="SPECIFIC GRAVITY">
-                <input type="text" id="fuelTp_in" title="FUEL TEMPERATURE" required style="font-size: 1.4vh; text-transform:uppercase; text-align: center;" placeholder="FUEL TEMPERATURE">
-              </div>
-
-              <img class="" src="sun.png" style="object-fit:fill; height:8vh; display: none;">
-
-
-        </div>
-
-        <div class="flex-column" id="crew" style="height: 100%; width:100%; display: none;">
-
-          <div class="  " style="text-align: center;">
-            <input type="text" id="1name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
-            <input type="text" id="1staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
-            <input type="number" id="1sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
-            <input type="number" id="1ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="IPLTM No." value="2020">
-            <select id="1status_in" style="font-size:14px; ">
-              <option value=" "> </option>
-              <option value="PIC RC">PIC RC</option>
-              <option value="PC PF">RC PF</option>
-              <option value="RC PM">RC PM</option>
-              <option value="SLF">SLF</option>
-              <option value="SUT">SUT</option>
-              <option value="SNY">SNY</option>
-            </select>
-            <select id="1seat_in" style="font-size:14px; ">
-              <option value="1tL" selected="selected">L Seat = TO LDG</option>
-              <option value="1tR">R Seat = TO LDG</option>
-              <option value="1cL">L Seat = CRUISE</option>
-              <option value="1cR">R Seat = CRUISE</option>
-            </select>
-          </div>
-
-          <div class="  " style="text-align: center;">
-            <input type="text" id="2name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
-            <input type="text" id="2staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
-            <input type="number" id="2sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
-            <input type="number" id="2ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="IPLTM No." value="2020">
-            <select id="2status_in" style="font-size:14px; ">
-              <option value=" "> </option>
-              <option value="PIC RC">PIC RC</option>
-              <option value="PC PF">RC PF</option>
-              <option value="RC PM">RC PM</option>
-              <option value="SLF">SLF</option>
-              <option value="SUT">SUT</option>
-              <option value="SNY">SNY</option>
-            </select>
-            <select id="2seat_in" style="font-size:14px; ">
-              <option value="2tL">L Seat = TO LDG</option>
-              <option value="2tR" selected="selected">R Seat = TO LDG</option>
-              <option value="2cL">L Seat = CRUISE</option>
-              <option value="2cR">R Seat = CRUISE</option>
-            </select>
-          </div>
-
-          <div class="  " style="text-align: center;">
-            <input type="text" id="3name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
-            <input type="text" id="3staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
-            <input type="number" id="3sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
-            <input type="number" id="3ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="IPLTM No." value="2020">
-            <select id="3status_in" style="font-size:14px; ">
-              <option value=" "> </option>
-              <option value="PIC RC">PIC RC</option>
-              <option value="PC PF">RC PF</option>
-              <option value="RC PM">RC PM</option>
-              <option value="SLF">SLF</option>
-              <option value="SUT">SUT</option>
-              <option value="SNY">SNY</option>
-            </select>
-            <select id="3seat_in" style="font-size:14px; ">
-              <option value="3tL">L Seat = TO LDG</option>
-              <option value="3tR">R Seat = TO LDG</option>
-              <option value="3cL" selected="selected">L Seat = CRUISE</option>
-              <option value="3cR">R Seat = CRUISE</option>
-            </select>
-          </div>
-
-          <div class="  " style="text-align: center;">
-            <input type="text" id="4name_in" required style="font-size:14px; text-transform:uppercase; text-align: left;" placeholder="CREW NAME">
-            <input type="text" id="4staff_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="STAFF No.">
-            <input type="number" id="4sap_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="S.A.P No.">
-            <input type="number" id="4ipltm_in" required style="font-size:14px; text-transform:uppercase; text-align: center;" placeholder="IPLTM No." value="2020">
-            <select id="4status_in" style="font-size:14px; ">
-              <option value=" "> </option>
-              <option value="PIC RC">PIC RC</option>
-              <option value="PC PF">RC PF</option>
-              <option value="RC PM">RC PM</option>
-              <option value="SLF">SLF</option>
-              <option value="SUT">SUT</option>
-              <option value="SNY">SNY</option>
-            </select>
-            <select id="4seat_in" style="font-size:14px; ">
-              <option value="4tL">L Seat = TO LDG</option>
-              <option value="4tR">R Seat = TO LDG</option>
-              <option value="4cL">L Seat = CRUISE</option>
-              <option value="4cR" selected="selected">R Seat = CRUISE</option>
-            </select>
-          </div>
-
-          <div class="  " style="text-align: center;">
-            <div class="" style="">TakeOff CREW / SEAT</div>
-            <input type="text" id="departurePf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1L">
-            <div class="" style="margin-top:2vh;">Landing CREW / SEAT</div>
-            <input type="text" id="destinationPf_in" required style="font-size: 16px; text-transform:uppercase; text-align: center;" placeholder="1l">
-          </div>
-
-          <div class="  " style="text-align: center; font-size:3vh;">
-            <div class="FIRST" id="half_in" style="color: grey;" onclick="half(this)">PIC SITTING FIRST HALF</div>
-          </div>
-
-        </div>
-
-        <div class="flex-column" id="time" style="height: 100%; width:100%; display: none;">
-
-          <div class="" style="height: 50%; position: relative;">
-
-            <div class="NIGHT" id="light" style=" position:absolute; margin-left: -50px;" onclick="lightchange()">
-              <img class="" style="object-fit:fill; height:8vh;" src="moon.png">
-              <output class="" style="display:block; text-align: center;"></output>
-            </div>
-
-            <div class="" id="line1" style="position:absolute; bottom: 14%;">
-              <output class="" style="display: block; margin-left:-50px; text-align: center;"></output>
-              <svg class = "" width="8" height="12vh">
-                <rect class = "line" width="8" height="12vh" style="fill:grey;" />
-              </svg>
-            </div>
-
-            <div class="" id="line2" style="position:absolute; bottom: 14%;">
-              <output class="" style="display: block; margin-left: +50px; text-align: center;"></output>
-              <svg class = "" width="8" height="12vh">
-                <rect class = "line" width="8" height="12vh" style="fill:grey;" />
-              </svg>
-            </div>
-
-            <div class="" id="base" style="position: absolute; left: 20%; bottom: 16%; width: 64%; height: 2vh; border-radius: 25px; border: 2px solid grey;"></div>
-
-          </div>
-          <div class="flex-row" style="height: 30%;">
-
-
-              <div class="" style="text-align: center;">
-                <div class="">ACTUAL DEPARTURE</div>
-                <input type="datetime-local" id="departureActual_in" style="font-size:20px;" value="" oninput="init()">
-                </br></br></br>
-                <div class="" style="display:none;">
-                  <span>DEP DELAY : </span>
-                  <output></output>
-                  <span>mins DUE &nbsp;&nbsp;</span>
-                  <select id="departureDelay_in" style="font-size:20px;">
-                      <option value="STN" selected="selected">STN</option>
-                      <option value="ATC">ATC</option>
-                      <option value="WX WIND">WX WIND</option>
-                  </select>
-
-                </div>
-              </div>
-
-              <div class="" style="text-align: center;">
-                <div class="">ACTUAL ARRIVAL</div>
-                <input type="datetime-local" id="destinationActual_in" style="font-size:20px;" value="" oninput="init()">
-                </br></br></br>
-                <div class="" style="display:none;">
-                  <span>ARR DELAY : </span>
-                  <span>CONSQ </span>
-                  <output></output>
-                  <span> + </span>
-                  <output></output>
-                  <span>mins DUE &nbsp;&nbsp;</span>
-                  <select id="destinationDelay_in" style="font-size:20px;">
-                      <option value="WX WIND" selected="selected">WX WIND</option>
-                      <option value="ATC">ATC</option>
-                      <option value="STN">STN</option>
-                  </select>
-                </div>
-              </div>
-
-
-          </div>
-          <div class="" style="height: 20%;">
-
-            <div class="" style="text-align: center; margin-top: 5vh;">
-              <span>INSTRUMENT FLYING : </span>
-              <input class="" id="instrumentflying" type="range" value="120" min="0" max="360" step="10" style="margin: 0 2% 0 2%; width: 40%;" oninput="this.nextElementSibling.value = this.value">
-              <output>120</output>
-              <span>mins</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <button id="card2" type="button" name="AUTO PSR" style="width: 40%; translateX: 50%; font-size:30px; text-align: center; color: green;" onclick="psr_generate()">AUTO PSR</button>
-
-    <div id = "table" style="font-family: Arial; position: relative; display: none;">
-
-      <img class="" style="position:absolute; height:36px; margin-top: -8px;object-fit:fill;" src="logo.png">
-
-      <table id="0table" style="margin: 0; height:8mm; border: none;">
-        <tr>
-          <th style="width:18%; border: none;"></th>
-          <th style="width:18%; border: none;"></th>
-          <th style="border: none; font-size: 14px;">PILOTS REPORT</th>
-          <td id="number_out" style="width:12%; border: none;">AIC-</td>
-          <td id="registeration_out" style="width:12%; border: none;">VT-</td>
-          <td id="type_out" style="width:12%; border: none;">B777-</td>
-        </tr>
-      </table>
-
-      <table id="1table" style="height:10mm;">
-        <tr style="height:6mm; font-size: 8px;">
-          <td style="width: 22%; font-size: 12px;" rowspan="2">OPERATING CREW</td>
-
-          <td style="width: 7%;" rowspan="2">STAFF</br>NO.</br>(Suffix AT / IT)</td>
-          <td style="width: 6%;" rowspan="2">CRT</br>(UTC)</br>hh:mm</td>
-          <td style="width: 5%;" colspan="2">SECTOR(S) OPTG</br>(4 letter ICAO)</td>
-
-          <td style="width: 4%;" rowspan="2">STS</br>(+,**,</br>etc)</td>
-          <td style="width: 6%; font-size: 12px;" colspan="9">MULTIPLE CREW LOG - ON CONTROLS TIMING</td>
-
-        </tr>
-        <tr style="height:4mm; font-size: 8px;">
-
-          <td style="width: 5%;">FROM</td>
-
-          <td style="width: 5%;">TO</td>
-
-          <td style="width: 6%;">FROM</br>hh:mm</td>
-          <td style="width: 6%;">TO</br>hh:mm</td>
-          <td style="width: 6%;">FROM</br>hh:mm</td>
-          <td style="width: 6%;">TO</br>hh:mm</td>
-          <td style="width: 6%;">FROM</br>hh:mm</td>
-          <td style="width: 6%;">TO</br>hh:mm</td>
-          <td style="width: 5%;">DAY</br>hh:mm</td>
-          <td style="width: 5%;">NIGHT</br>hh:mm</td>
-          <td style="width: 5%;">IF</br>hh:mm</td>
-        </tr>
-      </table>
-
-      <table id="2table" style="height:67.5mm; font-size: 12px;">
-
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-bottom: none; font-size: 10px;">CDR.</td>
-          <td id="1name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="1staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
-          <td id="1crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td id="1status_out" style="width: 4%;" rowspan="3"></td>
-          <td class="fromto" id="11from_out" style="width: 6%;"></td>
-          <td class="fromto" id="11to_out" style="width: 6%;"></td>
-          <td class="fromto" id="12from_out" style="width: 6%;"></td>
-          <td class="fromto" id="12to_out" style="width: 6%;"></td>
-          <td class="fromto" id="14from_out" style="width: 6%;"></td>
-          <td class="fromto" id="14to_out" style="width: 6%;"></td>
-          <td id="15day_out" style="width: 5%;" rowspan="3"></td>
-          <td id="16night_out" style="width: 5%;" rowspan="3"></td>
-          <td id="17instrument_out" style="width: 5%;" rowspan="3"></td>
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none; border-bottom: none;">1</td>
-
-
-
-          <td class="day" id="11day_out" style="width: 6%;"></td>
-          <td class="night" id="11night_out" style="width: 6%;"></td>
-          <td class="day" id="12day_out" style="width: 6%;"></td>
-          <td class="night" id="12night_out" style="width: 6%;"></td>
-          <td class="day" id="14day_out" style="width: 6%;"></td>
-          <td class="night" id="14night_out" style="width: 6%;"></td>
-
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none;"></td>
-          <td id="1ipltm_out" style="width: 19%; font-size: 12px;">IPLTM </td>
-          <td id="1sap_out" style="width: 7%; border-top: none;"></td>
-
-          <td class="instfly" id="11instrument_out" style="width: 6%;"></td>
-          <td id="11seat_out" style="width: 6%;"></td>
-          <td class="instfly" id="12instrument_out" style="width: 6%;"></td>
-          <td id="12seat_out" style="width: 6%;"></td>
-          <td class="instfly" id="14instrument_out" style="width: 6%;"></td>
-          <td id="14seat_out" style="width: 6%;"></td>
-
-        </tr>
-
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-bottom: none; font-size: 10px;">CDR.</td>
-          <td id="2name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="2staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
-          <td id="2crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td id="2status_out" style="width: 4%;" rowspan="3"></td>
-          <td class="fromto" id="21from_out" style="width: 6%;"></td>
-          <td class="fromto" id="21to_out" style="width: 6%;"></td>
-          <td class="fromto" id="22from_out" style="width: 6%;"></td>
-          <td class="fromto" id="22to_out" style="width: 6%;"></td>
-          <td class="fromto" id="24from_out" style="width: 6%;"></td>
-          <td class="fromto" id="24to_out" style="width: 6%;"></td>
-          <td id="25day_out" style="width: 5%;" rowspan="3"></td>
-          <td id="26night_out" style="width: 5%;" rowspan="3"></td>
-          <td id="27instrument_out" style="width: 5%;" rowspan="3"></td>
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none; border-bottom: none;">2</td>
-
-
-
-          <td class="day" id="21day_out" style="width: 6%;"></td>
-          <td class="night" id="21night_out" style="width: 6%;"></td>
-          <td class="day" id="22day_out" style="width: 6%;"></td>
-          <td class="night" id="22night_out" style="width: 6%;"></td>
-          <td class="day" id="24day_out" style="width: 6%;"></td>
-          <td class="night" id="24night_out" style="width: 6%;"></td>
-
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none;"></td>
-          <td id="2ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
-          <td id="2sap_out" style="width: 7%; border-top: none;"></td>
-
-          <td class="instfly" id="21instrument_out" style="width: 6%;"></td>
-          <td id="21seat_out" style="width: 6%;"></td>
-          <td class="instfly" id="22instrument_out" style="width: 6%;"></td>
-          <td id="22seat_out" style="width: 6%;"></td>
-          <td class="instfly" id="24instrument_out" style="width: 6%;"></td>
-          <td id="24seat_out" style="width: 6%;"></td>
-
-        </tr>
-
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-bottom: none; font-size: 10px;">CDR.</td>
-          <td id="3name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="3staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
-          <td id="3crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td id="3status_out" style="width: 4%;" rowspan="3"></td>
-          <td class="fromto" id="31from_out" style="width: 6%;"></td>
-          <td class="fromto" id="31to_out" style="width: 6%;"></td>
-          <td class="fromto" id="32from_out" style="width: 6%;"></td>
-          <td class="fromto" id="32to_out" style="width: 6%;"></td>
-          <td class="fromto" id="34from_out" style="width: 6%;"></td>
-          <td class="fromto" id="34to_out" style="width: 6%;"></td>
-          <td id="35day_out" style="width: 5%;" rowspan="3"></td>
-          <td id="36night_out" style="width: 5%;" rowspan="3"></td>
-          <td id="37instrument_out" style="width: 5%;" rowspan="3"></td>
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none; border-bottom: none;">3</td>
-
-
-
-          <td class="day" id="31day_out" style="width: 6%;"></td>
-          <td class="night" id="31night_out" style="width: 6%;"></td>
-          <td class="day" id="32day_out" style="width: 6%;"></td>
-          <td class="night" id="32night_out" style="width: 6%;"></td>
-          <td class="day" id="34day_out" style="width: 6%;"></td>
-          <td class="night" id="34night_out" style="width: 6%;"></td>
-
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none;"></td>
-          <td id="3ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
-          <td id="3sap_out" style="width: 7%; border-top: none;"></td>
-
-          <td class="instfly" id="31instrument_out" style="width: 6%;"></td>
-          <td id="31seat_out" style="width: 6%;"></td>
-          <td class="instfly" id="32instrument_out" style="width: 6%;"></td>
-          <td id="32seat_out" style="width: 6%;"></td>
-          <td class="instfly" id="34instrument_out" style="width: 6%;"></td>
-          <td id="34seat_out" style="width: 6%;"></td>
-
-        </tr>
-
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-bottom: none; font-size: 10px;">CDR.</td>
-          <td id="4name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="4staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
-          <td id="4crt_out" style="width: 6%; font-size:14px;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td id="4status_out" style="width: 4%;" rowspan="3"></td>
-          <td class="fromto" id="41from_out" style="width: 6%;"></td>
-          <td class="fromto" id="41to_out" style="width: 6%;"></td>
-          <td class="fromto" id="42from_out" style="width: 6%;"></td>
-          <td class="fromto" id="42to_out" style="width: 6%;"></td>
-          <td class="fromto" id="44from_out" style="width: 6%;"></td>
-          <td class="fromto" id="44to_out" style="width: 6%;"></td>
-          <td id="45day_out" style="width: 5%;" rowspan="3"></td>
-          <td id="46night_out" style="width: 5%;" rowspan="3"></td>
-          <td id="47instrument_out" style="width: 5%;" rowspan="3"></td>
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none; border-bottom: none;">4</td>
-
-
-
-          <td class="day" id="41day_out" style="width: 6%;"></td>
-          <td class="night" id="41night_out" style="width: 6%;"></td>
-          <td class="day" id="42day_out" style="width: 6%;"></td>
-          <td class="night" id="42night_out" style="width: 6%;"></td>
-          <td class="day" id="44day_out" style="width: 6%;"></td>
-          <td class="night" id="44night_out" style="width: 6%;"></td>
-
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none;"></td>
-          <td id="4ipltm_out" style="width: 19%; font-size: 12px;">IPTM </td>
-          <td id="4sap_out" style="width: 7%; border-top: none;"></td>
-
-          <td class="instfly" id="41instrument_out" style="width: 6%;"></td>
-          <td id="41seat_out" style="width: 6%;"></td>
-          <td class="instfly" id="42instrument_out" style="width: 6%;"></td>
-          <td id="42seat_out" style="width: 6%;"></td>
-          <td class="instfly" id="44instrument_out" style="width: 6%;"></td>
-          <td id="44seat_out" style="width: 6%;"></td>
-
-        </tr>
-
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-bottom: none;"></td>
-          <td id="5name_out" style="width: 19%; font-size: 12px; text-align: left; padding-left: 10px;" rowspan="2"></td>
-          <td id="5staff_out" style="width: 7%; border-bottom: none;" rowspan="2"></td>
-          <td id="5crt_out" style="width: 6%;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td style="width: 5%;" rowspan="3"></td>
-          <td id="5status_out" style="width: 4%;" rowspan="3"></td>
-          <td id="51from_out" style="width: 6%;"></td>
-          <td id="51to_out" style="width: 6%;"></td>
-          <td id="52from_out" style="width: 6%;"></td>
-          <td id="52to_out" style="width: 6%;"></td>
-          <td id="54from_out" style="width: 6%;"></td>
-          <td id="54to_out" style="width: 6%;"></td>
-          <td id="45day_out" style="width: 5%;" rowspan="3"></td>
-          <td id="46night_out" style="width: 5%;" rowspan="3"></td>
-          <td id="47instrument_out" style="width: 5%;" rowspan="3"></td>
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none; border-bottom: none;">5</td>
-
-
-
-          <td id="51day_out" style="width: 6%;"></td>
-          <td id="51night_out" style="width: 6%;"></td>
-          <td id="52day_out" style="width: 6%;"></td>
-          <td id="52night_out" style="width: 6%;"></td>
-          <td id="54day_out" style="width: 6%;"></td>
-          <td id="54night_out" style="width: 6%;"></td>
-
-        </tr>
-        <tr style="height:4.5mm;">
-          <td style="width: 3%; border-top: none;"></td>
-          <td id="5ipltm_out" style="width: 19%; font-size: 12px;"></td>
-          <td id="1sap_out" style="width: 7%; border-top: none;"></td>
-
-          <td id="51instrument_out" style="width: 6%;"></td>
-          <td id="51seat_out" style="width: 6%;"></td>
-          <td id="52instrument_out" style="width: 6%;"></td>
-          <td id="52seat_out" style="width: 6%;"></td>
-          <td id="54instrument_out" style="width: 6%;"></td>
-          <td id="54seat_out" style="width: 6%;"></td>
-
-        </tr>
-
-      </table>
-
-      <table id="3table" style="margin:1px 0 0 0; height:10mm;">
-
-        <tr style="height:5mm; font-size: 8px;">
-          <td style="width: 9.2%; border-bottom: none;" rowspan="2">DATE</br>(UTC)</td>
-          <td style="width: 7%; border-bottom: none;" rowspan="2">STATION</br>4 letter</td>
-          <td style="width: 5.8%; border-bottom: none;" rowspan="2">SKED</br>(UTC)</td>
-          <td style="width: 5.8%; border-bottom: none;" rowspan="2">ACTUAL</br>(UTC)</td>
-          <td style="width: 5.8%; border-bottom: none;" rowspan="2">TOTAL</br>DELAY</td>
-          <td style="width: 5.8%; border-bottom: none;" rowspan="2">CONSQ</td>
-          <td style="width: 5.8%; border-bottom: none;" rowspan="2">STN</td>
-          <td style="width: 5.8%; border-bottom: none;" rowspan="2">ATC</td>
-          <td style="width: 5.8%; border-bottom: none;" rowspan="2">WX</br>WIND</td>
-          <td style="width: 5.4%; border-bottom: none;" rowspan="3">PF</td>
-          <td style="width: 6.4%; border-bottom: none;" rowspan="2">TOTAL</br>FLT.TIME</td>
-          <td style="width: 6.4%; border-bottom: none;" rowspan="2">NIGHT</br>FLYING</td>
-          <td style="width: 6.4%; border-bottom: none;" rowspan="2">INST</br>FLYING</td>
-          <td style="width: 3.2%; border-bottom: none;" rowspan="2" colspan="2">CAT II / III</br>RECORD</td>
-          <td style="width: 6.2%; border-bottom: none;" colspan="3" rowspan="2">FUEL UPLIFT</td>
-        </tr>
-        <tr style="height:2mm; font-size: 8px;"></tr>
-        <tr style="height:3mm; font-size: 8px;">
-          <td style="width: 9.2%; border-top: none;">DD-MM-YYYY</td>
-          <td style="width: 7%">ICAO CODE</td>
-          <td style="width: 5.8%">HH:MM</td>
-          <td style="width: 5.8%">HH:MM</td>
-          <td style="width: 5.8%">HH:MM</td>
-          <td style="width: 5.8%">HH:MM</td>
-          <td style="width: 5.8%">HH:MM</td>
-          <td style="width: 5.8%">HH:MM</td>
-          <td style="width: 5.8%">HH:MM</td>
-          <td style="width: 6.4%">HH:MM</td>
-          <td style="width: 6.4%">HH:MM</td>
-          <td style="width: 6.4%">HH:MM</td>
-          <td style="width: 3.2%">PF</td>
-          <td style="width: 3.2%">PM</td>
-          <td style="width: 6.2%">QUANTITY</td>
-          <td style="width: 3%">UNIT</td>
-          <td style="width: 3%">Sg</td>
-        </tr>
-
-      </table>
-
-      <table id="4table" style="height:30mm; font-size: 12px;">
-
-        <tr style="height:5mm;">
-          <td id="departureDate_out" style="width: 9.2%;"></td>
-          <td id="departure_out" style="width: 7%;"></td>
-          <td id="departureSked_out" style="width: 5.8%;"></td>
-          <td id="departureActual_out" style="width: 5.8%;"></td>
-          <td id="departureDelay_out" style="width: 5.8%;"></td>
-          <td id="depCONSQ_out" style="width: 5.8%;"></td>
-          <td id="depSTN_out" style="width: 5.8%;"></td>
-          <td id="depATC_out" style="width: 5.8%;"></td>
-          <td id="depWX WIND_out" style="width: 5.8%;"></td>
-          <td id="departurePf_out" style="width: 5.4%;"></td>
-
-          <td id="total_out" style="width: 6.4%;" rowspan="2"></td>
-          <td id="night_out" style="width: 6.4%;" rowspan="2"></td>
-          <td id="instrumentflying_out" style="width: 6.4%;" rowspan="2"></td>
-          <td id="" style="width: 3.2%;"></td>
-          <td id="" style="width: 3.2%;"></td>
-          <td id="fuelQt_out" style="width: 6.2%;" rowspan="2"></td>
-          <td id="fuelUt_out" style="width: 3%;" rowspan="2"></td>
-          <td id="fuelSp_out" style="width: 3%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td id="destinationDate_out" style="width: 9.2%;"></td>
-          <td id="destination_out" style="width: 7%; border-bottom: none;"></td>
-          <td id="destinationSked_out" style="width: 5.8%;"></td>
-          <td id="destinationActual_out"style="width: 5.8%;"></td>
-          <td id="destinationDelay_out" style="width: 5.8%;"></td>
-          <td id="desCONSQ_out" style="width: 5.8%;"></td>
-          <td id="desSTN_out" style="width: 5.8%;"></td>
-          <td id="desATC_out" style="width: 5.8%;"></td>
-          <td id="desWX WIND_out" style="width: 5.8%;"></td>
-          <td id="destinationPf_out" style="width: 5.4%;"></td>
-
-
-
-          <td id="" style="width: 3.2%;" colspan="2"></td>
-          <td id="fuelTp_out" style="width: 3%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td style="width: 9.2%;"></td>
-          <td style="width: 7%; border-top: none;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.4%;"></td>
-          <td style="width: 6.4%;" rowspan="2"></td>
-          <td style="width: 6.4%;" rowspan="2"></td>
-          <td style="width: 6.4%;" rowspan="2"></td>
-          <td id="" style="width: 3.2%;"></td>
-          <td id="" style="width: 3.2%;"></td>
-          <td style="width: 6.2%;" rowspan="2"></td>
-          <td style="width: 3%;" rowspan="2"></td>
-          <td style="width: 3%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td style="width: 9.2%;"></td>
-          <td style="width: 7%; border-bottom: none;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.4%;"></td>
-
-          <td id="" style="width: 3.2%;" colspan="2"></td>
-          <td style="width: 3%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td style="width: 9.2%;"></td>
-          <td style="width: 7%; border-top: none;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.4%;"></td>
-          <td style="width: 6.4%;" rowspan="2"></td>
-          <td style="width: 6.4%;" rowspan="2"></td>
-          <td style="width: 6.4%;" rowspan="2"></td>
-          <td id="" style="width: 3.2%;"></td>
-          <td id="" style="width: 3.2%;"></td>
-          <td style="width: 6.2%;" rowspan="2"></td>
-          <td style="width: 3%;" rowspan="2"></td>
-          <td style="width: 3%;"></td>
-        </tr>
-        <tr style="height:5mm;">
-          <td style="width: 9.2%;"></td>
-          <td style="width: 7%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.8%;"></td>
-          <td style="width: 5.4%;"></td>
-
-          <td id="" style="width: 3.2%;" colspan="2"></td>
-          <td style="width: 3%;"></td>
-        </tr>
-
-      </table>
-
-      <table id="5table" style="margin:1px 0 0 0; height:9mm; font-size: 7.5px;">
-        <tr style="height: 2.5mm">
-          <td style="border: none; text-align: left; width: 87.8%" rowspan="2">REMARKS&nbsp;&nbsp;:</td>
-          <td style="width: 6.2%"></td>
-          <td style="width: 6%">:</td>
-        </tr>
-        <tr style="height: 2.5mm">
-          <td style="width: 6.2%"></td>
-          <td style="width: 6%">:</td>
-        </tr style="height: 3mm">
-        <tr style="height: 2.5mm">
-          <td style="border: none; text-align: left; width: 87.8%">FDTL EXTENSION AVAILED&nbsp;&nbsp;[&nbsp;&nbsp;]</td>
-          <td style="width: 6.2%"></td>
-          <td style="width: 6%">:</td>
-        </tr>
-      </table>
-
-      <table id="6table" style="font-size: 8px; margin:1px 0 0 0; padding:0; height:4mm;">
-        <tr>
-          <td style="width: 16%; text-align: left;">REPORTS&nbsp;&nbsp;(&nbsp;&#10003;&nbsp;)&nbsp;&nbsp;Attached</td>
-          <td style="width: 8%;">PSR&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)</td>
-          <td style="width: 8%;">FSR&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)</td>
-          <td style="width: 8%;">HIR&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)</td>
-          <td style="width: 8%;">A/LAND&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)</td>
-          <td style="width: 8%;">BIRDHIT&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)</td>
-          <td style="width: 8%;">FMS&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;(EGPWS)</td>
-          <td style="width: 8%;">RA&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;(TCAS)</td>
-          <td style="width: 28%; text-align: left; padding-left: 10px;">OTHER&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)</td>
-        </tr>
-      </table>
-
-      <table id="7table" style="height:8mm; border: none;">
-        <tr>
-          <td style="font-size: 8px; border: none; text-align: left;">NOTE : UNDER PF coloumn enter the Crew Serial Number, Seat Occupied [L/R] and Circle [D/N] for [Day/Night] T.O / Landing.  Tick [&nbsp;&nbsp;] IF FDTL EXTENSION AVAILED.</br>
-          * TRG STS = PIC RC, RCPF, RCPM, SLF, SNY, SUT  Important Email ID's : FLIGHT SAFETY : flightsafety.airindia.in CMS : cms.psrupdation@airindia.in</td>
-        </tr>
-      </table>
-
-    </div>
-
-    <script type="text/javascript">
-
-      document.getElementById('number_out').innerHTML = 'AIC-' + document.getElementById('number_in').value;
-
-      //////////////////////////////////////////////////////////////////////////
-      function display(item){
-
-        document.getElementById('flight').style.display = 'none';
-        document.getElementById('crew').style.display = 'none';
-        document.getElementById('time').style.display = 'none';
-        let a = 'flex';
-        if(item == 'time'){a = 'block'};
-        document.getElementById(item).style.display = a;
-
-      };
-
-      function fill(item){
-        let n = item.value;
-        if(n == 101){populate('VIDP', 'KJFK', 20, 15, 885)}
-        if(n == 102){populate('KJFK', 'VIDP', 16, 30, 840)}
-
-        if(n == 105){populate('VIDP', 'KEWR', 21, 15, 860)}
-        if(n == 106){populate('KEWR', 'VIDP', 16, 15, 810)}
-
-        if(n == 191){populate('VABB', 'KEWR', 19, 00, 1015)}
-        if(n == 144){populate('KEWR', 'VABB', 16, 05, 890)}
-
-        if(n == 187){populate('VIDP', 'CYYZ', 21, 30, 915)}
-        if(n == 188){populate('CYYZ', 'VIDP', 16, 15, 840)}
-
-        if(n == 127){populate('VIDP', 'KORD', 20, 45, 940)}
-        if(n == 126){populate('KORD', 'VIDP', 17, 00, 875)}
-
-        if(n == 173){populate('VIDP', 'KSFO', 22, 00, 945)}
-        if(n == 174){populate('KSFO', 'VIDP', 17, 30, 955)}
-
-        if(n == 183){populate('VIDP', 'KSFO', 09, 30, 950)}
-        if(n == 184){populate('KSFO', 'VIDP', 05, 00, 960)}
-
-        if(n == 185){populate('VIDP', 'CYVR', 23, 45, 870)}
-        if(n == 186){populate('CYVR', 'VIDP', 17, 15, 890)}
-
-      };
-
-      function populate(dep, des, hh, mm, block){
-
-        document.getElementById('departure_in').value = dep;
-        document.getElementById('destination_in').value = des;
-
-        let d = new Date();
-        d.setUTCHours(hh);
-        d.setUTCMinutes(mm);
-        d.setUTCSeconds(0);
-        d.setUTCMilliseconds(0);
-        let c = new Date();
-
-        if (d > c){d.setUTCDate(d.getUTCDate() - 1)}
-
-        document.getElementById('departureSked_in').value = d.toISOString().slice(0, -1);
-        document.getElementById('departureActual_in').value = d.toISOString().slice(0, -1);
-
-        d = d.valueOf() + block * 60000;
-        document.getElementById('destinationSked_in').value = new Date(d).toISOString().slice(0, -1);
-        document.getElementById('destinationActual_in').value = new Date(d).toISOString().slice(0, -1);
-
-        d = document.getElementById('departureSked_in').valueAsNumber - 5400000;
-        d = new Date(d).toISOString().slice(11, 16);
-        document.getElementById('crt_in').value = d;
-        init();
-
-      };
-
-      var start, end, l1, light, l2, fract, l_s, l_e;
-      var depSkd, desSkd, depDly, delay1 = 0, delay2 = 0, desDly;
-      var night;
-      var calc_time;
-      init();
-
-      function init(){
-
-
-        start = document.getElementById('departureActual_in').valueAsNumber;
-        end = document.getElementById('destinationActual_in').valueAsNumber;
-        l1 = document.getElementById('line1');
-        light = document.getElementById('light');
-        l2 = document.getElementById('line2');
-
-        depSkd = document.getElementById('departureSked_in').valueAsNumber;
-        desSkd = document.getElementById('destinationSked_in').valueAsNumber;
-        depDly = document.getElementById('departureDelay_in');
-        desDly = document.getElementById('destinationDelay_in');
-
-        fract = 60 / ((end - start)/60000);
-        l1.style.left = 20 + 60 * 0.33 + '%';
-        l1.firstElementChild.value = get_utc( start + 60000 * (60 * 0.33) / fract );
-        l2.style.left = 20 + 60 * 0.66 + '%';
-        l2.firstElementChild.value = get_utc( start + 60000 * (60 * 0.66)/fract );
-
-        light.style.left = 50 + '%';
-        calc_night();
-
-        if(start > depSkd){delay1 = start - depSkd}
-        else{delay1 = 0};
-
-        if(end - desSkd > delay1){delay2 = end - (desSkd + delay1)}
-        else{delay2 = 0};
-
-        if(delay1 > 0){depDly.parentNode.style.display = 'block'; depDly.parentNode.childNodes[3].innerHTML  = get_hhmm(delay1);}
-        else{depDly.parentNode.style.display = 'none'};
-
-        if(delay2 > 0){
-          desDly.parentNode.style.display = 'block';
-          let dddd = get_hhmm(delay1);
-          if(dddd == ''){dddd = '0 min'}
-          desDly.parentNode.childNodes[5].innerHTML  = dddd;
-          desDly.parentNode.childNodes[9].innerHTML  = get_hhmm(delay2);
-        }
-        else{desDly.parentNode.style.display = 'none'};
-
-      };
-
-      //////////////////////////////////////////////////////////////////////////
-
-      l1.addEventListener('touchmove', function(event) {
-
-        var touch = event.targetTouches[0].pageX / window.innerWidth * 100;
-
-        ////
-
-        if(touch <= 20){drag = 20}
-        else if( touch >= 80){drag = 80}
-        else{drag = touch};
-
-        ////
-
-        l1.style.left = drag + '%';
-
-        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) );
-
-        ////
-
-        calc_night();
-        light.style.left = drag + (value(l2.style.left) - drag) / 2 + '%';
-
-        ////
-
-        event.preventDefault();
-
-      }, false);
-
-      ////////////////
-
-      l2.addEventListener('touchmove', function(event) {
-
-        var touch = event.targetTouches[0].pageX / window.innerWidth * 100;
-
-        ////
-
-        let min = value(l1.style.left) + fract * 10;
-        if(touch <= min){drag = min;}
-        else if(touch >= 80){drag = 80}
-        else{drag = touch};
-
-        ////
-
-        l2.style.left = drag + '%';
-        this.firstElementChild.value = get_utc( start + 60000 * Math.floor( (drag - 20)/fract ) );
-
-        ////
-
-        calc_night();
-        light.style.left = value(l1.style.left) + (drag - value(l1.style.left)) / 2 + '%';
-
-        ////
-
-        event.preventDefault();
-
-      }, false);
-
-      //////////////////////////////////////////////////////////////////////////
-
-
-      function takeoffland(item){
-
-        if(item.style.color == 'lightgrey'){item.style.color = 'black'}
-        else if(item.style.color == 'black'){item.style.color = 'lightgrey'};
-
-        let count = 0;
-        for(i=1; i<5; i++){if(document.getElementById(i + 'takeoffland_in').style.color == 'black'){count++}};
-
-        if(count == 0 || count > 2){document.getElementById('half_in').style.display = 'none'}
-        else{document.getElementById('half_in').style.display = 'block'};
-
-        if(count > 2){
-            for(i=1; i<5; i++){document.getElementById(i + 'takeoffland_in').style.color = 'lightgrey'};
-        }
-
-      };
-      function half(item){
-
-        if(item.classList[0] == "FIRST"){
-          item.innerHTML = "PIC SITING SECOND HALF";
-          item.className = "SECOND";
-        }
-        else if(item.classList[0] == "SECOND"){
-          item.innerHTML = 'PIC SITING FIRST HALF';
-          item.className = "FIRST";
-        };
-
-      };
-
-      function value(data){
-        return Number(data.slice(0, data.length - 1));
-      };
-      function lightchange(){
-
-        if(light.firstElementChild.src.endsWith("sun.png")){
-          light.classList = ["NIGHT"];
-          light.firstElementChild.src = "moon.png";
-        }
-        else{
-          light.classList = ["DAY"];
-          light.firstElementChild.src = "sun.png";
-        };
-
-      };
-      function calc_night(){
-        l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/fract ) );
-        l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/fract ) );
-        light.lastElementChild.value =  get_hhmm(l_e - l_s);
-      };
-
-      function get_utc(time){
-        time = new Date(time);
-        hh = time.getUTCHours();
-        hh = ('0'+ hh).slice(-2);
-        mm = time.getUTCMinutes();
-        mm = ('0'+ mm).slice(-2);
-        return hh + ':' + mm;
-      };
-      function get_hhmm(block){
-
-        block = block / 60000;
-        hh = Math.trunc(block / 60);
-        hh = ('0'+ hh).slice(-2);
-        mm = block % 60;
-        mm = ('0'+ mm).slice(-2);
-        if(hh == '00' && mm == '00'){return ''}
-        else{return hh + ':' + mm};
-
-      };
-      function pad(item){
-        if(Number(item) < 10){return String(item).padStart(2, '0')}
-        else{return item}
-      }
-      //////////////////////////////////////////////////////////////////////////
-
-      function psr_generate(){
-
-        document.getElementById('number_out').innerHTML = 'AIC-' + document.getElementById('number_in').value;
-        document.getElementById('registeration_out').innerHTML = document.getElementById('registeration_in').value;
-        let lr200 = ['VT-ALF', 'VT-ALG', 'VT-ALH'], type = 'B777-300ER'
-        if(lr200.includes(document.getElementById('registeration_in').value)){type = 'B777-200LR'}
-        document.getElementById('type_out').innerHTML = type;
-
-        let date = new Date(start);
-        date = pad(date.getUTCDate()) + '/' + pad(date.getUTCMonth()) + '/' + date.getUTCFullYear();
-        document.getElementById('departureDate_out').innerHTML = date;
-        date = new Date(end);
-        date = pad(date.getUTCDate()) + '/' + pad(date.getUTCMonth()) + '/' + date.getUTCFullYear();
-        document.getElementById('destinationDate_out').innerHTML = date;
-
-        document.getElementById('departure_out').innerHTML = document.getElementById('departure_in').value.toUpperCase();
-        document.getElementById('destination_out').innerHTML = document.getElementById('destination_in').value.toUpperCase();
-
-        document.getElementById('departureSked_out').innerHTML = get_utc(depSkd);
-        document.getElementById('destinationSked_out').innerHTML = get_utc(desSkd);
-
-        document.getElementById('departureActual_out').innerHTML = get_utc(start);
-        document.getElementById('destinationActual_out').innerHTML = get_utc(end);
-
-
-        // if(depDly.style.display == 'block'){
-        //   document.getElementById('departureDelay_out').innerHTML = depDly.nextElementSibling.value;
-        //   document.getElementById('dep' + depDly.value + '_out').innerHTML = depDly.nextElementSibling.value;
-        // };
-
-        if(delay1 > 0){
-          document.getElementById('departureDelay_out').innerHTML = get_hhmm(delay1);
-          document.getElementById('dep' + depDly.value + '_out').innerHTML = get_hhmm(delay1);
-        };
-
-        if(end - desSkd > 0){
-          document.getElementById('destinationDelay_out').innerHTML = get_hhmm(end - desSkd);
-          if(delay1 > 0){document.getElementById('desCONSQ_out').innerHTML = get_hhmm(delay1)};
-          if(delay2 > 0){document.getElementById('des' + desDly.value + '_out').innerHTML = get_hhmm(delay2)};
-        };
-
-        document.getElementById('departurePf_out').innerHTML = document.getElementById('departurePf_in').value.toUpperCase();
-        document.getElementById('destinationPf_out').innerHTML = document.getElementById('destinationPf_in').value.toUpperCase();
-
-        document.getElementById('total_out').innerHTML = get_hhmm(end - start);
-
-        let totalNight = 0;
-        if(light.classList[0] == "NIGHT"){totalNight = light.lastElementChild.value}
-        else if(light.classList[0] == "DAY"){
-          let l_s = ( start + 60000 * Math.floor( (value(l1.style.left) - 20)/fract ) );
-          let l_e = ( start + 60000 * Math.floor( (value(l2.style.left) - 20)/fract ) );
-          totalNight = get_hhmm( (l_s - start) + (end - l_e) );
-        }
-        document.getElementById('night_out').innerHTML = totalNight;
-
-        let inst = document.getElementById('instrumentflying').valueAsNumber * 60000;
-        document.getElementById('instrumentflying_out').innerHTML = get_hhmm(inst);
-
-        document.getElementById('fuelQt_out').innerHTML = document.getElementById('fuelQt_in').value;
-        document.getElementById('fuelUt_out').innerHTML = document.getElementById('fuelUt_in').value;
-        document.getElementById('fuelSp_out').innerHTML = document.getElementById('fuelSp_in').value;
-        document.getElementById('fuelTp_out').innerHTML = document.getElementById('fuelTp_in').value;
-
-        document.getElementById('1name_out').innerHTML = document.getElementById('1name_in').value.toUpperCase();
-        document.getElementById('1staff_out').innerHTML = document.getElementById('1staff_in').value.toUpperCase();
-        document.getElementById('1sap_out').innerHTML = document.getElementById('1sap_in').value.toUpperCase();
-        document.getElementById('1ipltm_out').innerHTML = 'IPLTM ' + document.getElementById('1ipltm_in').value.toUpperCase();
-        document.getElementById('1status_out').innerHTML = document.getElementById('1status_in').value.toUpperCase();
-        document.getElementById('1crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
-
-        document.getElementById('2name_out').innerHTML = document.getElementById('2name_in').value.toUpperCase();
-        document.getElementById('2staff_out').innerHTML = document.getElementById('2staff_in').value.toUpperCase();
-        document.getElementById('2sap_out').innerHTML = document.getElementById('2sap_in').value.toUpperCase();
-        document.getElementById('2ipltm_out').innerHTML = 'IPLTM ' + document.getElementById('2ipltm_in').value.toUpperCase();
-        document.getElementById('2status_out').innerHTML = document.getElementById('2status_in').value.toUpperCase();
-        document.getElementById('2crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
-
-        document.getElementById('3name_out').innerHTML = document.getElementById('3name_in').value.toUpperCase();
-        document.getElementById('3staff_out').innerHTML = document.getElementById('3staff_in').value.toUpperCase();
-        document.getElementById('3sap_out').innerHTML = document.getElementById('3sap_in').value.toUpperCase();
-        document.getElementById('3ipltm_out').innerHTML = 'IPLTM ' + document.getElementById('3ipltm_in').value.toUpperCase();
-        document.getElementById('3status_out').innerHTML = document.getElementById('3status_in').value.toUpperCase();
-        document.getElementById('3crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
-
-        document.getElementById('4name_out').innerHTML = document.getElementById('4name_in').value.toUpperCase();
-        document.getElementById('4staff_out').innerHTML = document.getElementById('4staff_in').value.toUpperCase();
-        document.getElementById('4sap_out').innerHTML = document.getElementById('4sap_in').value.toUpperCase();
-        document.getElementById('4ipltm_out').innerHTML = 'IPLTM ' + document.getElementById('4ipltm_in').value.toUpperCase();
-        document.getElementById('4status_out').innerHTML = document.getElementById('4status_in').value.toUpperCase();
-        document.getElementById('4crt_out').innerHTML = document.getElementById('crt_in').value.toUpperCase();
-
-        calc_time = time_generate();
-
-
-        //console.log(calc_time);
-
-        distribute(document.getElementById('1seat_in').value);
-        distribute(document.getElementById('2seat_in').value);
-        distribute(document.getElementById('3seat_in').value);
-        distribute(document.getElementById('4seat_in').value);
-
-        function distribute(item){
-
-          let a = item.charAt(0);
-          let set = calc_time[item.charAt(1)];
-          let seat = 'LS';
-          if(item.charAt(2) == 'R'){seat = 'RS'};
-
-          for (var [k, v] of Object.entries(set)) {
-            for (var [key, value] of Object.entries(v)) {
-              // let i = '';
-              // if(key == 'day' && value != ''){i = 'D '}
-              // if(key == 'night' && value != ''){i = 'N '}
-              // if(key == 'instrument' && value != ''){i = 'IF '}
-              // document.getElementById(a + k + key + '_out').innerHTML = i + value;
-              document.getElementById(a + k + key + '_out').innerHTML = value;
-              if(k == 1 || k == 2 || k == 4){document.getElementById(a + k + 'seat_out').innerHTML = seat}
+          one_add = ms(4) + startTrim;
+          let check = (tl - one_add - ms(1) - endTrim) < ms(0.5);
+          console.log('>>>>>>>>>>>>', check)
+          if(check){
+            five_add = 40 * 60000 + endTrim;
+          }
+          else{
+            five_add = ms(1) + endTrim;
+          }         
+          three_add = tl - one_add - five_add;
 
             }
+            else if(seq){
+              
+              three_add = ms(4);
+              let check = (tl - three_add - ms(1) - startTrim) < ms(0.5);
+          console.log('>>>>>>>>>>>>', check);
+          if(check){
+            five_add = 40 * 60000 + endTrim;
           }
+          else{
+            five_add = ms(1) + endTrim;
+          }         
+              
+              one_add = tl - three_add - five_add;
 
+            };
 
+        two_add = ms(4);
+        four_add = cr - ms(4);
 
-        };
+      }
+      else{
 
-        var table_data = document.getElementsByTagName('td');
-        for(let i = 0; i < table_data.length; i++){table_data[i].setAttribute("contenteditable", "true")};
+        if(!seq){
 
-        window_generate();
+          five_add = ms(1) + endTrim;
+          three_add = ms(1.5);
+          one_add = tl - five_add - three_add;
 
-      };
+            }
+            else if(seq){
+              
+              five_add = ms(1) + endTrim;
+              one_add = startTrim + ms(1.5);
+              three_add = tl - one_add - five_add;
 
-      function time_generate(){
-
-        ////////////////////////////////////////////////////////////////////////
-
-        let one_add = 0, two_add = 0, three_add = 0, four_add = 0, five_add = 0;
-
-        let tt = (end - start - 4 * 60000)/60000;
-        let tl = (Math.floor(tt/2) + tt%2) * 60000;
-        let cr = Math.floor(tt/2) * 60000;
-
-        let add_three = Math.floor(  (tl - ms(6.5))/60000 / 2 ) * 60000;
-
-        if(document.getElementById('half_in').className == 'FIRST'){
-          if(tl < ms(6.5)){five_add = ms(1);  three_add = ms(1.5); one_add = tl - ms(2.5);}
-          else{ one_add = ms(4); three_add = ms(1.5) + add_three ; five_add = tl - one_add - three_add; }
-        }
-        else if(document.getElementById('half_in').className == 'SECOND'){
-          if(tl < ms(6)){one_add = ms(1); five_add = ms(1); three_add = tl - ms(2); }
-          else if(tl > ms(6)){one_add = ms(1); three_add = ms(4); five_add = tl - ms(5);};
-        }
-
+            };
         if(cr < ms(6)){four_add = ms(2); two_add = cr - ms(2);}
-        else if(cr > ms(6)){two_add = ms(4); four_add = cr - ms(4);};
+                else if(cr > ms(6)){two_add = ms(4); four_add = cr - ms(4);};
 
-        function ms(item){
-          return item * 60 * 60000;
-        };
+      }
 
-        ////////////////////
 
-        let ll;
-
-        if(light.classList[0] == 'NIGHT'){ll = 'NIGHT'}
-        else if(light.classList[0] == 'DAY'){ll = 'DAY'};
-
-        //l_s = start + 60000 * Math.floor( (value(l1.style.left) - 20) / fract );
-        if(l_s <= start){startLight = ll}
-        else if(l_s > start){startLight = lc(ll)};
-        //le = start + 60000 * Math.floor( (value(l2.style.left) - 20) / fract );
-        if(l_e < end){endLight = lc(ll)}
-        else if(l_e >= end){endLight = ll};
-
-        function lc(info){
-          if(info == 'DAY'){return 'NIGHT'}
-          if(info == 'NIGHT'){return 'DAY'}
-        };
-        let lastlight = startLight;
-
-        ////////////////////
-
-        let instrument = document.getElementById('instrumentflying').valueAsNumber;
-
-        ////////////////////
-
-        // console.log(start, startLight);
-        // console.log(ls, ll, le);
-        // console.log(end, endLight);
-        // console.log(instrument);
-
-        //console.log(get_hhmm(one_add), get_hhmm(two_add), get_hhmm(three_add),get_hhmm(four_add),get_hhmm(five_add));
-
-        ////////////////////////////////////////////////////////////////////////
+          // console.log(get_hhmm(startTrim),get_hhmm(endTrim), get_hhmm(tl), get_hhmm(one_add), get_hhmm(three_add), get_hhmm(five_add));
 
 
 
-        let one_start = start;
-        //let one_add = 3600000;
-        let one_end = start + one_add;
-        let block1 = {'from': one_start, 'to': one_end};
+      ////////////////////////////////////////
+            function ms(item){
+              return item * 60 * 60000;
+            };
+            function get_hhmm(block){
 
-        let two_start = one_end + 60000;
-        //let two_add = 14400000;
-        let two_end = two_start + two_add;
-        let block2 = {'from': two_start, 'to': two_end};
+            block = block / 60000;
+            hh = Math.trunc(block / 60);
+            hh = ('0'+ hh).slice(-2);
+            mm = block % 60;
+            mm = ('0'+ mm).slice(-2);
+            if(hh == '00' && mm == '00'){return '00:00'}
+            else{return hh + ':' + mm};
 
-        let three_start = two_end + 60000;
-        //let three_add = 10800000;
-        let three_end = three_start + three_add;
-        let block3 = {'from': three_start, 'to': three_end};
-
-        let four_start = three_end + 60000;
-        // let last_block = end - 60000 - four_start;
-        // let block = last_block/60000;
-        // let min = block % 60;
-        // last_block -= 60000 * (min%2);
-        // let four_add = last_block/2;
-        let four_end = four_start + four_add;
-        let block4 = {'from': four_start, 'to': four_end};
-
-        let five_start = four_end + 60000;
-        //let five_add = undefined;
-        let five_end = end;
-        let block5 = {'from': five_start, 'to': five_end};
-
-        daynight(block1, 1);
-        daynight(block2, 2);
-        daynight(block3, 3);
-        daynight(block4, 4);
-        daynight(block5, 5);
-
-        function daynight(block, index){
-
-          let day = 0, night = 0;
-
-          if(l_e <= block.from || l_s >= block.to){
-            if(lastlight == 'DAY'){day = diff(block.from, block.to)}
-            else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
-          }
-          else if(l_s <= block.from && l_e >= block.to){
-            //lastlight = ll;
-            if(lastlight == 'DAY'){day = diff(block.from, block.to)}
-            else if(lastlight == 'NIGHT'){night = diff(block.from, block.to)}
-          }
-          else if(l_s <= block.from && l_e < block.to){
-            if(lastlight == 'DAY'){day = diff(block.from, l_e); night = diff(l_e, block.to); lastlight = 'NIGHT';}
-            else if(lastlight == 'NIGHT'){night = diff(block.from, l_e); day = diff(l_e, block.to); lastlight = 'DAY';}
-          }
-          else if(l_s > block.from && l_e >= block.to){
-            if(lastlight == 'DAY'){day = diff(block.from, l_s); night = diff(l_s, block.to); lastlight = 'NIGHT';}
-            else if(lastlight == 'NIGHT'){night = diff(block.from, l_s); day = diff(l_s, block.to); lastlight = 'DAY';}
-          }
-          else if(l_s > block.from && l_e < block.to){
-            let a = diff(block.from, l_s);
-            let b = diff(l_s, l_e);
-            let c = diff(l_e, block.to);
-            if(lastlight == 'DAY'){day = a + c; night = b; ll = 'DAY'; lastlight = 'DAY';}
-            else if(lastlight == 'NIGHT'){night = a + c; day = b; ll = 'NIGHT'; lastlight = 'NIGHT';}
-          }
-
-          function diff(a, b){
-            return (b - a);
-          };
-
-          block.day = day;
-          block.night = night;
-
-          block.block = index;
-
-        };
-
-
-
-
-        let set1 = [block1, block3, block5], day1 = 0;
-        let set2 = [block2, block4], day2 = 0;
-
-        set1 = sort_info(set1, 'day', 'high');
-        set2 = sort_info(set2, 'day', 'high');
-        function sort_info(x, y, z){
-          x.sort( compare );
-          function compare( a, b ) {
-            if ( eval('a.' + y + ' < b.' + y ) ){ return -1 }
-            if ( eval('a.' + y + ' > b.' + y ) ){ return 1 }
-            return 0;
-          }
-          if(z == 'low'){return x};
-          if(z == 'high'){return x.reverse()};
-        };
-
-        let dayset1 = block1.day;
-        dayset1 += block3.day;
-        dayset1 += block5.day;
-        dayset1 = Math.trunc( dayset1 / 300000 ) * 300000;
-        let dayset2 = block2.day;
-        dayset2 += block4.day;
-        dayset2 = Math.trunc( dayset2 / 300000 ) * 300000;
-
-        let half = instrument * 60000 /2;
-        let add_inst = 0;
-        if(dayset1 <= dayset2){add_inst = dayset1}
-        else{add_inst = dayset2}
-        if(half < add_inst){add_inst = half};
-
-        // console.log(instrument, dayset1/60000, dayset2/60000, add_inst/60000);
-
-        inst_add(set1, add_inst);
-        inst_add(set2, add_inst);
-
-        function inst_add(data, info){
-
-          data.forEach((x)=>{
-
-            let avail = Math.trunc( x.day / 300000 ) * 300000, added = 0;
-
-            if(info > avail){added = avail}
-            else{added = info};
-            x.instrument = added;
-
-            if(info - added <= 0){info = 0}
-            else{info -= added};
-
-          });
-
-        };
-
-        let tday = 0; tnight = 0, tinstrument = 0, cday = 0; cnight = 0, cinstrument = 0, t = {}, c = {};
-
-        final(block1);
-        final(block2);
-        final(block3);
-        final(block4);
-        final(block5);
-
-        function final(block){
-
-          let b = block.block;
-
-          if(b == 1 || b == 3 || b == 5){
-            tday += block.day;
-            tnight += block.night;
-            tinstrument += block.instrument;
-          };
-          if(b == 2 || b == 4){
-            cday += block.day;
-            cnight += block.night;
-            cinstrument += block.instrument;
           };
 
 
-          block.from = get_utc(block.from) + ' Z';
-          block.to = get_utc(block.to) + ' Z';
+      document.getElementById("one").innerHTML = get_hhmm(one_add);
+      document.getElementById("two").innerHTML = get_hhmm(two_add);
+      document.getElementById("three").innerHTML = get_hhmm(three_add);
+      document.getElementById("four").innerHTML = get_hhmm(four_add);
+      document.getElementById("five").innerHTML = get_hhmm(five_add);
 
-          let d = get_hhmm(block.day);
-          let n = get_hhmm(block.night);
-          let i = get_hhmm(block.instrument);
-
-          if(d != ''){block.day = 'D ' + d}
-          else{block.day = ''};
-          if(n != ''){block.night = 'N ' + n}
-          else{block.night = ''};
-          if(i != ''){block.instrument = 'IF ' + i}
-          else{block.instrument = ''};
-
-          delete block.block;
-          if(b == 1){t[1] = block};
-          if(b == 2){c[1] = block};
-          if(b == 3){t[2] = block};
-          if(b == 4){c[2] = block};
-          if(b == 5){t[4] = block
-            t[5] = {'day': get_hhmm(tday)};
-            t[6] = {'night': get_hhmm(tnight)};
-            t[7] = {'instrument': get_hhmm(tinstrument)};
-            c[5] = {'day': get_hhmm(cday)};
-            c[6] = {'night': get_hhmm(cnight)};
-            c[7] = {'instrument': get_hhmm(cinstrument)};
-          };
+      document.getElementById("total0").innerHTML = get_hhmm(one_add + three_add + five_add);
+      document.getElementById("total1").innerHTML = get_hhmm(two_add + four_add);
+    }
 
 
-          // console.log(block);
 
-        };
+  </script>
 
-        ////////////////////////////////////////////////////////////////////////
-
-        return {t, c};
-
-      };
-
-      function window_generate(){
-
-        var mywindow = window.open('', '', '');
-        mywindow.document.write('<!DOCTYPE html><html><head><title>')
-        ////////////////
-
-        let date = new Date(start);
-
-        mywindow.document.write(
-          //Change to Scheduled ADD DEP DES
-          "AI" + document.getElementById("number_in").value + ' ' +
-          date.toLocaleDateString() + ' ' +
-          document.getElementById("departure_in").value.toUpperCase() + '-' +
-          document.getElementById("destination_in").value.toUpperCase()
-
-        );
-
-        ////////////////
-        mywindow.document.write('</title></head><body >')
-        ////////////////
-
-        let node, clone;
-
-        node = document.head.lastElementChild;
-        clone = node.cloneNode(true);
-        mywindow.document.head.appendChild(clone);
-
-        node = document.getElementById("table");
-        clone = node.cloneNode(true);
-        clone.style.display = 'block';
-        mywindow.document.body.appendChild(clone);
-
-
-        // Object.values(calc_time).forEach((x)=>{
-        //   mywindow.document.write('<h4>'+ JSON.stringify(x) +'</h4>')
-        // });
-
-        ////////////////
-        mywindow.document.write('</body></html>');
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10*/
-      };
-
-    </script>
-
-  </body>
-
-
+</body>
 </html>
