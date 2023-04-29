@@ -45,10 +45,18 @@
   <button type="button" onclick="calculate()">CALCULATE</button> 
   <br><br><br><br>
 
-
-  <div><h2><span>Operating Crew Split : </span>&nbsp<span id="one">0</span>&nbsp+&nbsp<span id="three">0</span>&nbsp+&nbsp<span id="five">0</span>&nbsp &nbsp = <span id="total0">0</span></h2></div>
+  <div><h2><span>Operating Crew Split : </span></h2>
+    <div><span id="one">0</span></div>
+    <div><span id="three">0</span></div>
+    <div><span id="five">0</span></div>
+    <div>TOTAL = &nbsp<span id="total0">0</span></div>
+  </div>
   <br><br>
-  <div><h2><span>Cruise Crew Split: </span>&nbsp<span id="two">0</span>&nbsp+&nbsp<span id="four">0</span>&nbsp &nbsp = <span id="total1">0</span></h2></div>
+  <div><h2><span>Cruise Crew Split: </span></h2>
+    <div><span id="two">0</span></div>
+    <div><span id="four">0</span></div>
+    <div>TOTAL = &nbsp<span id="total1">0</span></div>
+  </div>
 
 
 
@@ -61,63 +69,60 @@
       let touchdown = document.getElementById("touchdown").valueAsNumber;
       let end = document.getElementById("end").valueAsNumber;
 
+      //Check if Operating Crew is RESTING during First Half
       let seq = document.getElementById("seq").checked;
+      //Check if flight is ULR Flight
       let ulr = document.getElementById("ulr").checked
       
-      
+
 
 
       ////////////////////////////////////////
 
       let one_add = 0, two_add = 0, three_add = 0, four_add = 0, five_add = 0;
 
-
-      
-
       let startTrim = airborne - start;
       let endTrim = end - touchdown;
-      //let totaltrim = (touchdown - airborne - 4 * 60000)/60000;
-      
+            
       let tt = (end - start - 4 * 60000)/60000;
       let tl = (Math.floor(tt/2) + tt%2) * 60000;
-      //let tl = (Math.floor(tt/2) + tt%2) * 60000 - startTrim - endTrim;
       let cr = Math.floor(tt/2) * 60000;
 
 
-          
-      //console.log(start, airborne, touchdown, end, tt, get_hhmm(tl), get_hhmm(cr), seq, ulr)
+
       
       if(ulr){
 
         if(!seq){
 
           one_add = ms(4) + startTrim;
+          
           let check = (tl - one_add - ms(1) - endTrim) < ms(0.5);
-          console.log('>>>>>>>>>>>>', check)
           if(check){
             five_add = 40 * 60000 + endTrim;
           }
           else{
             five_add = ms(1) + endTrim;
           }         
+          
           three_add = tl - one_add - five_add;
 
             }
-            else if(seq){
-              
-              three_add = ms(4);
-              let check = (tl - three_add - ms(1) - startTrim) < ms(0.5);
-          console.log('>>>>>>>>>>>>', check);
+        else if(seq){
+          
+          three_add = ms(4);
+
+          let check = (tl - three_add - ms(1) - startTrim) < ms(0.5);
           if(check){
             five_add = 40 * 60000 + endTrim;
           }
           else{
             five_add = ms(1) + endTrim;
           }         
-              
-              one_add = tl - three_add - five_add;
+          
+          one_add = tl - three_add - five_add;
 
-            };
+        };
 
         two_add = ms(4);
         four_add = cr - ms(4);
@@ -131,46 +136,88 @@
           three_add = ms(1.5);
           one_add = tl - five_add - three_add;
 
-            }
-            else if(seq){
-              
-              five_add = ms(1) + endTrim;
-              one_add = startTrim + ms(1.5);
-              three_add = tl - one_add - five_add;
+        }
+        else if(seq){
+          
+          five_add = ms(1) + endTrim;
+          one_add = startTrim + ms(1.5);
+          three_add = tl - one_add - five_add;
 
-            };
+        };
+
         if(cr < ms(6)){four_add = ms(2); two_add = cr - ms(2);}
-                else if(cr > ms(6)){two_add = ms(4); four_add = cr - ms(4);};
+        else if(cr > ms(6)){two_add = ms(4); four_add = cr - ms(4);};
 
-      }
-
-
-          // console.log(get_hhmm(startTrim),get_hhmm(endTrim), get_hhmm(tl), get_hhmm(one_add), get_hhmm(three_add), get_hhmm(five_add));
+      };
 
 
+      let one_start = start;
+      let one_end = start + one_add;
+      let block1 = {'from': one_start, 'to': one_end};
+
+      let two_start = one_end + 60000;
+      let two_end = two_start + two_add;
+      let block2 = {'from': two_start, 'to': two_end};
+
+      let three_start = two_end + 60000;
+      let three_end = three_start + three_add;
+      let block3 = {'from': three_start, 'to': three_end};
+
+      let four_start = three_end + 60000;
+      let four_end = four_start + four_add;
+      let block4 = {'from': four_start, 'to': four_end};
+
+      let five_start = four_end + 60000;
+      let five_end = end;
+      let block5 = {'from': five_start, 'to': five_end};
+
+      ck(block1, one_add);
+      ck(block2, two_add);
+      ck(block3,three_add);
+      ck(block4, four_add);
+      ck(block5, five_add);
+
+      function ck(item, info){
+        let from = get_utc(item.from);
+        let total = get_hhmm(info);
+        let to = get_utc(item.to);
+        return `${from} -> ( ${total} ) <- ${to}`
+      };
 
       ////////////////////////////////////////
-            function ms(item){
-              return item * 60 * 60000;
-            };
-            function get_hhmm(block){
+      
+      function ms(item){
+        return item * 60 * 60000;
+      };
+      
+      function get_hhmm(block){
 
-            block = block / 60000;
-            hh = Math.trunc(block / 60);
-            hh = ('0'+ hh).slice(-2);
-            mm = block % 60;
-            mm = ('0'+ mm).slice(-2);
-            if(hh == '00' && mm == '00'){return '00:00'}
-            else{return hh + ':' + mm};
+        block = block / 60000;
+        hh = Math.trunc(block / 60);
+        hh = ('0'+ hh).slice(-2);
+        mm = block % 60;
+        mm = ('0'+ mm).slice(-2);
+        if(hh == '00' && mm == '00'){return '00:00'}
+        else{return hh + ':' + mm};
 
-          };
+      };
+
+      function get_utc(time){
+        time = new Date(time);
+        hh = time.getUTCHours();
+        hh = ('0'+ hh).slice(-2);
+        mm = time.getUTCMinutes();
+        mm = ('0'+ mm).slice(-2);
+        return hh + ':' + mm;
+      };
+      
 
 
-      document.getElementById("one").innerHTML = get_hhmm(one_add);
-      document.getElementById("two").innerHTML = get_hhmm(two_add);
-      document.getElementById("three").innerHTML = get_hhmm(three_add);
-      document.getElementById("four").innerHTML = get_hhmm(four_add);
-      document.getElementById("five").innerHTML = get_hhmm(five_add);
+      document.getElementById("one").innerHTML = ck(block1, one_add);
+      document.getElementById("two").innerHTML = ck(block2, two_add);
+      document.getElementById("three").innerHTML = ck(block3,three_add);
+      document.getElementById("four").innerHTML = ck(block4, four_add);
+      document.getElementById("five").innerHTML = ck(block5, five_add);
 
       document.getElementById("total0").innerHTML = get_hhmm(one_add + three_add + five_add);
       document.getElementById("total1").innerHTML = get_hhmm(two_add + four_add);
