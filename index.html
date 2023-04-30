@@ -75,11 +75,16 @@
       let ulr = document.getElementById("ulr").checked
       
 
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
 
-
-      ////////////////////////////////////////
-
-      let one_add = 0, two_add = 0, three_add = 0, four_add = 0, five_add = 0;
+      let split = {
+        one_add: 0,
+        two_add: 0,
+        three_add: 0,
+        four_add: 0,
+        five_add: 0
+      };
 
       let startTrim = airborne - start;
       let endTrim = end - touchdown;
@@ -88,104 +93,124 @@
       let tl = (Math.floor(tt/2) + tt%2) * 60000;
       let cr = Math.floor(tt/2) * 60000;
 
-
-
-      
       if(ulr){
-
+        
         if(!seq){
 
-          one_add = ms(4) + startTrim;
-          
-          let check = (tl - one_add - ms(1) - endTrim) < ms(0.5);
-          if(check){
-            five_add = 40 * 60000 + endTrim;
-          }
-          else{
-            five_add = ms(1) + endTrim;
-          }         
-          
-          three_add = tl - one_add - five_add;
+          split.one_add = 4 * 60 * 60000;
+          split.three_add = 30 * 60000;
+          split.five_add = 40 * 60000;
 
-            }
-        else if(seq){
+          let stepOne, stepTwo, stepThree, stepFour;
+
+          stepOne = extra_add(30*60000, 'three_add');
+          if(stepOne){ stepTwo = extra_add(60*60000, 'one_add') };
+          if(stepTwo){ stepThree = extra_add(20*60000, 'five_add') };
+          if(stepThree){ extra_add(stepThree, 'three_add') };
           
-          three_add = ms(4);
+        }
+        else{
 
-          let check = (tl - three_add - ms(1) - startTrim) < ms(0.5);
-          if(check){
-            five_add = 40 * 60000 + endTrim;
-          }
-          else{
-            five_add = ms(1) + endTrim;
-          }         
-          
-          one_add = tl - three_add - five_add;
+          split.one_add = 30 * 60000;
+          split.three_add =  4 * 60 * 60000;
+          split.five_add = 40 * 60000;
 
-        };
+          let stepOne, stepTwo, stepThree, stepFour;
 
-        two_add = ms(4);
-        four_add = cr - ms(4);
+          stepOne = extra_add(30*60000, 'one_add');
+          if(stepOne){ stepTwo = extra_add(60*60000, 'three_add') };
+          if(stepTwo){ stepThree = extra_add(20*60000, 'five_add') };
+          if(stepThree){ extra_add(stepThree, 'one_add') };
+
+        }
 
       }
       else{
 
+        split.one_add = 90 * 60000;
+        split.three_add = 90 * 60000;
+        split.five_add = 40 * 60000;
+        
         if(!seq){
 
-          five_add = ms(1) + endTrim;
-          three_add = ms(1.5);
-          one_add = tl - five_add - three_add;
+          let stepOne, stepTwo;
+
+          stepOne = extra_add(20*60000, 'five_add');
+          if(stepOne){ stepTwo = extra_add(ms(2.5), 'one_add') };
+          if(stepTwo){ extra_add(stepTwo, 'three_add') };
+          
+        }
+        else{
+
+          let stepOne, stepTwo;
+
+          stepOne = extra_add(20*60000, 'five_add');
+          if(stepOne){ stepTwo = extra_add(ms(2.5), 'three_add') };
+          if(stepTwo){ extra_add(stepTwo, 'one_add') };
 
         }
-        else if(seq){
-          
-          five_add = ms(1) + endTrim;
-          one_add = startTrim + ms(1.5);
-          three_add = tl - one_add - five_add;
-
-        };
-        console.log('>>>>>>>>>>>>>>>',cr, ms(6))
-        if(cr <= ms(6)){four_add = ms(2); two_add = cr - ms(2);}
-        else if(cr > ms(6)){two_add = ms(4); four_add = cr - ms(4);};
 
       };
 
-      console.log('>>>>>>>>>>>>>>>>>', get_hhmm(two_add), get_hhmm(four_add))
-      let one_start = start;
-      let one_end = start + one_add;
-      let block1 = {'from': one_start, 'to': one_end};
+      split.one_add += startTrim;
+      split.five_add += endTrim;
 
-      let two_start = one_end + 60000;
-      let two_end = two_start + two_add;
-      let block2 = {'from': two_start, 'to': two_end};
-
-      let three_start = two_end + 60000;
-      let three_end = three_start + three_add;
-      let block3 = {'from': three_start, 'to': three_end};
-
-      let four_start = three_end + 60000;
-      let four_end = four_start + four_add;
-      let block4 = {'from': four_start, 'to': four_end};
-
-      let five_start = four_end + 60000;
-      let five_end = end;
-      let block5 = {'from': five_start, 'to': five_end};
-
-      ck(block1, one_add);
-      ck(block2, two_add);
-      ck(block3,three_add);
-      ck(block4, four_add);
-      ck(block5, five_add);
-
-      function ck(item, info){
-        let from = get_utc(item.from);
-        let total = get_hhmm(info);
-        let to = get_utc(item.to);
-        return `${from} -> ( ${total} ) <- ${to}`
-      };
-
-      ////////////////////////////////////////
+      let operatingCrew = split.one_add + split.three_add + split.five_add;
+      if(operatingCrew > cr + 60000){ cr -= operatingCrew - tl };
       
+      if(cr <= ms(6)){split.four_add = ms(2); split.two_add = cr - ms(2);}
+      else if(cr > ms(6)){split.two_add = ms(4); split.four_add = cr - ms(4);};
+
+      final();
+    
+      ////////////////////////////////////////
+
+      function final(){
+
+        let one_start = start;
+        let one_end = start + split.one_add;
+        let block1 = {'from': one_start, 'to': one_end};
+
+        let two_start = one_end + 60000;
+        let two_end = two_start + split.two_add;
+        let block2 = {'from': two_start, 'to': two_end};
+
+        let three_start = two_end + 60000;
+        let three_end = three_start + split.three_add;
+        let block3 = {'from': three_start, 'to': three_end};
+
+        let four_start = three_end + 60000;
+        let four_end = four_start + split.four_add;
+        let block4 = {'from': four_start, 'to': four_end};
+
+        let five_start = four_end + 60000;
+        let five_end = end;
+        let block5 = {'from': five_start, 'to': five_end};
+
+        document.getElementById("one").innerHTML = ck(block1, split.one_add);
+        document.getElementById("two").innerHTML = ck(block2, split.two_add);
+        document.getElementById("three").innerHTML = ck(block3,split.three_add);
+        document.getElementById("four").innerHTML = ck(block4, split.four_add);
+        document.getElementById("five").innerHTML = ck(block5, split.five_add);
+
+        document.getElementById("total0").innerHTML = get_hhmm(split.one_add + split.three_add + split.five_add);
+        document.getElementById("total1").innerHTML = get_hhmm(split.two_add + split.four_add);
+
+      };
+      
+      ////////////////////////////////////////
+
+      function extra_add(infoA, infoB){
+        
+        let extra = tl - (startTrim + split.one_add + split.three_add + split.five_add + endTrim);
+        if(extra > 0){
+          if(extra <= infoA){split[infoB] += extra; return undefined;}
+          else{ split[infoB] += infoA; return extra - infoA;}
+        }
+        else{return undefined;};
+
+      };
+
       function ms(item){
         return item * 60 * 60000;
       };
@@ -210,21 +235,19 @@
         mm = ('0'+ mm).slice(-2);
         return hh + ':' + mm;
       };
+
+      function ck(item, info){
+        let from = get_utc(item.from);
+        let total = get_hhmm(info);
+        let to = get_utc(item.to);
+        return `${from} -> ( ${total} ) <- ${to}`
+      };
+
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
       
-
-
-      document.getElementById("one").innerHTML = ck(block1, one_add);
-      document.getElementById("two").innerHTML = ck(block2, two_add);
-      document.getElementById("three").innerHTML = ck(block3,three_add);
-      document.getElementById("four").innerHTML = ck(block4, four_add);
-      document.getElementById("five").innerHTML = ck(block5, five_add);
-
-      document.getElementById("total0").innerHTML = get_hhmm(one_add + three_add + five_add);
-      document.getElementById("total1").innerHTML = get_hhmm(two_add + four_add);
-    }
-
-
-
+    };
+    
   </script>
 
 </body>
